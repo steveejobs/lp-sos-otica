@@ -15,10 +15,15 @@ export const metadata: Metadata = {
     "lentes e armações"
   ],
   icons: {
-    icon: site.logoIcon,
-    shortcut: site.logoIcon,
-    apple: site.logoIcon
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-48.png", type: "image/png", sizes: "48x48" }
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: "SOS Ótica | Óculos pronto em até 40 minutos",
     description:

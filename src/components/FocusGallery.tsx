@@ -17,11 +17,16 @@ export function FocusGallery() {
         </AnimatedReveal>
 
         <AnimatedReveal className="contact-panel" delay={0.1}>
-          <a href={site.mapUrl}>
+          <a
+            href={site.mapsRouteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Traçar rota até a SOS Ótica no Google Maps"
+          >
             <MapPin size={20} aria-hidden="true" />
             <span>
               <strong>{site.address}</strong>
-              <small>Ver rota no Google Maps</small>
+              <small>Traçar rota</small>
             </span>
           </a>
           <a href={site.whatsappUrl}>
@@ -42,7 +47,12 @@ export function FocusGallery() {
       </div>
 
       <AnimatedReveal className="site-shell map-band" delay={0.15}>
-        <a href={site.mapUrl} aria-label="Abrir localização da SOS Ótica no Google Maps">
+        <a
+          href={site.mapsRouteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Traçar rota até a SOS Ótica no Google Maps"
+        >
           <Image
             src="/imagens/araguaina-1.jpg"
             alt=""
@@ -52,6 +62,7 @@ export function FocusGallery() {
           />
           <span>Rua Sadoc Correia, 154</span>
           <strong>Centro, Araguaína-TO</strong>
+          <em>Traçar rota</em>
         </a>
       </AnimatedReveal>
     </section>

@@ -20,7 +20,7 @@ export function Header() {
     <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
       <div className="site-shell header-inner">
         <a href="#top" className="brand-mark" aria-label="SOS Ótica, voltar ao início">
-          <Image src={site.logoIcon} width={70} height={70} alt="" priority aria-hidden="true" />
+          <Image src={site.logoIcon} width={82} height={82} alt="" priority aria-hidden="true" />
           <span>
             <strong>SOS Ótica</strong>
             <small>Centro de Araguaína</small>

@@ -5,12 +5,14 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { FocusGallery } from "@/components/FocusGallery";
 import { Footer } from "@/components/Footer";
+import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
+import { ExameNewsSection } from "@/components/ExameNewsSection";
 import { Header } from "@/components/Header";
 import { LensGuidance } from "@/components/LensGuidance";
 import { LensHero } from "@/components/LensHero";
 import { Manifesto } from "@/components/Manifesto";
-import { SocialProof } from "@/components/SocialProof";
 import { SolutionsSection } from "@/components/SolutionsSection";
+import { WatchesSection } from "@/components/WatchesSection";
 
 export default function Home() {
   return (
@@ -20,11 +22,13 @@ export default function Home() {
         <LensHero />
         <Manifesto />
         <SolutionsSection />
+        <WatchesSection />
         <BrandPillars />
         <LensGuidance />
         <EventsSection />
+        <ExameNewsSection />
+        <GoogleReviewsSection />
         <FocusGallery />
-        <SocialProof />
         <FAQSection />
         <FinalCTA />
       </main>

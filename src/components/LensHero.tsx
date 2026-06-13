@@ -9,7 +9,7 @@ import {
   useReducedMotion,
   useTransform
 } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent } from "react";
 import { site } from "@/lib/site";
 
@@ -24,44 +24,104 @@ const heroStates = [
 
 type HeroState = (typeof heroStates)[number]["id"];
 
+const AUTOPLAY_INTERVAL_MS = 9800;
+const POINTER_EASE = 0.12;
+
 export function LensHero() {
   const reduceMotion = useReducedMotion();
   const [activeState, setActiveState] = useState<HeroState>("grau");
   const [skipMotion, setSkipMotion] = useState(false);
+  const [autoplayPaused, setAutoplayPaused] = useState(false);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
-  const sceneX = useTransform(pointerX, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-16, 16]);
-  const sceneY = useTransform(pointerY, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-9, 9]);
+  const smoothPointer = useRef({ currentX: 0, currentY: 0, targetX: 0, targetY: 0 });
+  const sceneX = useTransform(pointerX, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-18, 18]);
+  const sceneY = useTransform(pointerY, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-10, 10]);
+  const glassesX = useTransform(pointerX, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-8, 8]);
+  const glassesY = useTransform(pointerY, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-5, 5]);
+  const glassesRotateY = useTransform(pointerX, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [2.2, -2.2]);
+  const glassesRotateX = useTransform(pointerY, [-0.5, 0.5], reduceMotion || skipMotion ? [0, 0] : [-1.2, 1.2]);
 
   const motionDisabled = Boolean(reduceMotion || skipMotion);
+  const autoplayStopped = Boolean(motionDisabled || autoplayPaused);
   const activeLabel = useMemo(
     () => heroStates.find((item) => item.id === activeState)?.label ?? "Grau",
     [activeState]
   );
 
   useEffect(() => {
-    if (motionDisabled) return;
+    if (autoplayStopped) return;
     const timer = window.setInterval(() => {
       setActiveState((state) => (state === "grau" ? "solar" : "grau"));
-    }, 7200);
+    }, AUTOPLAY_INTERVAL_MS);
     return () => window.clearInterval(timer);
-  }, [motionDisabled]);
+  }, [autoplayStopped]);
+
+  useEffect(() => {
+    if (motionDisabled) {
+      smoothPointer.current = { currentX: 0, currentY: 0, targetX: 0, targetY: 0 };
+      pointerX.set(0);
+      pointerY.set(0);
+      return;
+    }
+
+    let frame = 0;
+    const tick = () => {
+      const pointer = smoothPointer.current;
+      pointer.currentX += (pointer.targetX - pointer.currentX) * POINTER_EASE;
+      pointer.currentY += (pointer.targetY - pointer.currentY) * POINTER_EASE;
+
+      if (Math.abs(pointer.targetX - pointer.currentX) < 0.001) pointer.currentX = pointer.targetX;
+      if (Math.abs(pointer.targetY - pointer.currentY) < 0.001) pointer.currentY = pointer.targetY;
+
+      pointerX.set(pointer.currentX);
+      pointerY.set(pointer.currentY);
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [motionDisabled, pointerX, pointerY]);
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (motionDisabled || event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
-    pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
-    pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
+    smoothPointer.current.targetX = Math.max(-0.5, Math.min(0.5, (event.clientX - rect.left) / rect.width - 0.5));
+    smoothPointer.current.targetY = Math.max(-0.5, Math.min(0.5, (event.clientY - rect.top) / rect.height - 0.5));
+  }
+
+  function resetPointer() {
+    smoothPointer.current.targetX = 0;
+    smoothPointer.current.targetY = 0;
+  }
+
+  function selectHeroState(state: HeroState) {
+    setActiveState(state);
+    setAutoplayPaused(true);
+  }
+
+  function toggleAutoplay() {
+    if (autoplayStopped) {
+      setSkipMotion(false);
+      setAutoplayPaused(false);
+      return;
+    }
+
+    setAutoplayPaused(true);
+  }
+
+  function skipHeroMotion() {
+    setSkipMotion(true);
+    setAutoplayPaused(true);
+    resetPointer();
   }
 
   return (
     <section
       className={`cinematic-hero hero-${activeState}`}
       aria-labelledby="hero-title"
-      onPointerMove={activeState === "solar" ? handlePointerMove : undefined}
-      onPointerLeave={() => {
-        pointerX.set(0);
-        pointerY.set(0);
-      }}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
     >
       <h1 id="hero-title" className="sr-only">
         SOS Ótica em Araguaína: óculos pronto em até 40 minutos
@@ -84,23 +144,28 @@ export function LensHero() {
           >
             <HeroCopyLayer sharp={false} />
             <motion.div
-              className="cinematic-glasses cinematic-glasses-grau"
-              animate={motionDisabled ? undefined : { rotateY: [-2.4, 2.6, -2.4], y: [0, -7, 0] }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden="true"
+              className="hero-pointer-frame"
+              style={{ x: glassesX, y: glassesY, rotateX: glassesRotateX, rotateY: glassesRotateY }}
             >
-              <LensBoundCopy />
-              <Image
-                src="/assets/glasses/eyeglasses-hero.webp"
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 680px) 142vw, 1180px"
-                className="cinematic-glasses-image"
-              />
-              <span className="hero-lens-map hero-lens-map-grau hero-lens-left" />
-              <span className="hero-lens-map hero-lens-map-grau hero-lens-right" />
-              <span className="hero-refraction" />
+              <motion.div
+                className="cinematic-glasses cinematic-glasses-grau"
+                animate={motionDisabled ? undefined : { y: [0, -6, 0] }}
+                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden="true"
+              >
+                <LensBoundCopy />
+                <Image
+                  src="/assets/glasses/eyeglasses-hero.webp"
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 680px) 142vw, 1180px"
+                  className="cinematic-glasses-image"
+                />
+                <span className="hero-lens-map hero-lens-map-grau hero-lens-left" />
+                <span className="hero-lens-map hero-lens-map-grau hero-lens-right" />
+                <span className="hero-refraction" />
+              </motion.div>
             </motion.div>
           </motion.div>
         ) : (
@@ -115,7 +180,7 @@ export function LensHero() {
             <div className="hero-sunset-stage" aria-hidden="true">
               <motion.div className="hero-sunset hero-sunset-glare" style={{ x: sceneX, y: sceneY }}>
                 <Image
-                  src="/assets/scenes/sunset-dark.jpg"
+                  src="/imagens/araguaina-1.jpg"
                   alt=""
                   fill
                   priority
@@ -125,7 +190,7 @@ export function LensHero() {
               </motion.div>
               <motion.div className="hero-sunset hero-sunset-filtered" style={{ x: sceneX, y: sceneY }}>
                 <Image
-                  src="/assets/scenes/sunset-dark.jpg"
+                  src="/imagens/araguaina-1.jpg"
                   alt=""
                   fill
                   sizes="100vw"
@@ -135,22 +200,27 @@ export function LensHero() {
             </div>
 
             <motion.div
-              className="cinematic-glasses cinematic-glasses-solar"
-              animate={motionDisabled ? undefined : { rotateY: [-2.8, 2.8, -2.8], y: [0, -6, 0] }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden="true"
+              className="hero-pointer-frame"
+              style={{ x: glassesX, y: glassesY, rotateX: glassesRotateX, rotateY: glassesRotateY }}
             >
-              <Image
-                src="/assets/glasses/sunglasses-hero.webp"
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 680px) 138vw, 1100px"
-                className="cinematic-glasses-image"
-              />
-              <span className="hero-lens-map hero-lens-map-solar hero-lens-left" />
-              <span className="hero-lens-map hero-lens-map-solar hero-lens-right" />
-              <span className="hero-solar-glint" />
+              <motion.div
+                className="cinematic-glasses cinematic-glasses-solar"
+                animate={motionDisabled ? undefined : { y: [0, -5, 0] }}
+                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden="true"
+              >
+                <Image
+                  src="/assets/glasses/sunglasses-hero.webp"
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 680px) 138vw, 1100px"
+                  className="cinematic-glasses-image"
+                />
+                <span className="hero-lens-map hero-lens-map-solar hero-lens-left" />
+                <span className="hero-lens-map hero-lens-map-solar hero-lens-right" />
+                <span className="hero-solar-glint" />
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
@@ -163,7 +233,7 @@ export function LensHero() {
               key={item.id}
               type="button"
               className={activeState === item.id ? "is-active" : ""}
-              onClick={() => setActiveState(item.id)}
+              onClick={() => selectHeroState(item.id)}
               aria-pressed={activeState === item.id}
             >
               <span>{item.index}</span>
@@ -181,14 +251,14 @@ export function LensHero() {
           </a>
         </div>
 
-        <button
-          type="button"
-          className="skip-motion"
-          onClick={() => setSkipMotion(true)}
-          disabled={skipMotion}
-        >
-          {skipMotion ? "Animação pausada" : "Pular animação"}
-        </button>
+        <div className="hero-control-actions">
+          <button type="button" className="animation-toggle" onClick={toggleAutoplay}>
+            {autoplayStopped ? "Retomar animação" : "Pausar animação"}
+          </button>
+          <button type="button" className="skip-motion" onClick={skipHeroMotion} disabled={skipMotion}>
+            {skipMotion ? "Animação pulada" : "Pular animação"}
+          </button>
+        </div>
       </div>
 
       <a href="#rapidez" className="hero-scroll" aria-label="Ir para a mensagem principal">

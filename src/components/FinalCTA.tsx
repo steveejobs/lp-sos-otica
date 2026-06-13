@@ -19,9 +19,15 @@ export function FinalCTA() {
             <MessageCircle size={18} aria-hidden="true" />
             Chamar no WhatsApp
           </a>
-          <a href={site.mapUrl} className="button button-light">
+          <a
+            href={site.mapsRouteUrl}
+            className="button button-light"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Traçar rota até a SOS Ótica no Google Maps"
+          >
             <MapPin size={18} aria-hidden="true" />
-            Ver localização
+            Traçar rota
           </a>
         </div>
       </div>

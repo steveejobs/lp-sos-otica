@@ -16,6 +16,8 @@ export const site = {
     "https://wa.me/5563992938550?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20SOS%20%C3%93tica.%20Quero%20atendimento.",
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=Rua%20Sadoc%20Correia%20154%20Centro%20Aragua%C3%ADna%20TO",
+  mapsRouteUrl:
+    "https://www.google.com/maps/dir/?api=1&destination=Rua%20Sadoc%20Corr%C3%AAa%2C%20154%2C%20Centro%2C%20Aragua%C3%ADna%20TO",
   logoIcon: "/imagens/logotipo icon preto.png",
   logoIconColor: "/imagens/logotipo icon.png",
   logoFull: "/imagens/logotipo completa preta.png"
@@ -24,6 +26,7 @@ export const site = {
 export const navItems = [
   { label: "Rapidez", href: "#rapidez" },
   { label: "Soluções", href: "#solucoes" },
+  { label: "Relógios", href: "#relogios" },
   { label: "Lentes", href: "#lentes" },
   { label: "Laboratório", href: "#laboratorio" },
   { label: "Contato", href: "#contato" }
