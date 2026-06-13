@@ -264,9 +264,11 @@ function LensBoundCopy() {
   return (
     <div className="lens-bound-copy" aria-hidden="true">
       <div className="lens-bound-copy-panel lens-bound-left eyeglasses-left-lens">
+        <div className="lens-clean" />
         <HeroCopyStack />
       </div>
       <div className="lens-bound-copy-panel lens-bound-right eyeglasses-right-lens">
+        <div className="lens-clean" />
         <HeroCopyStack />
       </div>
     </div>

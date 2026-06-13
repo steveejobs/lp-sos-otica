@@ -11,4 +11,4 @@
 - [x] Adicionar fallback estático com 3 itens.
 - [x] Rodar `npm run lint`.
 - [x] Rodar `npm run build`.
-- [ ] Gerar screenshots de validação visual. Bloqueado localmente por falha/travamento do Chrome/Edge headless antes de gravar PNG.
+- [x] Gerar screenshots de validação visual.

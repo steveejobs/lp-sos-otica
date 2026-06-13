@@ -17,7 +17,7 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
       "Grife de óculos que conquistou Meryl Streep abre galeria em São Paulo",
     category: "Casual",
     href: "https://exame.com/casual/grife-de-oculos-que-conquistou-meryl-streep-abre-galeria-em-sao-paulo/",
-    meta: "Arquivo Exame",
+    meta: "Há 2 semanas",
     source: "Exame",
   },
   {
@@ -25,7 +25,7 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
       "The Simple RunClub e Zerezes lançam collab de óculos que une corrida e design",
     category: "Casual",
     href: "https://exame.com/casual/the-simple-runclub-e-zerezes-lancam-collab-de-oculos-que-une-corrida-e-design/",
-    meta: "Arquivo Exame",
+    meta: "Há um mês",
     source: "Exame",
   },
   {
@@ -33,28 +33,28 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
       "Ele trabalhou no STF, virou franqueado e agora vai faturar R$ 120 milhões com óculos",
     category: "Negócios",
     href: "https://exame.com/negocios/ele-trabalhou-no-stf-virou-franqueado-e-agora-vai-faturar-r-120-milhoes-com-oculos/",
-    meta: "Arquivo Exame",
+    meta: "Há um mês",
     source: "Exame",
   },
   {
     title: "O acessório queridinho dos corredores agora é outro",
     category: "Casual",
     href: "https://exame.com/casual/o-acessorio-queridinho-dos-corredores-agora-e-outro/",
-    meta: "Arquivo Exame",
+    meta: "Há 2 meses",
     source: "Exame",
   },
   {
     title: "Óculos sem aro voltam à moda entre celebridades e Geração Z",
     category: "Casual",
     href: "https://exame.com/casual/oculos-sem-aro-voltam-a-moda-entre-celebridades-e-geracao-z/",
-    meta: "Arquivo Exame",
+    meta: "Há 3 meses",
     source: "Exame",
   },
   {
     title: "A dona da Ray-Ban não vende mais só óculos — agora é medtech",
     category: "Casual",
     href: "https://exame.com/casual/a-dona-da-ray-ban-nao-vende-mais-so-oculos-agora-e-medtech/",
-    meta: "Arquivo Exame",
+    meta: "Há 5 meses",
     source: "Exame",
   },
   {
@@ -62,7 +62,7 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
       "Google e Magic Leap revelam novo óculos com IA e realidade aumentada",
     category: "Inteligência Artificial",
     href: "https://exame.com/inteligencia-artificial/google-e-magic-leap-revelam-novo-oculos-com-ia-e-realidade-aumentada/",
-    meta: "Arquivo Exame",
+    meta: "Há 8 meses",
     source: "Exame",
   },
   {
@@ -70,7 +70,7 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
       "Snap negocia captação de US$ 1 bilhão para acelerar divisão de óculos de realidade aumentada",
     category: "Tecnologia",
     href: "https://exame.com/tecnologia/snap-negocia-captacao-de-us-1-bilhao-para-acelerar-divisao-de-oculos-de-realidade-aumentada/",
-    meta: "Arquivo Exame",
+    meta: "Há 8 meses",
     source: "Exame",
   },
 ];
