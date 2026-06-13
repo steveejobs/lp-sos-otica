@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "Onde fica a SOS Ótica?",
     answer:
-      "A loja fica na Rua Sadoc Correia, 154, Centro, Araguaína-TO, com atendimento local e rota pelo Google Maps.",
+      "A loja fica na Rua Sadoc Corrêa, 154, Centro, Araguaína-TO, com atendimento local e rota pelo Google Maps.",
   },
 ];
 

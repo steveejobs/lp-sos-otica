@@ -6,25 +6,25 @@ import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
 
 const featuredWatch = {
-  title: "Coleção em destaque",
-  text: "Uma seleção Technos com presença, acabamento e opções para presente.",
+  title: "Coleção Technos em destaque",
+  text: "Quatro recortes da vitrine em um bloco de coleção, com peças para uso diário, presente e ocasiões especiais.",
   image: "/imagens/TECHNOS-02.jpg",
 };
 
 const watches = [
   {
-    title: "Clássicos de vitrine",
-    text: "Modelos versáteis para acompanhar trabalho, eventos e rotina.",
+    title: "Automático GMT",
+    text: "Estojo, pulseira extra e leitura marcante para observar de perto.",
     image: "/imagens/TECHNOS-01.jpg",
   },
   {
-    title: "Automáticos selecionados",
-    text: "Peças com visual marcante e detalhes de acabamento para observar de perto.",
+    title: "Vitrine selecionada",
+    text: "Peças com presença, acabamento e boa composição para presente.",
     image: "/imagens/TECHNOS-06.jpg",
   },
   {
-    title: "Presentes especiais",
-    text: "Opções com apresentação cuidadosa para escolher com bom gosto.",
+    title: "Coleção para comparar",
+    text: "Um mosaico visual para comparar estilos, caixas e pulseiras.",
     image: "/imagens/TECHNOS-02 (1).jpg",
   },
 ];
@@ -41,61 +41,70 @@ export function WatchesSection() {
       className="section watches-section"
       aria-labelledby="watches-title"
     >
-      <div className="site-shell watches-intro">
-        <AnimatedReveal className="section-heading compact">
+      <div className="site-shell watches-layout">
+        <AnimatedReveal className="section-heading compact watches-copy-panel">
           <p className="eyebrow">Relógios e acessórios</p>
           <h2 id="watches-title">
-            Relógios com presença, escolha e bom acabamento
+            Relógios com presença e acabamento para escolher sem pressa
           </h2>
           <p>
-            Uma curadoria compacta para quem quer completar o estilo ou escolher
-            um presente com aparência mais refinada.
+            Uma curadoria Technos enxuta, com modelos de vitrine, opções para
+            presente e peças que pedem comparação ao vivo.
           </p>
-        </AnimatedReveal>
-        <AnimatedReveal className="watches-cta" delay={0.12}>
           <a href={site.whatsappUrl} className="button button-red">
             <MessageCircle size={18} aria-hidden="true" />
             Ver opções pelo WhatsApp
           </a>
         </AnimatedReveal>
-      </div>
 
-      <div className="site-shell watches-editorial">
-        <AnimatedReveal className="watch-card watch-card-featured" delay={0.08}>
-          <WatchImage
-            src={featuredWatch.image}
-            alt={featuredWatch.title}
-            sizes="(max-width: 1040px) 92vw, 640px"
+        <AnimatedReveal className="watches-gallery" delay={0.08}>
+          <WatchCard
+            watch={featuredWatch}
+            className="watch-card-featured"
+            sizes="(max-width: 1040px) 92vw, 560px"
             priority
           />
-          <div className="watch-copy">
-            <p className="watch-kicker">Technos</p>
-            <h3>{featuredWatch.title}</h3>
-            <p>{featuredWatch.text}</p>
+
+          <div className="watches-grid">
+            {watches.map((watch) => (
+              <WatchCard
+                key={watch.title}
+                watch={watch}
+                sizes="(max-width: 680px) 92vw, 320px"
+              />
+            ))}
           </div>
         </AnimatedReveal>
-
-        <div className="watches-grid">
-          {watches.map((watch, index) => (
-            <AnimatedReveal
-              key={watch.title}
-              className="watch-card"
-              delay={0.14 + index * 0.06}
-            >
-              <WatchImage
-                src={watch.image}
-                alt={watch.title}
-                sizes="(max-width: 680px) 92vw, 260px"
-              />
-              <div className="watch-copy">
-                <h3>{watch.title}</h3>
-                <p>{watch.text}</p>
-              </div>
-            </AnimatedReveal>
-          ))}
-        </div>
       </div>
     </section>
+  );
+}
+
+function WatchCard({
+  watch,
+  className = "",
+  sizes,
+  priority = false,
+}: {
+  watch: typeof featuredWatch;
+  className?: string;
+  sizes: string;
+  priority?: boolean;
+}) {
+  return (
+    <article className={`watch-card ${className}`}>
+      <WatchImage
+        src={watch.image}
+        alt={watch.title}
+        sizes={sizes}
+        priority={priority}
+      />
+      <div className="watch-copy">
+        <p className="watch-kicker">Technos</p>
+        <h3>{watch.title}</h3>
+        <p>{watch.text}</p>
+      </div>
+    </article>
   );
 }
 

@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 
 const testimonials = [
@@ -27,6 +28,16 @@ export function SocialProof() {
         <div className="testimonial-grid">
           {testimonials.map((item, index) => (
             <AnimatedReveal key={item.quote} className="testimonial-item" delay={index * 0.08}>
+              <span className="testimonial-stars" aria-label="5 de 5 estrelas">
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <Star
+                    key={starIndex}
+                    size={15}
+                    fill="currentColor"
+                    aria-hidden="true"
+                  />
+                ))}
+              </span>
               <p>“{item.quote}”</p>
               <span>{item.person}</span>
             </AnimatedReveal>

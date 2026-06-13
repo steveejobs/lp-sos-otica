@@ -16,16 +16,14 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/icon-48.png", type: "image/png", sizes: "48x48" },
+      { url: "/imagens/logotipo%20icon%20preto.png", type: "image/png", sizes: "any" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/imagens/logotipo%20icon%20preto.png",
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/imagens/logotipo%20icon%20preto.png", sizes: "any", type: "image/png" },
     ],
   },
-  manifest: "/manifest.webmanifest",
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "SOS Ótica | Óculos pronto em até 30 minutos",
     description:

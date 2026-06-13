@@ -15,12 +15,14 @@ import { site } from "@/lib/site";
 const mainLine =
   "CLAREZA PARA SUA ROTINA • CONFORTO PARA SEUS OLHOS • SOS ÓTICA ARAGUAÍNA";
 const secondaryLine =
-  "ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
+  "ÓCULOS PRONTO EM ATÉ 40 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
 
 const POINTER_EASE = 0.1;
+const HERO_COPY_DURATION = 96000;
 
 export function LensHero() {
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const smoothPointer = useRef({
@@ -86,7 +88,27 @@ export function LensHero() {
     return () => window.cancelAnimationFrame(frame);
   }, [pointerX, pointerY, reduceMotion]);
 
-  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+  useEffect(() => {
+    const hero = sectionRef.current;
+    if (!hero) return;
+
+    if (reduceMotion) {
+      hero.style.setProperty("--hero-copy-progress", "14");
+      return;
+    }
+
+    let frame = 0;
+    const tick = (time: number) => {
+      const progress = ((time % HERO_COPY_DURATION) / HERO_COPY_DURATION) * 50;
+      hero.style.setProperty("--hero-copy-progress", progress.toFixed(4));
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [reduceMotion]);
+
+  function handlePointerMove(event: PointerEvent<HTMLElement>) {
     if (reduceMotion || event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
     smoothPointer.current.targetX = Math.max(
@@ -106,13 +128,14 @@ export function LensHero() {
 
   return (
     <section
+      ref={sectionRef}
       className="cinematic-hero hero-grau"
       aria-labelledby="hero-title"
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
       <h1 id="hero-title" className="sr-only">
-        SOS Ótica em Araguaína: óculos pronto em até 30 minutos
+        SOS Ótica em Araguaína: óculos pronto em até 40 minutos
       </h1>
 
       <div className="hero-brand-signal" aria-hidden="true">
@@ -196,16 +219,16 @@ function HeroCopyStack() {
   return (
     <div className="cinematic-copy-stack">
       <div className="cinematic-copy-line cinematic-copy-main">
-        <span>{mainLine}</span>
-        <span>{mainLine}</span>
-        <span>{mainLine}</span>
-        <span>{mainLine}</span>
+        <span className="cinematic-copy-segment">{mainLine} • {mainLine} • </span>
+        <span className="cinematic-copy-segment">{mainLine} • {mainLine} • </span>
       </div>
       <div className="cinematic-copy-line cinematic-copy-secondary">
-        <span>{secondaryLine}</span>
-        <span>{secondaryLine}</span>
-        <span>{secondaryLine}</span>
-        <span>{secondaryLine}</span>
+        <span className="cinematic-copy-segment">
+          {secondaryLine} • {secondaryLine} •{" "}
+        </span>
+        <span className="cinematic-copy-segment">
+          {secondaryLine} • {secondaryLine} •{" "}
+        </span>
       </div>
     </div>
   );

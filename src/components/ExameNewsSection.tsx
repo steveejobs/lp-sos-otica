@@ -42,7 +42,9 @@ export async function ExameNewsSection() {
               delay={index * 0.06}
             >
               <span
-                className={`exame-news-thumb${item.image ? " has-image" : ""}`}
+                className={`exame-news-thumb${
+                  item.image ? " has-image" : " is-placeholder"
+                }`}
                 style={
                   item.image
                     ? ({
