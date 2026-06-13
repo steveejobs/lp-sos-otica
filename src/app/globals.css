@@ -2610,14 +2610,14 @@ img {
   padding-top: 76px;
   isolation: isolate;
   --hero-copy-progress: 12;
-  --lens-left-x: 11.84%;
-  --lens-left-y: 28.72%;
-  --lens-left-w: 32.78%;
-  --lens-left-h: 44.04%;
-  --lens-right-x: 55.38%;
-  --lens-right-y: 28.72%;
-  --lens-right-w: 32.78%;
-  --lens-right-h: 44.04%;
+  --lens-left-x: 11.18%;
+  --lens-left-y: 28.14%;
+  --lens-left-w: 34.1%;
+  --lens-left-h: 45.24%;
+  --lens-right-x: 54.72%;
+  --lens-right-y: 28.14%;
+  --lens-right-w: 34.1%;
+  --lens-right-h: 45.24%;
   --hero-copy-y: 32px;
   --lens-copy-scale: 1.08;
   background:
@@ -2719,12 +2719,12 @@ img {
 }
 
 .cinematic-copy-main {
-  font-size: clamp(1.18rem, 2.24vw, 2.52rem);
+  font-size: clamp(1.34rem, 2.54vw, 2.85rem);
 }
 
 .cinematic-copy-secondary {
   color: rgba(20, 20, 18, 0.68);
-  font-size: clamp(0.54rem, 0.74vw, 0.82rem);
+  font-size: clamp(0.59rem, 0.8vw, 0.89rem);
   font-weight: 720;
   letter-spacing: 0.12em;
 }
@@ -3176,11 +3176,11 @@ img {
   }
 
   .cinematic-copy-main {
-    font-size: clamp(1.16rem, 6.25vw, 1.76rem);
+    font-size: clamp(1.32rem, 7.05vw, 1.98rem);
   }
 
   .cinematic-copy-secondary {
-    font-size: clamp(0.5rem, 2.45vw, 0.68rem);
+    font-size: clamp(0.54rem, 2.65vw, 0.73rem);
     letter-spacing: 0.12em;
   }
 
