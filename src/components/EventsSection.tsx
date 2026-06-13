@@ -2,11 +2,20 @@ import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 
-const steps = ["Conferência da receita", "Escolha da lente", "Montagem precisa", "Ajuste no rosto"];
+const steps = [
+  "Conferência da receita",
+  "Escolha da lente",
+  "Montagem precisa",
+  "Ajuste no rosto",
+];
 
 export function EventsSection() {
   return (
-    <section id="laboratorio" className="section lab-section" aria-labelledby="lab-title">
+    <section
+      id="laboratorio"
+      className="section lab-section"
+      aria-labelledby="lab-title"
+    >
       <div className="site-shell lab-layout">
         <AnimatedReveal className="lab-visual">
           <div className="lab-frame" aria-hidden="true">
@@ -29,16 +38,19 @@ export function EventsSection() {
             <div className="lab-scan" />
             <div className="lab-badge lab-badge-a">Receita conferida</div>
             <div className="lab-badge lab-badge-b">Ajuste final</div>
-            <div className="lab-timer">40 min</div>
+            <div className="lab-timer">30 min</div>
           </div>
         </AnimatedReveal>
 
         <AnimatedReveal className="section-heading" delay={0.1}>
           <p className="eyebrow">Laboratório de precisão</p>
-          <h2 id="lab-title">Agilidade com precisão: seu óculos pronto sem complicação.</h2>
+          <h2 id="lab-title">
+            Agilidade com precisão: seu óculos pronto sem complicação.
+          </h2>
           <p>
-            O diferencial de tempo só faz sentido quando a montagem mantém alinhamento, acabamento e
-            conforto. Por isso cada entrega passa por conferência e ajuste final.
+            O diferencial de tempo só faz sentido quando a montagem mantém
+            alinhamento, acabamento e conforto. Por isso cada entrega passa por
+            conferência e ajuste final.
           </p>
           <div className="lab-steps">
             {steps.map((step) => (

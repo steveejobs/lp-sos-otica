@@ -1,42 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import {
-  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
   useTransform,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { PointerEvent } from "react";
 import { site } from "@/lib/site";
 
 const mainLine =
   "CLAREZA PARA SUA ROTINA • CONFORTO PARA SEUS OLHOS • SOS ÓTICA ARAGUAÍNA";
 const secondaryLine =
-  "ÓCULOS PRONTO EM ATÉ 40 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
+  "ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
 
-const heroStates = [
-  { id: "grau", label: "Grau", index: "01" },
-  { id: "solar", label: "Solar", index: "02" },
-] as const;
+const POINTER_EASE = 0.1;
 
-type HeroState = (typeof heroStates)[number]["id"];
-
-const AUTOPLAY_INTERVAL_MS = 9800;
-const POINTER_EASE = 0.12;
-
-type LensHeroProps = {
-  initialState?: HeroState;
-};
-
-export function LensHero({ initialState = "grau" }: LensHeroProps) {
+export function LensHero() {
   const reduceMotion = useReducedMotion();
-  const [activeState, setActiveState] = useState<HeroState>(initialState);
-  const [skipMotion, setSkipMotion] = useState(false);
-  const [autoplayPaused, setAutoplayPaused] = useState(false);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const smoothPointer = useRef({
@@ -45,50 +29,30 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
     targetX: 0,
     targetY: 0,
   });
-  const sceneX = useTransform(
-    pointerX,
-    [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [-12, 12],
-  );
-  const sceneY = useTransform(
-    pointerY,
-    [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [-7, 7],
-  );
+
   const glassesX = useTransform(
     pointerX,
     [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [-7, 7],
+    reduceMotion ? [0, 0] : [-5, 5],
   );
   const glassesY = useTransform(
     pointerY,
     [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [-4, 4],
+    reduceMotion ? [0, 0] : [-3, 3],
   );
   const glassesRotateY = useTransform(
     pointerX,
     [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [1.8, -1.8],
+    reduceMotion ? [0, 0] : [1.2, -1.2],
   );
   const glassesRotateX = useTransform(
     pointerY,
     [-0.5, 0.5],
-    reduceMotion || skipMotion ? [0, 0] : [-1, 1],
+    reduceMotion ? [0, 0] : [-0.8, 0.8],
   );
 
-  const motionDisabled = Boolean(reduceMotion || skipMotion);
-  const autoplayStopped = Boolean(motionDisabled || autoplayPaused);
-
   useEffect(() => {
-    if (autoplayStopped) return;
-    const timer = window.setInterval(() => {
-      setActiveState((state) => (state === "grau" ? "solar" : "grau"));
-    }, AUTOPLAY_INTERVAL_MS);
-    return () => window.clearInterval(timer);
-  }, [autoplayStopped]);
-
-  useEffect(() => {
-    if (motionDisabled) {
+    if (reduceMotion) {
       smoothPointer.current = {
         currentX: 0,
         currentY: 0,
@@ -106,10 +70,12 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
       pointer.currentX += (pointer.targetX - pointer.currentX) * POINTER_EASE;
       pointer.currentY += (pointer.targetY - pointer.currentY) * POINTER_EASE;
 
-      if (Math.abs(pointer.targetX - pointer.currentX) < 0.001)
+      if (Math.abs(pointer.targetX - pointer.currentX) < 0.001) {
         pointer.currentX = pointer.targetX;
-      if (Math.abs(pointer.targetY - pointer.currentY) < 0.001)
+      }
+      if (Math.abs(pointer.targetY - pointer.currentY) < 0.001) {
         pointer.currentY = pointer.targetY;
+      }
 
       pointerX.set(pointer.currentX);
       pointerY.set(pointer.currentY);
@@ -118,10 +84,10 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [motionDisabled, pointerX, pointerY]);
+  }, [pointerX, pointerY, reduceMotion]);
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (motionDisabled || event.pointerType === "touch") return;
+    if (reduceMotion || event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
     smoothPointer.current.targetX = Math.max(
       -0.5,
@@ -138,26 +104,15 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
     smoothPointer.current.targetY = 0;
   }
 
-  function selectHeroState(state: HeroState) {
-    setActiveState(state);
-    setAutoplayPaused(true);
-  }
-
-  function skipHeroMotion() {
-    setSkipMotion(true);
-    setAutoplayPaused(true);
-    resetPointer();
-  }
-
   return (
     <section
-      className={`cinematic-hero hero-${activeState}`}
+      className="cinematic-hero hero-grau"
       aria-labelledby="hero-title"
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
       <h1 id="hero-title" className="sr-only">
-        SOS Ótica em Araguaína: óculos pronto em até 40 minutos
+        SOS Ótica em Araguaína: óculos pronto em até 30 minutos
       </h1>
 
       <div className="hero-brand-signal" aria-hidden="true">
@@ -165,133 +120,43 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
         <span>Centro de Araguaína</span>
       </div>
 
-      <AnimatePresence mode="wait">
-        {activeState === "grau" ? (
+      <div className="hero-state hero-state-grau">
+        <HeroCopyLayer />
+        <motion.div
+          className="hero-pointer-frame"
+          style={{
+            x: glassesX,
+            y: glassesY,
+            rotateX: glassesRotateX,
+            rotateY: glassesRotateY,
+          }}
+        >
           <motion.div
-            key="grau"
-            className="hero-state hero-state-grau"
-            initial={false}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            exit={
-              motionDisabled ? undefined : { opacity: 0, filter: "blur(10px)" }
-            }
-            transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
+            className="cinematic-glasses cinematic-glasses-grau"
+            animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            aria-hidden="true"
           >
-            <HeroCopyLayer sharp={false} />
-            <motion.div
-              className="hero-pointer-frame"
-              style={{
-                x: glassesX,
-                y: glassesY,
-                rotateX: glassesRotateX,
-                rotateY: glassesRotateY,
-              }}
-            >
-              <motion.div
-                className="cinematic-glasses cinematic-glasses-grau"
-                animate={motionDisabled ? undefined : { y: [0, -6, 0] }}
-                transition={{
-                  duration: 18,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                aria-hidden="true"
-              >
-                <LensBoundCopy />
-                <Image
-                  src="/assets/glasses/eyeglasses-hero.webp"
-                  alt=""
-                  fill
-                  priority
-                  sizes="(max-width: 680px) 142vw, 1180px"
-                  className="cinematic-glasses-image"
-                />
-                <span className="hero-lens-map hero-lens-map-grau hero-lens-left eyeglasses-left-lens" />
-                <span className="hero-lens-map hero-lens-map-grau hero-lens-right eyeglasses-right-lens" />
-                <span className="hero-refraction" />
-              </motion.div>
-            </motion.div>
+            <LensBoundCopy />
+            <Image
+              src="/assets/glasses/eyeglasses-hero.webp"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 680px) 112vw, 1120px"
+              className="cinematic-glasses-image"
+            />
+            <span className="hero-lens-map hero-lens-map-grau hero-lens-left eyeglasses-left-lens" />
+            <span className="hero-lens-map hero-lens-map-grau hero-lens-right eyeglasses-right-lens" />
           </motion.div>
-        ) : (
-          <motion.div
-            key="solar"
-            className="hero-state hero-state-solar"
-            initial={false}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            exit={
-              motionDisabled ? undefined : { opacity: 0, filter: "blur(10px)" }
-            }
-            transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="hero-sunset-stage" aria-hidden="true">
-              <motion.div
-                className="hero-sunset hero-sunset-glare"
-                style={{ x: sceneX, y: sceneY }}
-              >
-                <Image
-                  src="/imagens/araguaina-1.jpg"
-                  alt=""
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="hero-sunset-image"
-                />
-              </motion.div>
-            </div>
-
-            <motion.div
-              className="hero-pointer-frame"
-              style={{
-                x: glassesX,
-                y: glassesY,
-                rotateX: glassesRotateX,
-                rotateY: glassesRotateY,
-              }}
-            >
-              <motion.div
-                className="cinematic-glasses cinematic-glasses-solar"
-                animate={motionDisabled ? undefined : { y: [0, -5, 0] }}
-                transition={{
-                  duration: 18,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                aria-hidden="true"
-              >
-                <SolarLensFilter />
-                <Image
-                  src="/assets/glasses/sunglasses-hero.webp"
-                  alt=""
-                  fill
-                  priority
-                  sizes="(max-width: 680px) 138vw, 1100px"
-                  className="cinematic-glasses-image"
-                />
-                <span className="hero-lens-map hero-lens-map-solar hero-lens-left sunglasses-left-lens" />
-                <span className="hero-lens-map hero-lens-map-solar hero-lens-right sunglasses-right-lens" />
-                <span className="hero-solar-glint" />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+      </div>
 
       <div className="hero-ui">
-        <div className="hero-state-controls" aria-label="Estados do hero">
-          {heroStates.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className={activeState === item.id ? "is-active" : ""}
-              onClick={() => selectHeroState(item.id)}
-              aria-pressed={activeState === item.id}
-            >
-              <span>{item.index}</span>
-              {item.label}
-            </button>
-          ))}
-        </div>
-
         <div className="hero-mini-panel">
           <a
             href={site.whatsappUrl}
@@ -301,40 +166,14 @@ export function LensHero({ initialState = "grau" }: LensHeroProps) {
             WhatsApp
           </a>
         </div>
-
-        <div className="hero-control-actions">
-          <button
-            type="button"
-            className="skip-motion"
-            onClick={skipHeroMotion}
-            disabled={skipMotion}
-          >
-            {skipMotion ? "Animação pulada" : "Pular animação"}
-          </button>
-        </div>
       </div>
-
-      <a
-        href="#rapidez"
-        className="hero-scroll"
-        aria-label="Ir para a mensagem principal"
-      >
-        <ArrowDown size={18} aria-hidden="true" />
-      </a>
     </section>
   );
 }
 
-function HeroCopyLayer({ sharp }: { sharp: boolean }) {
+function HeroCopyLayer() {
   return (
-    <div
-      className={
-        sharp
-          ? "cinematic-copy cinematic-copy-sharp"
-          : "cinematic-copy cinematic-copy-blur"
-      }
-      aria-hidden="true"
-    >
+    <div className="cinematic-copy cinematic-copy-blur" aria-hidden="true">
       <HeroCopyStack />
     </div>
   );
@@ -353,15 +192,6 @@ function LensBoundCopy() {
   );
 }
 
-function SolarLensFilter() {
-  return (
-    <div className="solar-lens-filter" aria-hidden="true">
-      <span className="solar-lens-filter-panel solar-lens-left sunglasses-left-lens" />
-      <span className="solar-lens-filter-panel solar-lens-right sunglasses-right-lens" />
-    </div>
-  );
-}
-
 function HeroCopyStack() {
   return (
     <div className="cinematic-copy-stack">
@@ -369,8 +199,10 @@ function HeroCopyStack() {
         <span>{mainLine}</span>
         <span>{mainLine}</span>
         <span>{mainLine}</span>
+        <span>{mainLine}</span>
       </div>
       <div className="cinematic-copy-line cinematic-copy-secondary">
+        <span>{secondaryLine}</span>
         <span>{secondaryLine}</span>
         <span>{secondaryLine}</span>
         <span>{secondaryLine}</span>

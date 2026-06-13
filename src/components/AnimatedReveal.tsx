@@ -25,10 +25,10 @@ export function AnimatedReveal({
     <Component
       id={id}
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
+      viewport={{ once: true, amount: 0.42, margin: "0px 0px -18% 0px" }}
+      transition={{ duration: 0.76, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </Component>

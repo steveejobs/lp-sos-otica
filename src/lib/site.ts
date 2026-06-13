@@ -20,7 +20,7 @@ export const site = {
     "https://www.google.com/maps/dir/?api=1&destination=Rua%20Sadoc%20Corr%C3%AAa%2C%20154%2C%20Centro%2C%20Aragua%C3%ADna%20TO",
   logoIcon: "/imagens/logotipo icon preto.png",
   logoIconColor: "/imagens/logotipo icon.png",
-  logoFull: "/imagens/logotipo completa preta.png"
+  logoFull: "/imagens/logotipo completa preta.png",
 };
 
 export const navItems = [
@@ -29,7 +29,7 @@ export const navItems = [
   { label: "Relógios", href: "#relogios" },
   { label: "Lentes", href: "#lentes" },
   { label: "Laboratório", href: "#laboratorio" },
-  { label: "Contato", href: "#contato" }
+  { label: "Contato", href: "#contato" },
 ];
 
 export const localBusinessJsonLd = {
@@ -45,13 +45,13 @@ export const localBusinessJsonLd = {
     streetAddress: site.streetAddress,
     addressLocality: site.addressLocality,
     addressRegion: site.addressRegion,
-    addressCountry: site.postalCountry
+    addressCountry: site.postalCountry,
   },
   areaServed: {
     "@type": "City",
-    name: "Araguaína"
+    name: "Araguaína",
   },
   description:
-    "Ótica em Araguaína-TO com óculos pronto em até 30 a 40 minutos, teste de visão, lentes e armações.",
-  priceRange: "$$"
+    "Ótica em Araguaína-TO com óculos pronto em até 30 minutos, teste de visão, lentes e armações.",
+  priceRange: "$$",
 };

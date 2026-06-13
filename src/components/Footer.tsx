@@ -6,16 +6,26 @@ export function Footer() {
     <footer className="site-footer">
       <div className="site-shell footer-grid">
         <div>
-          <a href="#top" className="footer-brand" aria-label="SOS Ótica, voltar ao início">
-            <Image src={site.logoIcon} width={72} height={72} alt="" aria-hidden="true" />
+          <a
+            href="#top"
+            className="footer-brand"
+            aria-label="SOS Ótica, voltar ao início"
+          >
+            <Image
+              src={site.logoIcon}
+              width={72}
+              height={72}
+              alt=""
+              aria-hidden="true"
+            />
             <span>
               <strong>SOS Ótica</strong>
               <small>Ótica em Araguaína-TO</small>
             </span>
           </a>
           <p>
-            Óculos pronto em até 30 a 40 minutos, atendimento rápido, teste de visão, lentes e
-            armações.
+            Óculos pronto em até 30 minutos, atendimento rápido, teste de visão,
+            lentes e armações.
           </p>
         </div>
 

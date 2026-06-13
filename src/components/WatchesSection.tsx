@@ -5,27 +5,28 @@ import { MessageCircle } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
 
+const featuredWatch = {
+  title: "Coleção em destaque",
+  text: "Uma seleção Technos com presença, acabamento e opções para presente.",
+  image: "/imagens/TECHNOS-02.jpg",
+};
+
 const watches = [
   {
-    title: "Relógios clássicos",
-    text: "Peças discretas para presença elegante no trabalho e em ocasiões especiais.",
-    image: "/assets/watches/watch-01.webp"
+    title: "Clássicos de vitrine",
+    text: "Modelos versáteis para acompanhar trabalho, eventos e rotina.",
+    image: "/imagens/TECHNOS-01.jpg",
   },
   {
-    title: "Relógios casuais",
-    text: "Modelos versáteis para acompanhar a rotina com leveza e praticidade.",
-    image: "/assets/watches/watch-02.webp"
+    title: "Automáticos selecionados",
+    text: "Peças com visual marcante e detalhes de acabamento para observar de perto.",
+    image: "/imagens/TECHNOS-06.jpg",
   },
   {
     title: "Presentes especiais",
-    text: "Escolhas com aparência cuidadosa para surpreender com bom gosto.",
-    image: "/assets/watches/watch-03.webp"
+    text: "Opções com apresentação cuidadosa para escolher com bom gosto.",
+    image: "/imagens/TECHNOS-02 (1).jpg",
   },
-  {
-    title: "Acessórios selecionados",
-    text: "Detalhes que completam o visual sem perder funcionalidade.",
-    image: "/assets/watches/watch-04.webp"
-  }
 ];
 
 function publicAssetExists(src: string) {
@@ -35,14 +36,23 @@ function publicAssetExists(src: string) {
 
 export function WatchesSection() {
   return (
-    <section id="relogios" className="section watches-section" aria-labelledby="watches-title">
+    <section
+      id="relogios"
+      className="section watches-section"
+      aria-labelledby="watches-title"
+    >
       <div className="site-shell watches-intro">
         <AnimatedReveal className="section-heading compact">
           <p className="eyebrow">Relógios e acessórios</p>
-          <h2 id="watches-title">Relógios que completam o seu estilo</h2>
-          <p>Peças escolhidas para acompanhar sua rotina com elegância, presença e praticidade.</p>
+          <h2 id="watches-title">
+            Relógios com presença, escolha e bom acabamento
+          </h2>
+          <p>
+            Uma curadoria compacta para quem quer completar o estilo ou escolher
+            um presente com aparência mais refinada.
+          </p>
         </AnimatedReveal>
-        <AnimatedReveal className="watches-cta" delay={0.08}>
+        <AnimatedReveal className="watches-cta" delay={0.12}>
           <a href={site.whatsappUrl} className="button button-red">
             <MessageCircle size={18} aria-hidden="true" />
             Ver opções pelo WhatsApp
@@ -50,36 +60,75 @@ export function WatchesSection() {
         </AnimatedReveal>
       </div>
 
-      <div className="site-shell watches-grid">
-        {watches.map((watch, index) => {
-          const hasImage = publicAssetExists(watch.image);
+      <div className="site-shell watches-editorial">
+        <AnimatedReveal className="watch-card watch-card-featured" delay={0.08}>
+          <WatchImage
+            src={featuredWatch.image}
+            alt={featuredWatch.title}
+            sizes="(max-width: 1040px) 92vw, 640px"
+            priority
+          />
+          <div className="watch-copy">
+            <p className="watch-kicker">Technos</p>
+            <h3>{featuredWatch.title}</h3>
+            <p>{featuredWatch.text}</p>
+          </div>
+        </AnimatedReveal>
 
-          return (
-            <AnimatedReveal key={watch.title} className="watch-card" delay={index * 0.05}>
-              <div className="watch-media">
-                {hasImage ? (
-                  <Image
-                    src={watch.image}
-                    alt={watch.title}
-                    fill
-                    sizes="(max-width: 680px) 92vw, 280px"
-                    className="watch-image"
-                  />
-                ) : (
-                  <div className="watch-placeholder" aria-hidden="true">
-                    <span />
-                    <small>Imagem em breve</small>
-                  </div>
-                )}
-              </div>
+        <div className="watches-grid">
+          {watches.map((watch, index) => (
+            <AnimatedReveal
+              key={watch.title}
+              className="watch-card"
+              delay={0.14 + index * 0.06}
+            >
+              <WatchImage
+                src={watch.image}
+                alt={watch.title}
+                sizes="(max-width: 680px) 92vw, 260px"
+              />
               <div className="watch-copy">
                 <h3>{watch.title}</h3>
                 <p>{watch.text}</p>
               </div>
             </AnimatedReveal>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+function WatchImage({
+  src,
+  alt,
+  sizes,
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+  priority?: boolean;
+}) {
+  const hasImage = publicAssetExists(src);
+
+  return (
+    <div className="watch-media">
+      {hasImage ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="watch-image"
+        />
+      ) : (
+        <div className="watch-placeholder" aria-hidden="true">
+          <span />
+          <small>Imagem em breve</small>
+        </div>
+      )}
+    </div>
   );
 }

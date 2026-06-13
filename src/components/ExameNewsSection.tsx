@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import type { CSSProperties } from "react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { EXAME_NEWS_URL, getExameNews } from "@/lib/exame-news";
 
@@ -40,11 +41,23 @@ export async function ExameNewsSection() {
               key={item.href}
               delay={index * 0.06}
             >
+              <span
+                className={`exame-news-thumb${item.image ? " has-image" : ""}`}
+                style={
+                  item.image
+                    ? ({
+                        "--news-image": `url("${item.image}")`,
+                      } as CSSProperties)
+                    : undefined
+                }
+                aria-hidden="true"
+              />
+
               <div>
                 <div className="exame-news-meta">
                   <span>{item.category}</span>
-                  <span>{item.meta}</span>
                   <span>{item.source}</span>
+                  <span>{item.meta}</span>
                 </div>
                 <h3>{item.title}</h3>
               </div>
