@@ -1,18 +1,22 @@
 # Implementation Plan
 
-## Entrega
+## Entrega v16
 
-1. Criar biblioteca de notícias da Exame em `src/lib/exame-news.ts`.
-2. Criar rota API em `src/app/api/exame-news/route.ts`.
-3. Criar seção visual em `src/components/ExameNewsSection.tsx`.
-4. Inserir a seção antes das avaliações/depoimentos na home.
-5. Estilizar a seção como lista editorial premium, sem imagens e sem carrossel.
-6. Documentar cache, fallback e limites de conteúdo.
-7. Validar com lint, build e screenshots desktop/mobile.
+1. Centralizar dados comerciais reais em `src/lib/site.ts`.
+2. Padronizar toda a promessa para "Óculos pronto em até 30 minutos".
+3. Atualizar CTAs de WhatsApp e rota com URLs oficiais.
+4. Atualizar FAQ e schema LocalBusiness/Optician.
+5. Criar `src/data/testimonials.ts` com reviews manuais fornecidos pelo cliente.
+6. Criar `src/components/ui/testimonials-columns-1.tsx` usando `motion/react`.
+7. Substituir a seção antiga de reviews por colunas verticais animadas.
+8. Criar `src/components/StorePhotosSection.tsx` com composição editorial e placeholders.
+9. Refinar localização com cards compactos para horário, WhatsApp, 12x e teste de visão.
+10. Validar com lint, build e screenshots v16.
 
 ## Decisões
 
-- O componente da home chama a mesma biblioteca usada pela rota API para evitar uma chamada HTTP interna durante SSR.
-- O parser extrai apenas título, categoria, href, metadado e fonte.
-- O fallback mantém links para matérias originais da Exame, sem copiar conteúdo de corpo.
-- A animação usa `AnimatedReveal`, que já respeita `prefers-reduced-motion` via `framer-motion`.
+- O projeto é Next + TypeScript, mas não usa Tailwind nem shadcn. Foi criada a pasta `src/components/ui` para isolar o componente solicitado e manter compatibilidade futura com a estrutura shadcn.
+- Como Tailwind não está configurado, o visual do componente foi aplicado em `src/app/globals.css`.
+- Não foram usadas fotos falsas, randomuser ou Unsplash nos depoimentos.
+- Os avatares dos reviews são iniciais dos clientes.
+- A API do Google permanece preparada no código, mas a seção pública usa dados manuais.

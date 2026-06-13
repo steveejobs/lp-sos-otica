@@ -1,66 +1,73 @@
 import {
-  Instagram,
+  Clock3,
+  CreditCard,
+  Eye,
   MapPin,
   MessageCircle,
   Navigation,
-  Phone,
 } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
+
+const locationFacts = [
+  {
+    icon: Clock3,
+    title: "Horário",
+    text: `${site.openingHours.weekdays}. ${site.openingHours.saturday}.`,
+  },
+  {
+    icon: MessageCircle,
+    title: "WhatsApp",
+    text: site.phoneDisplay,
+  },
+  {
+    icon: CreditCard,
+    title: "Pagamento",
+    text: site.paymentSummary,
+  },
+  {
+    icon: Eye,
+    title: "Teste de visão",
+    text: "Disponível no local",
+  },
+];
 
 export function FocusGallery() {
   return (
     <section
       id="contato"
-      className="section trust-section"
+      className="section trust-section location-section"
       aria-labelledby="trust-title"
     >
-      <div className="site-shell trust-layout">
-        <AnimatedReveal className="section-heading">
-          <p className="eyebrow">Confiança local</p>
-          <h2 id="trust-title">Atendimento direto no Centro de Araguaína.</h2>
-          <p>
-            Uma ótica próxima, com conversa objetiva, orientação clara e canais
-            simples para chegar, chamar ou acompanhar novidades.
-          </p>
+      <div className="site-shell trust-layout location-premium-layout">
+        <AnimatedReveal className="section-heading compact location-heading">
+          <p className="eyebrow">Contato e rota</p>
+          <h2 id="trust-title">Estamos no Centro de Araguaína</h2>
+          <p>R. Sadoc Correa, 154 — Central</p>
         </AnimatedReveal>
 
-        <AnimatedReveal className="contact-panel" delay={0.1}>
-          <a
-            href={site.mapsRouteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Traçar rota até a SOS Ótica no Google Maps"
-          >
-            <MapPin size={20} aria-hidden="true" />
-            <span>
-              <strong>{site.address}</strong>
-              <small>Traçar rota</small>
-            </span>
-          </a>
-          <a href={site.whatsappUrl}>
-            <Phone size={20} aria-hidden="true" />
-            <span>
-              <strong>{site.phoneDisplay}</strong>
-              <small>Chamar no WhatsApp</small>
-            </span>
-          </a>
-          <a href={site.instagramUrl}>
-            <Instagram size={20} aria-hidden="true" />
-            <span>
-              <strong>{site.instagram}</strong>
-              <small>Acompanhar no Instagram</small>
-            </span>
-          </a>
+        <AnimatedReveal className="location-facts" delay={0.08}>
+          {locationFacts.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div className="location-fact" key={item.title}>
+                <Icon size={18} aria-hidden="true" />
+                <span>
+                  <strong>{item.title}</strong>
+                  <small>{item.text}</small>
+                </span>
+              </div>
+            );
+          })}
         </AnimatedReveal>
       </div>
 
-      <AnimatedReveal className="site-shell map-band" delay={0.15}>
+      <AnimatedReveal className="site-shell map-band" delay={0.12}>
         <div className="location-card">
           <div className="location-copy">
             <span className="location-seal">Centro de Araguaína</span>
-            <h3>Estamos no Centro de Araguaína</h3>
-            <p>Rua Sadoc Corrêa, 154 — Centro</p>
+            <h3>{site.mainPromise}</h3>
+            <p>{site.promiseNote}</p>
             <div className="location-actions">
               <a
                 href={site.mapsRouteUrl}
@@ -74,7 +81,7 @@ export function FocusGallery() {
               </a>
               <a href={site.whatsappUrl} className="button button-ghost">
                 <MessageCircle size={17} aria-hidden="true" />
-                Chamar no WhatsApp
+                Falar com a SOS Ótica
               </a>
             </div>
           </div>

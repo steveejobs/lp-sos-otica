@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sosotica.com.br"),
   title: "SOS Ótica em Araguaína | Óculos pronto em até 30 minutos",
   description:
-    "SOS Ótica em Araguaína-TO: óculos pronto em até 30 minutos, teste de visão, lentes, armações e atendimento rápido no Centro.",
+    "SOS Ótica em Araguaína-TO: óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e atendimento no Centro.",
   keywords: [
     "SOS Ótica",
     "ótica em Araguaína",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SOS Ótica | Óculos pronto em até 30 minutos",
     description:
-      "Atendimento rápido, cuidado com a visão, lentes e armações no Centro de Araguaína-TO.",
+      "Teste de visão no local, lentes, armações e atendimento no Centro de Araguaína-TO.",
     locale: "pt_BR",
     type: "website",
     images: [

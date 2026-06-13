@@ -60,7 +60,7 @@ export function Header() {
 
           <a href={site.whatsappUrl} className="button button-red header-cta">
             <MessageCircle size={17} aria-hidden="true" />
-            WhatsApp
+            Chamar no WhatsApp
           </a>
         </div>
 

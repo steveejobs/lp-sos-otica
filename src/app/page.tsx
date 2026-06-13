@@ -12,6 +12,7 @@ import { LensGuidance } from "@/components/LensGuidance";
 import { LensHero } from "@/components/LensHero";
 import { Manifesto } from "@/components/Manifesto";
 import { SolutionsSection } from "@/components/SolutionsSection";
+import { StorePhotosSection } from "@/components/StorePhotosSection";
 import { WatchesSection } from "@/components/WatchesSection";
 
 export default function Home() {
@@ -26,8 +27,9 @@ export default function Home() {
         <BrandPillars />
         <LensGuidance />
         <EventsSection />
-        <ExameNewsSection />
+        <StorePhotosSection />
         <GoogleReviewsSection />
+        <ExameNewsSection />
         <FocusGallery />
         <FAQSection />
         <FinalCTA />

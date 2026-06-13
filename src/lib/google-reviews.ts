@@ -16,8 +16,8 @@ export type GoogleReviewsData = {
 
 export const fallbackGoogleReviews: GoogleReviewsData = {
   rating: 4.9,
-  totalRatings: 0,
-  placeUrl: "https://www.google.com/maps/search/?api=1&query=SOS%20%C3%93tica%20Rua%20Sadoc%20Correia%20154%20Centro%20Aragua%C3%ADna%20TO",
+  totalRatings: 92,
+  placeUrl: "https://www.google.com/maps/search/?api=1&query=SOS%20%C3%93tica%20R.%20Sadoc%20Correa%20154%20Central%20Aragua%C3%ADna%20TO",
   isFallback: true,
   reviews: [
     {

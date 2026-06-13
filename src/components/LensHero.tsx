@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
 const mainLine =
   "CLAREZA PARA SUA ROTINA • CONFORTO PARA SEUS OLHOS • SOS ÓTICA ARAGUAÍNA";
 const secondaryLine =
-  "ÓCULOS PRONTO EM ATÉ 40 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
+  "ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
 
 const POINTER_EASE = 0.1;
 const HERO_COPY_DURATION = 96000;
@@ -157,7 +157,7 @@ export function LensHero() {
       onPointerLeave={resetPointer}
     >
       <h1 id="hero-title" className="sr-only">
-        SOS Ótica em Araguaína: óculos pronto em até 40 minutos
+        SOS Ótica em Araguaína: óculos pronto em até 30 minutos
       </h1>
 
       <div className="hero-brand-signal" aria-hidden="true">
@@ -208,7 +208,7 @@ export function LensHero() {
             aria-label="Chamar a SOS Ótica no WhatsApp"
           >
             <MessageCircle size={17} aria-hidden="true" />
-            WhatsApp
+            Chamar no WhatsApp
           </a>
         </div>
       </div>

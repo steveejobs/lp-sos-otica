@@ -11,13 +11,13 @@ export function FinalCTA() {
           <p className="eyebrow">SOS Ótica</p>
           <h2 id="final-title">Precisa de óculos hoje?</h2>
           <p>
-            Chame no WhatsApp, envie sua necessidade e receba orientação para resolver com rapidez.
+            Fale com a SOS Ótica e receba orientação para resolver com rapidez.
           </p>
         </div>
         <div className="final-actions">
           <a href={site.whatsappUrl} className="button button-red">
             <MessageCircle size={18} aria-hidden="true" />
-            Chamar no WhatsApp
+            Falar com a SOS Ótica
           </a>
           <a
             href={site.mapsRouteUrl}

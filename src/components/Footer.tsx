@@ -24,14 +24,16 @@ export function Footer() {
             </span>
           </a>
           <p>
-            Óculos pronto em até 30 minutos, atendimento rápido, teste de visão,
-            lentes e armações.
+            Óculos pronto em até 30 minutos, teste de visão no local, lentes,
+            armações, relógios e acessórios.
           </p>
         </div>
 
         <address>
           <strong>Endereço</strong>
-          <span>{site.address}</span>
+          <span>{site.fullAddress}</span>
+          <span>{site.openingHours.weekdays}</span>
+          <span>{site.openingHours.saturday}</span>
           <span>WhatsApp: {site.phoneDisplay}</span>
           <a href={site.instagramUrl}>Instagram: {site.instagram}</a>
         </address>

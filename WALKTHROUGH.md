@@ -1,108 +1,52 @@
 # Walkthrough
 
-## Hero
+## Dados Comerciais
 
-O hero usa somente o estado de óculos de grau. A alternância Grau/Solar e os controles de pular/pausar animação foram removidos para manter o primeiro viewport focado no conceito das lentes.
+Os dados oficiais ficam em `src/lib/site.ts`: nome, endereço, telefone, WhatsApp, rota, horário, parcelamento, promessa principal e schema LocalBusiness/Optician.
 
-O texto de fundo existe em uma camada borrada e de menor contraste. A mesma sequência textual aparece dentro das lentes por meio de dois painéis recortados, mantendo a leitura nítida apenas nas áreas das lentes.
+A promessa foi padronizada para "Óculos pronto em até 30 minutos". A nota "Conforme receita, lente e disponibilidade." aparece de forma discreta, sem ser repetida em todos os blocos.
 
-Na rodada v10, o bug de sincronia foi corrigido removendo as animações CSS independentes da linha superior e da linha inferior. O componente `LensHero` agora usa um único `requestAnimationFrame` para atualizar a variável CSS `--hero-copy-progress` na raiz `.cinematic-hero`. Todas as camadas do texto, incluindo o fundo borrado e os recortes dentro das lentes, leem essa mesma variável.
+## CTAs
 
-O loop ficou mais robusto porque cada linha usa dois segmentos textuais idênticos e se desloca de `0%` a `-50%`. Quando o progresso reinicia, o segundo segmento ocupa a mesma posição visual do primeiro, evitando salto perceptível.
+Os CTAs usam o link oficial:
 
-A visibilidade do texto de fundo foi melhorada reduzindo o blur, aumentando a opacidade e elevando levemente o contraste. Fora da lente, as palavras continuam difíceis de ler com precisão; dentro da lente, a mesma posição de animação aparece nítida e sincronizada.
+`https://api.whatsapp.com/send/?phone=5563992938550&text=Ol%C3%A1%2C+S.O.S+%C3%93tica%21&type=phone_number&app_absent=0`
 
-## Ajuste Fino Das Lentes
+O CTA de rota usa:
 
-As máscaras do hero ficam em `src/app/globals.css`, no seletor `.cinematic-hero` e nas classes:
+`https://www.google.com/maps/dir/?api=1&destination=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil`
 
-- `eyeglasses-left-lens`
-- `eyeglasses-right-lens`
+## Depoimentos
 
-Para calibrar a posição e o tamanho do reveal, ajuste estas variáveis em porcentagem dentro de `.cinematic-hero`:
+A seção "Clientes que já confiaram na SOS" usa reviews manuais fornecidos pelo cliente em `src/data/testimonials.ts`.
 
-- `--lens-left-x`
-- `--lens-left-y`
-- `--lens-left-w`
-- `--lens-left-h`
-- `--lens-right-x`
-- `--lens-right-y`
-- `--lens-right-w`
-- `--lens-right-h`
+A API do Google ainda não foi conectada para alimentar essa seção. A rota antiga continua existindo como infraestrutura, mas a prova social da home usa os dados revisados manualmente.
 
-Regra de ajuste: primeiro mova `x/y` até o reveal ficar dentro da lente real, depois reduza `w/h` para não invadir ponte, armação ou área externa. Só altere o `clip-path` quando o contorno da lente precisar mudar; para deslocamento e escala, as variáveis acima costumam ser suficientes.
+Não usamos fotos falsas, randomuser.me ou Unsplash nos depoimentos. Os avatares são iniciais dos clientes, com visual neutro e compatível com a marca.
 
-## Relógios
+O componente de colunas fica em `src/components/ui/testimonials-columns-1.tsx`, usa `motion/react`, anima verticalmente em loop, pausa em hover/focus e respeita `prefers-reduced-motion`.
 
-A seção de relógios foi compactada em um grid único: coluna esquerda estreita com eyebrow, título menor, texto curto e CTA; coluna direita com um card principal de coleção e uma pilha densa com as demais imagens. O CTA agora pertence à coluna de texto, então não fica solto no topo da seção.
+## Fotos Da Loja
 
-A imagem composta com quatro fotos (`TECHNOS-02.jpg`) foi usada como card principal de coleção. As outras imagens formam o mosaico menor ao lado, sem célula vazia e sem área morta. A seção também reduziu padding vertical, escala de texto e espaçamento entre cards.
+A seção "Por dentro da SOS Ótica" foi criada para receber fotos reais da loja em formato editorial, não como galeria comum.
 
-## CTA De Rota No Header
+Paths esperados:
 
-O header tem dois CTAs no desktop:
+- `public/assets/store/store-01.webp`
+- `public/assets/store/store-02.webp`
+- `public/assets/store/store-03.webp`
+- `public/assets/store/store-04.webp`
 
-- "Traçar rota", secundário, com ícone `Navigation`;
-- "WhatsApp", principal, em vermelho.
-
-O link de rota usado é:
-
-`https://www.google.com/maps/dir/?api=1&destination=Rua%20Sadoc%20Corr%C3%AAa%2C%20154%2C%20Centro%2C%20Aragua%C3%ADna%20TO`
-
-O CTA abre em nova aba com `target="_blank"` e `rel="noopener noreferrer"`, usando o aria-label `Traçar rota até a SOS Ótica no Google Maps`. Em telas menores, a navegação principal e os CTAs saem do topo para não poluir o header; "Traçar rota" aparece no menu mobile como ação secundária.
+Enquanto as fotos não existem, a seção mostra placeholders premium com textos como "Foto da loja", "Atendimento" e "Vitrine". Nenhuma imagem externa é usada.
 
 ## Localização
 
-A foto grande de Araguaína foi removida da faixa de localização porque estava perdendo qualidade e ficando muito cortada. A seção agora usa um bloco claro com endereço, CTAs e um mapa abstrato minimalista, evitando que uma imagem de baixa resolução vire protagonista.
+A seção de contato mostra "Estamos no Centro de Araguaína", endereço curto, horário, WhatsApp, até 12x no cartão e teste de visão no local. O objetivo é ser confiável e escaneável, sem virar bloco pesado.
 
-Para trocar por uma foto melhor no futuro, prefira uma imagem horizontal em alta resolução dentro de `public/imagens/`. Use-a como elemento secundário e sem crop agressivo:
+## FAQ
 
-- `object-fit: contain` quando a foto inteira precisar aparecer;
-- `object-position: center center` como ponto inicial;
-- overlay branco/off-white leve se a imagem competir com o texto;
-- nunca ampliar acima de 100% se a imagem já estiver no limite de qualidade.
+O FAQ foi reduzido para perguntas reais e curtas sobre prazo, teste de visão, endereço, parcelamento e horário.
 
-## Notícias
+## Notas Técnicas
 
-"Visão em pauta" é uma curadoria editorial pequena, não um portal. A seção mostra no máximo 3 matérias da Exame com:
-
-- thumbnail quando a listagem fornece imagem;
-- categoria;
-- fonte "Exame";
-- tempo/data relativa quando disponível;
-- título;
-- link para a matéria original.
-
-Os links externos usam `target="_blank"` e `rel="noopener noreferrer"`. Se a busca falhar, a Exame responder com erro, o HTML mudar ou uma imagem não puder ser extraída, o site mantém fallback sem quebrar a home.
-
-Na v10, a thumbnail tem uma camada editorial base com rótulo "Visão" e linhas de matéria. Isso cobre tanto itens sem imagem quanto imagens externas que existam no HTML, mas não carreguem no navegador durante a renderização. Assim não aparece buraco visual.
-
-## Cache
-
-A busca usa `revalidate = 3600`, ou seja, o conteúdo pode ser reutilizado por até 1 hora antes de uma nova tentativa de atualização.
-
-## Fallback
-
-Se a busca falhar a ponto de impedir a extração de 3 itens, o site exibe estes 3 fallback estáticos:
-
-- "Óculos sem aro voltam à moda entre celebridades e Geração Z"
-- "A dona da Ray-Ban não vende mais só óculos - agora é medtech"
-- "Google e Magic Leap revelam novo óculos com IA e realidade aumentada"
-
-Cada fallback aponta para a matéria original na Exame. Quando não houver thumbnail confiável, o card usa um placeholder visual limpo.
-
-## Favicon
-
-O navegador controla o tamanho visual final do favicon na aba. O site não consegue forçar que ele ocupe mais pixels do que a UI do navegador permite.
-
-O que foi ajustado foi a qualidade do asset: fundo branco, borda preta e símbolo preto em alto contraste. Os arquivos preparados são:
-
-- `public/favicon.ico`
-- `public/icon-32.png`
-- `public/icon-48.png`
-- `public/icon-192.png`
-- `public/icon-512.png`
-- `public/apple-touch-icon.png`
-- `public/site.webmanifest`
-
-`src/app/layout.tsx` aponta `metadata.icons` para o conjunto completo e usa `manifest: "/site.webmanifest"`. O arquivo antigo `manifest.webmanifest` foi mantido compatível.
+O projeto usa Next + TypeScript e CSS global. Ele não tem Tailwind nem shadcn configurados. A pasta `src/components/ui` foi criada para manter o componente solicitado isolado e facilitar uma futura adoção de shadcn se necessário.

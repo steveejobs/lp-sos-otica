@@ -92,6 +92,7 @@ img {
 
 .section {
   position: relative;
+  scroll-margin-top: 92px;
   padding: clamp(54px, 6.4vw, 88px) 0;
 }
 
@@ -2021,6 +2022,274 @@ img {
   font-size: 0.86rem;
 }
 
+.promise-note {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--muted-2);
+  font-size: 0.84rem;
+  font-weight: 640;
+}
+
+.store-photos-section {
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 14% 18%,
+      rgba(255, 214, 0, 0.1),
+      transparent 18rem
+    ),
+    linear-gradient(180deg, var(--paper) 0%, #ffffff 100%);
+}
+
+.store-photos-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+
+.store-photos-copy {
+  max-width: 390px;
+}
+
+.store-photos-composition {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(190px, 0.65fr);
+  grid-template-rows: repeat(2, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.store-photo-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.store-photo-card.is-featured {
+  grid-row: 1 / -1;
+}
+
+.store-photo-media {
+  position: relative;
+  min-height: 180px;
+  overflow: hidden;
+  border: 1px solid rgba(20, 20, 18, 0.1);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.75), rgba(245, 244, 237, 0.92)),
+    radial-gradient(circle at 24% 22%, rgba(255, 214, 0, 0.2), transparent 11rem);
+  box-shadow: 0 20px 60px rgba(20, 20, 18, 0.06);
+}
+
+.store-photo-card.is-featured .store-photo-media {
+  min-height: clamp(390px, 36vw, 560px);
+}
+
+.store-photo-image {
+  object-fit: cover;
+}
+
+.store-photo-placeholder {
+  position: absolute;
+  inset: 14px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  border: 1px dashed rgba(20, 20, 18, 0.16);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 760;
+}
+
+.store-photo-placeholder svg {
+  color: var(--red-dark);
+}
+
+.store-photo-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 680;
+}
+
+.testimonials-section {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--paper) 100%),
+    radial-gradient(circle at 88% 20%, rgba(255, 214, 0, 0.1), transparent 18rem);
+}
+
+.testimonials-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: end;
+}
+
+.testimonials-heading {
+  max-width: 640px;
+}
+
+.testimonials-summary {
+  min-width: 210px;
+  padding: 20px;
+}
+
+.testimonials-summary > span {
+  color: var(--red-dark);
+  font-size: 0.76rem;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.testimonials-summary strong {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+.testimonials-columns-wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-height: 680px;
+  margin-top: clamp(30px, 4vw, 46px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.testimonials-column {
+  min-width: 0;
+}
+
+.testimonials-column-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 14px;
+}
+
+.testimonial-column-card {
+  display: grid;
+  gap: 14px;
+  border: 1px solid rgba(20, 20, 18, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 16px 48px rgba(20, 20, 18, 0.055);
+}
+
+.testimonial-column-card:focus-visible {
+  outline: 3px solid rgba(231, 25, 31, 0.28);
+  outline-offset: 4px;
+}
+
+.testimonial-column-card p {
+  margin: 0;
+  color: var(--graphite);
+  font-size: 0.95rem;
+  line-height: 1.58;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.testimonial-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(231, 25, 31, 0.12), rgba(255, 214, 0, 0.16)),
+    #ffffff;
+  color: var(--red-dark);
+  font-size: 0.78rem;
+  font-weight: 820;
+}
+
+.testimonial-author span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.testimonial-author strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.testimonial-author small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.location-premium-layout {
+  align-items: start;
+}
+
+.location-heading p:not(.eyebrow) {
+  color: var(--graphite);
+  font-weight: 680;
+}
+
+.location-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.location-fact {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid rgba(20, 20, 18, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 14px 40px rgba(20, 20, 18, 0.045);
+}
+
+.location-fact svg {
+  margin-top: 2px;
+  color: var(--red-dark);
+}
+
+.location-fact span {
+  display: grid;
+  gap: 4px;
+}
+
+.location-fact strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.location-fact small {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
 .final-section {
   padding-top: 40px;
   background: var(--paper);
@@ -2262,8 +2531,10 @@ img {
   .lab-layout,
   .trust-layout,
   .location-card,
+  .store-photos-layout,
   .exame-news-header,
   .reviews-layout,
+  .testimonials-shell,
   .watches-layout,
   .watches-gallery,
   .health-layout,
@@ -2319,8 +2590,26 @@ img {
   .category-grid,
   .testimonial-grid,
   .watches-grid,
-  .google-review-grid {
+  .google-review-grid,
+  .testimonials-columns-wrap {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .store-photos-composition {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .store-photo-card.is-featured {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .store-photo-card.is-featured .store-photo-media {
+    min-height: 360px;
+  }
+
+  .testimonials-column-desktop {
+    display: none;
   }
 
   .watches-gallery {
@@ -2464,7 +2753,10 @@ img {
   .category-grid,
   .testimonial-grid,
   .watches-grid,
-  .google-review-grid {
+  .google-review-grid,
+  .testimonials-columns-wrap,
+  .location-facts,
+  .store-photos-composition {
     grid-template-columns: 1fr;
   }
 
@@ -2473,6 +2765,25 @@ img {
   .testimonial-item,
   .google-review-card {
     min-height: auto;
+  }
+
+  .store-photo-card.is-featured .store-photo-media,
+  .store-photo-media {
+    min-height: 260px;
+  }
+
+  .testimonials-columns-wrap {
+    max-height: 560px;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .testimonials-column-tablet {
+    display: none;
+  }
+
+  .testimonial-column-card {
+    padding: 18px;
   }
 
   .exame-news-section {
@@ -2543,7 +2854,8 @@ img {
 
   .watch-copy,
   .google-review-card,
-  .reviews-summary {
+  .reviews-summary,
+  .location-fact {
     padding: 20px;
   }
 

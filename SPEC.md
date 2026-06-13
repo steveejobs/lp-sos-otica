@@ -1,35 +1,39 @@
 # SOS Ótica Landing Page Spec
 
-## Visão em pauta
+## Objetivo
 
-A home inclui uma seção editorial minimalista chamada "Visão em pauta", posicionada perto do fim da página e antes da área de avaliações/depoimentos.
+A home deve comunicar uma ótica real no Centro de Araguaína, com promessa clara de conversão:
 
-Objetivo:
+- óculos pronto em até 30 minutos;
+- teste de visão no local;
+- WhatsApp e rota como ações principais;
+- prova social do Google;
+- endereço, horário e pagamento sem excesso de informação.
 
-- adicionar autoridade editorial ao tema óculos;
-- manter o foco principal em WhatsApp, localização, confiança e conversão;
-- exibir no máximo 3 notícias;
-- não reproduzir imagens, corpo das matérias ou conteúdo completo da Exame.
+## Dados Oficiais
 
-Fonte:
+- Nome: SOS Ótica / Ótica S.O.S
+- Endereço: R. Sadoc Correa, 154 - Central, Araguaína - TO, 77803-060, Brasil
+- WhatsApp: `(63) 99293-8550`
+- Horário: segunda a sexta, 8h às 18h; sábado, 8h às 12h
+- Pagamento: até 12x no cartão
+- Google: 4,9 com 92 avaliações
 
-- https://exame.com/noticias-sobre/oculos/
+## Seções Principais
 
-Cada item exibido contém:
+- Hero com óculos e promessa de até 30 minutos.
+- Provas de rapidez, cuidado, conforto, precisão e presença local.
+- Serviços de óculos de grau, armações, lentes, teste de visão, relógios e acessórios.
+- "Por dentro da SOS Ótica", seção editorial para fotos reais da loja.
+- "Clientes que já confiaram na SOS", depoimentos manuais do Google.
+- "Tendências em óculos", carrossel editorial da Exame.
+- Contato/localização com cards compactos.
+- FAQ curto.
 
-- categoria;
-- título;
-- metadado de tempo/data quando disponível;
-- fonte fixa "Exame";
-- link externo para a matéria original;
-- CTA "Ler na Exame".
+## Regras
 
-A seção também inclui o CTA final "Ver mais na Exame" apontando para a página de origem.
-
-## Regras Técnicas
-
-- A busca dos dados fica em `src/lib/exame-news.ts`.
-- A rota server-side fica em `src/app/api/exame-news/route.ts`.
-- A rota e o render usam cache com revalidação de 1 hora.
-- Se a busca falhar ou o HTML da Exame mudar, o site usa 3 itens estáticos de fallback.
-- Links externos usam `target="_blank"` e `rel="noopener noreferrer"`.
+- Não usar fotos falsas de pessoas.
+- A seção de loja usa placeholders até as fotos reais serem adicionadas em `public/assets/store/`.
+- Reviews usam dados manuais fornecidos pelo cliente; a API do Google ainda não está conectada.
+- A observação "Conforme receita, lente e disponibilidade." deve aparecer de forma discreta, sem repetição excessiva.
+- Schema LocalBusiness/Optician deve refletir endereço, telefone, horário, rating e reviewCount.

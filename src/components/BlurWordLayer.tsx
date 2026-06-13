@@ -4,7 +4,7 @@ type BlurWordLayerProps = {
 
 const mainPhrase = "ENXERGUE COM CLAREZA • ENXERGUE COM CONFORTO • ENXERGUE COM ESTILO";
 const secondaryPhrase =
-  "SOS ÓTICA • ARAGUAÍNA • ÓCULOS PRONTO EM ATÉ 40 MINUTOS • CUIDADO COM A SUA VISÃO";
+  "SOS ÓTICA • ARAGUAÍNA • ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO COM A SUA VISÃO";
 
 export function BlurWordLayer({ sharp = false }: BlurWordLayerProps) {
   return (

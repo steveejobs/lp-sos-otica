@@ -1,5 +1,6 @@
 import { Clock3, Eye, Glasses, MapPin, Ruler } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
+import { site } from "@/lib/site";
 
 const proofs = [
   {
@@ -45,6 +46,7 @@ export function Manifesto() {
             combina laboratório ágil, orientação objetiva e acabamento preciso
             para entregar clareza com confiança.
           </p>
+          <small className="promise-note">{site.promiseNote}</small>
         </AnimatedReveal>
 
         <div className="proof-grid">
