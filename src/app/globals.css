@@ -843,8 +843,8 @@ img {
 
 .watches-layout {
   display: grid;
-  grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.42fr);
-  gap: clamp(22px, 3.2vw, 42px);
+  grid-template-columns: minmax(280px, 0.76fr) minmax(0, 1.48fr);
+  gap: clamp(28px, 4vw, 58px);
   align-items: center;
 }
 
@@ -865,16 +865,16 @@ img {
 
 .watches-gallery {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(220px, 0.82fr);
-  gap: 12px;
+  grid-template-columns: minmax(0, 1.28fr) minmax(220px, 0.72fr);
+  gap: 14px;
   align-items: stretch;
-  min-height: clamp(360px, 36vw, 470px);
+  min-height: clamp(420px, 38vw, 530px);
 }
 
 .watches-grid {
   display: grid;
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .watch-card {
@@ -900,22 +900,25 @@ img {
 
 .watch-card-featured {
   grid-template-rows: minmax(0, 1fr) auto;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .watch-card-featured .watch-media {
   height: 100%;
   min-height: 0;
-  aspect-ratio: auto;
+  aspect-ratio: 841 / 635;
+  margin: 12px 12px 0;
+  border-radius: 6px;
 }
 
 .watches-grid .watch-card {
-  grid-template-columns: minmax(116px, 0.82fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
 }
 
 .watches-grid .watch-media {
-  height: 100%;
+  height: auto;
   min-height: 0;
-  aspect-ratio: auto;
+  aspect-ratio: 16 / 10;
 }
 
 .watch-media {
@@ -933,6 +936,11 @@ img {
 
 .watch-image {
   object-fit: cover;
+}
+
+.watch-image-contain {
+  object-fit: contain;
+  padding: 0;
 }
 
 .watch-placeholder {
@@ -1633,6 +1641,7 @@ img {
 
 .exame-news-section {
   padding-block: clamp(58px, 7vw, 98px);
+  overflow: hidden;
   background: linear-gradient(180deg, #fff 0%, var(--paper) 100%);
 }
 
@@ -1654,7 +1663,8 @@ img {
 }
 
 .exame-news-more,
-.exame-news-link {
+.exame-news-link,
+.exame-news-arrow {
   display: inline-flex;
   width: fit-content;
   align-items: center;
@@ -1679,31 +1689,82 @@ img {
   transform: translateY(-1px);
 }
 
-.exame-news-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+.exame-news-carousel {
+  position: relative;
   margin-top: clamp(30px, 4vw, 46px);
+}
+
+.exame-news-controls {
+  position: absolute;
+  right: 0;
+  top: -74px;
+  display: flex;
+  gap: 8px;
+}
+
+.exame-news-arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(20, 20, 18, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 32px rgba(20, 20, 18, 0.07);
+  cursor: pointer;
+}
+
+.exame-news-arrow:hover {
+  border-color: rgba(231, 25, 31, 0.24);
+  background: white;
+  color: var(--red-dark);
+  transform: translateY(-1px);
+}
+
+.exame-news-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 2px 22px;
+  cursor: grab;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+
+.exame-news-track::-webkit-scrollbar {
+  display: none;
+}
+
+.exame-news-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .exame-news-card {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 16px;
+  flex: 0 0 clamp(286px, 27vw, 360px);
   min-height: 100%;
   overflow: hidden;
   border: 1px solid rgba(20, 20, 18, 0.1);
   border-radius: var(--radius-sm);
   padding: 12px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 60px rgba(20, 20, 18, 0.045);
+  scroll-snap-align: start;
   transition:
     background-color 220ms var(--ease-premium),
+    border-color 220ms var(--ease-premium),
+    box-shadow 220ms var(--ease-premium),
     transform 220ms var(--ease-premium);
 }
 
 .exame-news-card:hover {
+  border-color: rgba(20, 20, 18, 0.16);
   background: white;
+  box-shadow: 0 22px 64px rgba(20, 20, 18, 0.08);
   transform: translateY(-2px);
 }
 
@@ -1728,31 +1789,26 @@ img {
     linear-gradient(150deg, #f5f4ee, #e3e3dc);
 }
 
-.exame-news-thumb::before {
+.exame-news-thumb.is-placeholder::before {
   position: absolute;
-  left: 14px;
-  top: 14px;
-  content: "Visão";
-  color: rgba(20, 20, 18, 0.58);
-  font-size: 0.74rem;
-  font-weight: 820;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.exame-news-thumb::after {
-  position: absolute;
-  inset: auto 14px 14px;
-  height: 34%;
+  inset: 24%;
   content: "";
-  border-top: 1px solid rgba(20, 20, 18, 0.16);
-  border-bottom: 1px solid rgba(20, 20, 18, 0.1);
+  border: 1px solid rgba(42, 41, 37, 0.12);
+  border-radius: 999px;
   background:
-    linear-gradient(rgba(20, 20, 18, 0.12), rgba(20, 20, 18, 0.12)) 0 35% /
-      68% 1px no-repeat,
-    linear-gradient(rgba(20, 20, 18, 0.1), rgba(20, 20, 18, 0.1)) 0 68% /
-      48% 1px no-repeat;
-  opacity: 0.78;
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 48%,
+      rgba(20, 20, 18, 0.08) 49% 51%,
+      transparent 52%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(20, 20, 18, 0.1) 50%,
+      transparent 51%
+    );
+  opacity: 0.5;
 }
 
 .exame-news-thumb.has-image {
@@ -1775,15 +1831,18 @@ img {
   background-size: cover;
 }
 
+.exame-news-body {
+  min-width: 0;
+}
+
 .exame-news-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 14px;
+  gap: 7px 12px;
   color: var(--muted-2);
-  font-size: 0.76rem;
-  font-weight: 740;
+  font-size: 0.74rem;
+  font-weight: 680;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
 }
 
 .exame-news-meta span {
@@ -1803,6 +1862,11 @@ img {
   font-size: clamp(1rem, 1.18vw, 1.16rem);
   font-weight: 720;
   line-height: 1.32;
+  display: -webkit-box;
+  min-height: 4.35em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .exame-news-link {
@@ -2219,7 +2283,6 @@ img {
   .proof-grid,
   .category-grid,
   .testimonial-grid,
-  .exame-news-list,
   .watches-grid,
   .google-review-grid {
     grid-template-columns: 1fr 1fr;
@@ -2365,7 +2428,6 @@ img {
   .proof-grid,
   .category-grid,
   .testimonial-grid,
-  .exame-news-list,
   .watches-grid,
   .google-review-grid {
     grid-template-columns: 1fr;
@@ -2382,7 +2444,19 @@ img {
     padding-block: 58px;
   }
 
+  .exame-news-controls {
+    position: static;
+    margin-top: 18px;
+  }
+
+  .exame-news-track {
+    gap: 12px;
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+
   .exame-news-card {
+    flex-basis: min(82vw, 318px);
     min-height: auto;
     gap: 14px;
     padding: 10px;
@@ -2490,14 +2564,14 @@ img {
   padding-top: 76px;
   isolation: isolate;
   --hero-copy-progress: 12;
-  --lens-left-x: 12.2%;
-  --lens-left-y: 29.8%;
-  --lens-left-w: 29.3%;
-  --lens-left-h: 42.7%;
-  --lens-right-x: 58.6%;
-  --lens-right-y: 29.8%;
-  --lens-right-w: 29.3%;
-  --lens-right-h: 42.7%;
+  --lens-left-x: 11.84%;
+  --lens-left-y: 28.72%;
+  --lens-left-w: 32.78%;
+  --lens-left-h: 44.04%;
+  --lens-right-x: 55.38%;
+  --lens-right-y: 28.72%;
+  --lens-right-w: 32.78%;
+  --lens-right-h: 44.04%;
   --hero-copy-y: 32px;
   --lens-copy-scale: 1.08;
   background:
@@ -2629,6 +2703,13 @@ img {
   z-index: 6;
 }
 
+.lens-clip-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .lens-bound-copy {
   position: absolute;
   inset: 0;
@@ -2645,40 +2726,11 @@ img {
   isolation: isolate;
   filter: brightness(1.04) contrast(1.3) saturate(1.02);
   background: transparent;
-  box-shadow:
-    inset 0 0 24px rgba(255, 255, 255, 0.16),
-    inset 0 -12px 24px rgba(117, 199, 255, 0.06);
+  clip-path: url(#leftLensPath);
 }
 
 .lens-bound-copy-panel::before {
-  position: absolute;
-  inset: -1px;
-  z-index: 0;
-  content: "";
-  background:
-    linear-gradient(
-      118deg,
-      rgba(255, 255, 255, 0.78),
-      rgba(255, 255, 250, 0.68) 46%,
-      rgba(250, 249, 241, 0.78)
-    ),
-    radial-gradient(
-      ellipse at 50% 45%,
-      rgba(255, 214, 0, 0.1),
-      transparent 62%
-    );
-  -webkit-mask-image: radial-gradient(
-    ellipse at 50% 54%,
-    #000 58%,
-    rgba(0, 0, 0, 0.82) 76%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at 50% 54%,
-    #000 58%,
-    rgba(0, 0, 0, 0.82) 76%,
-    transparent 100%
-  );
+  content: none;
 }
 
 .lens-bound-left {
@@ -2691,6 +2743,7 @@ img {
   top: var(--lens-right-y);
   width: var(--lens-right-w);
   height: var(--lens-right-h);
+  clip-path: url(#rightLensPath);
   transform: rotate(0.35deg);
 }
 
@@ -2719,80 +2772,23 @@ img {
   color: rgba(18, 18, 16, 0.84);
 }
 
-.eyeglasses-left-lens {
-  clip-path: polygon(
-    5% 25%,
-    19% 10%,
-    49% 4%,
-    80% 11%,
-    96% 31%,
-    98% 55%,
-    88% 80%,
-    64% 94%,
-    31% 91%,
-    10% 73%,
-    2% 48%
-  );
-}
-
-.eyeglasses-right-lens {
-  clip-path: polygon(
-    2% 55%,
-    4% 31%,
-    20% 11%,
-    51% 4%,
-    81% 10%,
-    95% 25%,
-    98% 48%,
-    90% 73%,
-    69% 91%,
-    36% 94%,
-    12% 80%
-  );
-}
-
-.hero-lens-map {
+.lens-calibration-overlay {
   position: absolute;
-  z-index: 7;
-  overflow: hidden;
+  inset: 0;
+  z-index: 8;
+  display: none;
   pointer-events: none;
-  border: 0;
-  background:
-    linear-gradient(
-      118deg,
-      rgba(255, 255, 255, 0.24),
-      transparent 34%,
-      rgba(255, 214, 0, 0.06)
-    ),
-    radial-gradient(
-      ellipse at 45% 48%,
-      rgba(255, 255, 255, 0.12),
-      transparent 58%
-    );
-  box-shadow:
-    inset 0 0 38px rgba(255, 255, 255, 0.2),
-    inset 0 -22px 38px rgba(255, 214, 0, 0.07);
-  backdrop-filter: saturate(1.12);
 }
 
-.hero-lens-map::after {
-  position: absolute;
-  inset: -35% 50% -25% 22%;
-  content: "";
-  transform: rotate(28deg);
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 255, 255, 0.64),
-    transparent
-  );
-  opacity: 0.72;
+.cinematic-hero[data-lens-debug="true"] .lens-calibration-overlay {
+  display: block;
 }
 
-.hero-lens-map-grau {
-  top: var(--lens-left-y);
-  width: var(--lens-left-w);
-  height: var(--lens-left-h);
+.lens-calibration-path {
+  fill: rgba(0, 132, 255, 0.32);
+  stroke: rgba(0, 80, 255, 0.94);
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
 }
 
 .cinematic-glasses-grau .hero-lens-left {

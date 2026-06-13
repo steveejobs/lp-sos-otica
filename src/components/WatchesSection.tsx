@@ -7,8 +7,9 @@ import { site } from "@/lib/site";
 
 const featuredWatch = {
   title: "Coleção Technos em destaque",
-  text: "Quatro recortes da vitrine em um bloco de coleção, com peças para uso diário, presente e ocasiões especiais.",
+  text: "A vitrine Technos apresentada como uma peça única, com modelos para comparar acabamento, caixa e pulseira sem perder detalhe.",
   image: "/imagens/TECHNOS-02.jpg",
+  isMosaic: true,
 };
 
 const watches = [
@@ -16,16 +17,13 @@ const watches = [
     title: "Automático GMT",
     text: "Estojo, pulseira extra e leitura marcante para observar de perto.",
     image: "/imagens/TECHNOS-01.jpg",
+    isMosaic: false,
   },
   {
     title: "Vitrine selecionada",
     text: "Peças com presença, acabamento e boa composição para presente.",
     image: "/imagens/TECHNOS-06.jpg",
-  },
-  {
-    title: "Coleção para comparar",
-    text: "Um mosaico visual para comparar estilos, caixas e pulseiras.",
-    image: "/imagens/TECHNOS-02 (1).jpg",
+    isMosaic: false,
   },
 ];
 
@@ -61,7 +59,7 @@ export function WatchesSection() {
           <WatchCard
             watch={featuredWatch}
             className="watch-card-featured"
-            sizes="(max-width: 1040px) 92vw, 560px"
+            sizes="(max-width: 1040px) 92vw, 620px"
             priority
           />
 
@@ -92,12 +90,15 @@ function WatchCard({
   priority?: boolean;
 }) {
   return (
-    <article className={`watch-card ${className}`}>
+    <article
+      className={`watch-card ${watch.isMosaic ? "watch-card-mosaic" : ""} ${className}`}
+    >
       <WatchImage
         src={watch.image}
         alt={watch.title}
         sizes={sizes}
         priority={priority}
+        contain={watch.isMosaic}
       />
       <div className="watch-copy">
         <p className="watch-kicker">Technos</p>
@@ -113,11 +114,13 @@ function WatchImage({
   alt,
   sizes,
   priority = false,
+  contain = false,
 }: {
   src: string;
   alt: string;
   sizes: string;
   priority?: boolean;
+  contain?: boolean;
 }) {
   const hasImage = publicAssetExists(src);
 
@@ -130,7 +133,7 @@ function WatchImage({
           fill
           sizes={sizes}
           priority={priority}
-          className="watch-image"
+          className={`watch-image ${contain ? "watch-image-contain" : ""}`}
         />
       ) : (
         <div className="watch-placeholder" aria-hidden="true">

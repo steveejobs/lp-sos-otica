@@ -8,9 +8,41 @@ export type ExameNewsItem = {
 };
 
 export const EXAME_NEWS_URL = "https://exame.com/noticias-sobre/oculos/";
-export const EXAME_NEWS_REVALIDATE = 3600;
+export const EXAME_NEWS_REVALIDATE = 900;
+export const EXAME_NEWS_LIMIT = 8;
 
 const FALLBACK_NEWS: ExameNewsItem[] = [
+  {
+    title:
+      "Grife de óculos que conquistou Meryl Streep abre galeria em São Paulo",
+    category: "Casual",
+    href: "https://exame.com/casual/grife-de-oculos-que-conquistou-meryl-streep-abre-galeria-em-sao-paulo/",
+    meta: "Arquivo Exame",
+    source: "Exame",
+  },
+  {
+    title:
+      "The Simple RunClub e Zerezes lançam collab de óculos que une corrida e design",
+    category: "Casual",
+    href: "https://exame.com/casual/the-simple-runclub-e-zerezes-lancam-collab-de-oculos-que-une-corrida-e-design/",
+    meta: "Arquivo Exame",
+    source: "Exame",
+  },
+  {
+    title:
+      "Ele trabalhou no STF, virou franqueado e agora vai faturar R$ 120 milhões com óculos",
+    category: "Negócios",
+    href: "https://exame.com/negocios/ele-trabalhou-no-stf-virou-franqueado-e-agora-vai-faturar-r-120-milhoes-com-oculos/",
+    meta: "Arquivo Exame",
+    source: "Exame",
+  },
+  {
+    title: "O acessório queridinho dos corredores agora é outro",
+    category: "Casual",
+    href: "https://exame.com/casual/o-acessorio-queridinho-dos-corredores-agora-e-outro/",
+    meta: "Arquivo Exame",
+    source: "Exame",
+  },
   {
     title: "Óculos sem aro voltam à moda entre celebridades e Geração Z",
     category: "Casual",
@@ -33,6 +65,14 @@ const FALLBACK_NEWS: ExameNewsItem[] = [
     meta: "Arquivo Exame",
     source: "Exame",
   },
+  {
+    title:
+      "Snap negocia captação de US$ 1 bilhão para acelerar divisão de óculos de realidade aumentada",
+    category: "Tecnologia",
+    href: "https://exame.com/tecnologia/snap-negocia-captacao-de-us-1-bilhao-para-acelerar-divisao-de-oculos-de-realidade-aumentada/",
+    meta: "Arquivo Exame",
+    source: "Exame",
+  },
 ];
 
 const CATEGORY_LABELS = [
@@ -46,11 +86,13 @@ const CATEGORY_LABELS = [
   "Moda",
 ];
 
-export function getFallbackExameNews(limit = 3) {
+export function getFallbackExameNews(limit = EXAME_NEWS_LIMIT) {
   return FALLBACK_NEWS.slice(0, limit);
 }
 
-export async function getExameNews(limit = 3): Promise<ExameNewsItem[]> {
+export async function getExameNews(
+  limit = EXAME_NEWS_LIMIT,
+): Promise<ExameNewsItem[]> {
   try {
     const response = await fetch(EXAME_NEWS_URL, {
       headers: {
@@ -65,7 +107,10 @@ export async function getExameNews(limit = 3): Promise<ExameNewsItem[]> {
     }
 
     const html = await response.text();
-    const parsedNews = parseExameNews(html).slice(0, limit);
+    const parsedNews = mergeUniqueNews(
+      parseExameNews(html),
+      getFallbackExameNews(limit),
+    ).slice(0, limit);
 
     if (parsedNews.length < limit) {
       throw new Error("Exame markup did not expose enough news items");
@@ -115,6 +160,24 @@ export function parseExameNews(html: string): ExameNewsItem[] {
   }
 
   return items;
+}
+
+function mergeUniqueNews(...groups: ExameNewsItem[][]) {
+  const merged: ExameNewsItem[] = [];
+  const seen = new Set<string>();
+
+  for (const group of groups) {
+    for (const item of group) {
+      if (seen.has(item.href)) {
+        continue;
+      }
+
+      merged.push(item);
+      seen.add(item.href);
+    }
+  }
+
+  return merged;
 }
 
 function normalizeExameHref(href: string) {

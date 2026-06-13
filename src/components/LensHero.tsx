@@ -19,6 +19,12 @@ const secondaryLine =
 
 const POINTER_EASE = 0.1;
 const HERO_COPY_DURATION = 96000;
+const DEBUG_LENS_MASK = false;
+
+const leftLensPath =
+  "M0.073 0.261 C0.104 0.135 0.254 0.063 0.482 0.065 C0.672 0.068 0.858 0.13 0.929 0.258 C0.965 0.365 0.956 0.563 0.876 0.742 C0.772 0.896 0.595 0.944 0.369 0.899 C0.186 0.86 0.089 0.727 0.056 0.558 C0.036 0.442 0.038 0.345 0.073 0.261 Z";
+const rightLensPath =
+  "M0.927 0.261 C0.896 0.135 0.746 0.063 0.518 0.065 C0.328 0.068 0.142 0.13 0.071 0.258 C0.035 0.365 0.044 0.563 0.124 0.742 C0.228 0.896 0.405 0.944 0.631 0.899 C0.814 0.86 0.911 0.727 0.944 0.558 C0.964 0.442 0.962 0.345 0.927 0.261 Z";
 
 export function LensHero() {
   const reduceMotion = useReducedMotion();
@@ -52,6 +58,21 @@ export function LensHero() {
     [-0.5, 0.5],
     reduceMotion ? [0, 0] : [-0.8, 0.8],
   );
+
+  useEffect(() => {
+    const hero = sectionRef.current;
+    if (!hero) return;
+
+    const debugLens =
+      DEBUG_LENS_MASK ||
+      new URLSearchParams(window.location.search).get("debugLens") === "1";
+
+    if (debugLens) {
+      hero.dataset.lensDebug = "true";
+    } else {
+      hero.removeAttribute("data-lens-debug");
+    }
+  }, []);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -130,6 +151,7 @@ export function LensHero() {
     <section
       ref={sectionRef}
       className="cinematic-hero hero-grau"
+      data-lens-debug={DEBUG_LENS_MASK ? "true" : undefined}
       aria-labelledby="hero-title"
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
@@ -164,6 +186,7 @@ export function LensHero() {
             }}
             aria-hidden="true"
           >
+            <LensClipDefs />
             <LensBoundCopy />
             <Image
               src="/assets/glasses/eyeglasses-hero.webp"
@@ -173,8 +196,7 @@ export function LensHero() {
               sizes="(max-width: 680px) 112vw, 1120px"
               className="cinematic-glasses-image"
             />
-            <span className="hero-lens-map hero-lens-map-grau hero-lens-left eyeglasses-left-lens" />
-            <span className="hero-lens-map hero-lens-map-grau hero-lens-right eyeglasses-right-lens" />
+            <LensCalibrationOverlay />
           </motion.div>
         </motion.div>
       </div>
@@ -191,6 +213,42 @@ export function LensHero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function LensClipDefs() {
+  return (
+    <svg className="lens-clip-defs" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="leftLensPath" clipPathUnits="objectBoundingBox">
+          <path d={leftLensPath} />
+        </clipPath>
+        <clipPath id="rightLensPath" clipPathUnits="objectBoundingBox">
+          <path d={rightLensPath} />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+function LensCalibrationOverlay() {
+  return (
+    <svg
+      className="lens-calibration-overlay"
+      viewBox="0 0 1672 940"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        className="lens-calibration-path lens-calibration-left"
+        d="M238 378 C255 326 337 296 462 297 C566 298 668 324 707 377 C727 421 722 503 678 577 C621 641 524 661 400 642 C300 626 247 571 229 501 C218 453 219 413 238 378 Z"
+      />
+      <path
+        className="lens-calibration-path lens-calibration-right"
+        d="M1434 378 C1417 326 1335 296 1210 297 C1106 298 1004 324 965 377 C945 421 950 503 994 577 C1051 641 1148 661 1272 642 C1372 626 1425 571 1443 501 C1454 453 1453 413 1434 378 Z"
+      />
+    </svg>
   );
 }
 

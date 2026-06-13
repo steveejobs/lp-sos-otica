@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
-import { EXAME_NEWS_REVALIDATE, getExameNews } from "@/lib/exame-news";
+import {
+  EXAME_NEWS_LIMIT,
+  EXAME_NEWS_REVALIDATE,
+  getExameNews,
+} from "@/lib/exame-news";
 
-export const revalidate = 3600;
+export const revalidate = 900;
 
 export async function GET() {
-  const items = await getExameNews(3);
+  const items = await getExameNews(EXAME_NEWS_LIMIT);
 
   return NextResponse.json(items, {
     headers: {
