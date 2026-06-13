@@ -2498,6 +2498,8 @@ img {
   --lens-right-y: 29.8%;
   --lens-right-w: 29.3%;
   --lens-right-h: 42.7%;
+  --hero-copy-y: 32px;
+  --lens-copy-scale: 1.08;
   background:
     radial-gradient(
       circle at 50% 42%,
@@ -2561,50 +2563,16 @@ img {
 
 .cinematic-copy-blur {
   z-index: 1;
-  opacity: 0.56;
-  filter: blur(5.5px) contrast(0.88) saturate(0.9);
-  transform: skewX(-1.5deg) scale(1.025);
-}
-
-.cinematic-copy-sharp {
-  z-index: 4;
-  opacity: 0.98;
-  filter: contrast(1.34) saturate(1.08);
-  -webkit-mask-image:
-    radial-gradient(
-      ellipse 12.6% 20.5% at 29.7% 50.6%,
-      #000 56%,
-      rgba(0, 0, 0, 0.78) 64%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 12.6% 20.5% at 70.3% 50.6%,
-      #000 56%,
-      rgba(0, 0, 0, 0.78) 64%,
-      transparent 72%
-    );
-  mask-image:
-    radial-gradient(
-      ellipse 12.6% 20.5% at 29.7% 50.6%,
-      #000 56%,
-      rgba(0, 0, 0, 0.78) 64%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 12.6% 20.5% at 70.3% 50.6%,
-      #000 56%,
-      rgba(0, 0, 0, 0.78) 64%,
-      transparent 72%
-    );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  opacity: 0.6;
+  filter: blur(4.35px) contrast(0.92) saturate(0.92);
+  transform: skewX(-1.5deg) scale(1.02);
 }
 
 .cinematic-copy-stack {
   display: grid;
   width: max-content;
-  gap: clamp(12px, 1.9vw, 21px);
-  transform: translateY(0.85rem);
+  gap: clamp(14px, 2vw, 23px);
+  transform: translateY(var(--hero-copy-y));
 }
 
 .cinematic-copy-line {
@@ -2621,12 +2589,12 @@ img {
 }
 
 .cinematic-copy-main {
-  font-size: clamp(1.06rem, 2vw, 2.18rem);
+  font-size: clamp(1.18rem, 2.24vw, 2.52rem);
 }
 
 .cinematic-copy-secondary {
-  color: rgba(20, 20, 18, 0.64);
-  font-size: clamp(0.48rem, 0.64vw, 0.7rem);
+  color: rgba(20, 20, 18, 0.68);
+  font-size: clamp(0.54rem, 0.74vw, 0.82rem);
   font-weight: 720;
   letter-spacing: 0.12em;
 }
@@ -2674,17 +2642,48 @@ img {
   width: var(--lens-left-w);
   height: var(--lens-left-h);
   overflow: hidden;
-  filter: brightness(1.08) contrast(1.34) saturate(1.04);
-  transform: translateZ(-1px);
-  background: rgba(255, 255, 255, 0.04);
+  isolation: isolate;
+  filter: brightness(1.04) contrast(1.3) saturate(1.02);
+  background: transparent;
   box-shadow:
-    inset 0 0 24px rgba(255, 255, 255, 0.2),
-    inset 0 -12px 24px rgba(117, 199, 255, 0.08);
+    inset 0 0 24px rgba(255, 255, 255, 0.16),
+    inset 0 -12px 24px rgba(117, 199, 255, 0.06);
+}
+
+.lens-bound-copy-panel::before {
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  content: "";
+  background:
+    linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.78),
+      rgba(255, 255, 250, 0.68) 46%,
+      rgba(250, 249, 241, 0.78)
+    ),
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(255, 214, 0, 0.1),
+      transparent 62%
+    );
+  -webkit-mask-image: radial-gradient(
+    ellipse at 50% 54%,
+    #000 58%,
+    rgba(0, 0, 0, 0.82) 76%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse at 50% 54%,
+    #000 58%,
+    rgba(0, 0, 0, 0.82) 76%,
+    transparent 100%
+  );
 }
 
 .lens-bound-left {
   left: var(--lens-left-x);
-  transform: rotate(-0.35deg) translateZ(-1px);
+  transform: rotate(-0.35deg);
 }
 
 .lens-bound-right {
@@ -2692,14 +2691,16 @@ img {
   top: var(--lens-right-y);
   width: var(--lens-right-w);
   height: var(--lens-right-h);
-  transform: rotate(0.35deg) translateZ(-1px);
+  transform: rotate(0.35deg);
 }
 
 .lens-bound-copy-panel .cinematic-copy-stack {
   position: absolute;
+  z-index: 1;
   left: -31.4vw;
-  top: 50%;
-  transform: translateY(-48%);
+  top: calc(50% + var(--hero-copy-y));
+  transform: translateY(-50%) scale(var(--lens-copy-scale));
+  transform-origin: left center;
 }
 
 .lens-bound-right .cinematic-copy-stack {
@@ -2707,15 +2708,15 @@ img {
 }
 
 .lens-bound-copy-panel .cinematic-copy-line {
-  color: rgba(8, 8, 7, 0.94);
+  color: rgba(7, 7, 6, 0.98);
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.96),
     -1px 0 rgba(117, 199, 255, 0.12),
     1px 0 rgba(231, 25, 31, 0.08);
 }
 
 .lens-bound-copy-panel .cinematic-copy-secondary {
-  color: rgba(20, 20, 18, 0.76);
+  color: rgba(18, 18, 16, 0.84);
 }
 
 .eyeglasses-left-lens {
@@ -3059,6 +3060,8 @@ img {
 @media (max-width: 680px) {
   .cinematic-hero {
     min-height: min(100svh, 900px);
+    --hero-copy-y: 17px;
+    --lens-copy-scale: 1.07;
   }
 
   .hero-brand-signal {
@@ -3080,7 +3083,7 @@ img {
 
   .lens-bound-copy-panel .cinematic-copy-stack {
     left: -50vw;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(var(--lens-copy-scale));
   }
 
   .lens-bound-right .cinematic-copy-stack {
@@ -3088,22 +3091,22 @@ img {
   }
 
   .cinematic-copy-stack {
-    gap: 14px;
-    transform: translateY(-0.6rem);
+    gap: 12px;
+    transform: translateY(var(--hero-copy-y));
   }
 
   .cinematic-copy-main {
-    font-size: clamp(1.05rem, 5.7vw, 1.55rem);
+    font-size: clamp(1.16rem, 6.25vw, 1.76rem);
   }
 
   .cinematic-copy-secondary {
-    font-size: clamp(0.44rem, 2.2vw, 0.6rem);
+    font-size: clamp(0.5rem, 2.45vw, 0.68rem);
     letter-spacing: 0.12em;
   }
 
   .cinematic-copy-blur {
-    filter: blur(6.5px) contrast(0.88) saturate(0.86);
-    opacity: 0.48;
+    filter: blur(4.7px) contrast(0.9) saturate(0.88);
+    opacity: 0.56;
   }
 
   .hero-ui {
