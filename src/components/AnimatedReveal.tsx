@@ -16,7 +16,7 @@ export function AnimatedReveal({
   className,
   delay = 0,
   as = "div",
-  id
+  id,
 }: AnimatedRevealProps) {
   const reduceMotion = useReducedMotion();
   const Component = motion[as];
@@ -25,10 +25,10 @@ export function AnimatedReveal({
     <Component
       id={id}
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </Component>

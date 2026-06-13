@@ -14,12 +14,24 @@ import { Manifesto } from "@/components/Manifesto";
 import { SolutionsSection } from "@/components/SolutionsSection";
 import { WatchesSection } from "@/components/WatchesSection";
 
-export default function Home() {
+type HomeProps = {
+  searchParams?: Promise<{
+    hero?: string | string[];
+  }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  const heroParam = Array.isArray(params?.hero)
+    ? params?.hero[0]
+    : params?.hero;
+  const initialHeroState = heroParam === "solar" ? "solar" : "grau";
+
   return (
     <>
       <Header />
       <main id="top">
-        <LensHero />
+        <LensHero initialState={initialHeroState} />
         <Manifesto />
         <SolutionsSection />
         <WatchesSection />
