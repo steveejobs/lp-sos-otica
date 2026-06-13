@@ -1,0 +1,36 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
+
+type AnimatedRevealProps = {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  as?: "div" | "section";
+  id?: string;
+};
+
+export function AnimatedReveal({
+  children,
+  className,
+  delay = 0,
+  as = "div",
+  id
+}: AnimatedRevealProps) {
+  const reduceMotion = useReducedMotion();
+  const Component = motion[as];
+
+  return (
+    <Component
+      id={id}
+      className={className}
+      initial={reduceMotion ? false : { y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12, margin: "120px 0px" }}
+      transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1], delay }}
+    >
+      {children}
+    </Component>
+  );
+}
