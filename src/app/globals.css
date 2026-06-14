@@ -2923,13 +2923,13 @@ img {
   isolation: isolate;
   --hero-copy-progress: 12;
   --lens-left-x: 11.18%;
-  --lens-left-y: 28.14%;
+  --lens-left-y: 26.92%;
   --lens-left-w: 34.1%;
-  --lens-left-h: 45.24%;
+  --lens-left-h: 46.7%;
   --lens-right-x: 54.72%;
-  --lens-right-y: 28.14%;
+  --lens-right-y: 26.92%;
   --lens-right-w: 34.1%;
-  --lens-right-h: 45.24%;
+  --lens-right-h: 46.7%;
   --hero-copy-y: 32px;
   --lens-copy-scale: 1.08;
   background:
