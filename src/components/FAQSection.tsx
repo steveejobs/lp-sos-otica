@@ -1,4 +1,5 @@
 import { AnimatedReveal } from "@/components/AnimatedReveal";
+import { site } from "@/lib/site";
 
 const faqs = [
   {
@@ -12,7 +13,7 @@ const faqs = [
   },
   {
     question: "Onde fica a SOS Ótica?",
-    answer: "Na R. Sadoc Correa, 154 — Central, Araguaína - TO.",
+    answer: `Na ${site.displayAddress}.`,
   },
   {
     question: "Vocês parcelam?",

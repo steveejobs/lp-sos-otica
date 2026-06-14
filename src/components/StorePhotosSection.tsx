@@ -43,7 +43,7 @@ export function StorePhotosSection() {
               className="button button-red"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Traçar rota até a SOS Ótica no Google Maps"
+              aria-label="Traçar rota até a Ótica S.O.S no Google Maps"
             >
               <MapPin size={17} aria-hidden="true" />
               Traçar rota

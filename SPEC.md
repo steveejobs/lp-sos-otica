@@ -7,6 +7,7 @@ A home deve comunicar uma ótica real no Centro de Araguaína com experiência p
 - óculos pronto em até 30 minutos;
 - teste de visão no local;
 - escolha guiada por rotina de uso;
+- processo em 5 etapas: Receita, Lente, Montagem, Ajuste e Pronto;
 - loja real, atendimento próximo e presença local;
 - WhatsApp e rota como ações principais;
 - prova social real do Google;
@@ -26,14 +27,15 @@ A home deve comunicar uma ótica real no Centro de Araguaína com experiência p
 1. Hero com óculos e revelação nas lentes.
 2. Provas rápidas: até 30 minutos, teste de visão, 4,9 no Google.
 3. "Qual lente combina com sua rotina?", escolha guiada interativa.
-4. Laboratório de precisão.
-5. "Por dentro da SOS Ótica", seção editorial com fotos reais.
-6. Relógios e acessórios.
-7. Tendências em óculos.
-8. Clientes que já confiaram na SOS.
-9. Localização com mapa real do Google.
-10. FAQ.
-11. CTA final.
+4. "Do atendimento ao óculos pronto, sem enrolação", processo em 5 abas.
+5. Laboratório de precisão.
+6. "Por dentro da SOS Ótica", seção editorial com fotos reais.
+7. Relógios e acessórios.
+8. Tendências em óculos.
+9. Clientes que já confiaram na SOS.
+10. Localização com mapa real do Google.
+11. FAQ.
+12. CTA final.
 
 ## Regras
 
@@ -42,4 +44,5 @@ A home deve comunicar uma ótica real no Centro de Araguaína com experiência p
 - Não usar fotos falsas, randomuser ou Unsplash para depoimentos.
 - Reviews usam dados manuais fornecidos pelo cliente.
 - A observação "Conforme receita, lente e disponibilidade." deve aparecer de forma discreta.
+- A seção de processo deve ser compacta, usar tabs reais, não usar carrossel, vídeo, Three.js ou imagens pesadas.
 - Schema LocalBusiness/Optician deve refletir endereço, telefone, horário, rating e reviewCount.

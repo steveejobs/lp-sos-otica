@@ -7,7 +7,13 @@ export function FinalCTA() {
     <section className="section final-section" aria-labelledby="final-title">
       <div className="site-shell final-panel">
         <div>
-          <Image src={site.logoIcon} width={92} height={92} alt="" aria-hidden="true" />
+          <Image
+            src={site.logoIcon}
+            width={92}
+            height={92}
+            alt=""
+            aria-hidden="true"
+          />
           <p className="eyebrow">SOS Ótica</p>
           <h2 id="final-title">Precisa de óculos hoje?</h2>
           <p>
@@ -24,7 +30,7 @@ export function FinalCTA() {
             className="button button-light"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Traçar rota até a SOS Ótica no Google Maps"
+            aria-label="Traçar rota até a Ótica S.O.S no Google Maps"
           >
             <MapPin size={18} aria-hidden="true" />
             Traçar rota

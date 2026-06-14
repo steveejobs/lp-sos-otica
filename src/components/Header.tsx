@@ -52,7 +52,7 @@ export function Header() {
             className="button header-route"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Traçar rota até a SOS Ótica no Google Maps"
+            aria-label="Traçar rota até a Ótica S.O.S no Google Maps"
           >
             <Navigation size={17} aria-hidden="true" />
             Traçar rota
@@ -104,7 +104,7 @@ export function Header() {
               className="button header-route mobile-route"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Traçar rota até a SOS Ótica no Google Maps"
+              aria-label="Traçar rota até a Ótica S.O.S no Google Maps"
               onClick={() => setIsOpen(false)}
             >
               <Navigation size={17} aria-hidden="true" />

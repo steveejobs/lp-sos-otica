@@ -9,6 +9,7 @@ import { ExameNewsSection } from "@/components/ExameNewsSection";
 import { Header } from "@/components/Header";
 import { LensHero } from "@/components/LensHero";
 import { Manifesto } from "@/components/Manifesto";
+import { ProcessSection } from "@/components/ProcessSection";
 import { RoutineLensSection } from "@/components/RoutineLensSection";
 import { StorePhotosSection } from "@/components/StorePhotosSection";
 import { WatchesSection } from "@/components/WatchesSection";
@@ -21,6 +22,7 @@ export default function Home() {
         <LensHero />
         <Manifesto />
         <RoutineLensSection />
+        <ProcessSection />
         <EventsSection />
         <StorePhotosSection />
         <WatchesSection />

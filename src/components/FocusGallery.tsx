@@ -42,7 +42,7 @@ export function FocusGallery() {
         <AnimatedReveal className="section-heading compact location-heading">
           <p className="eyebrow">Contato e rota</p>
           <h2 id="trust-title">Estamos no Centro de Araguaína</h2>
-          <p>R. Sadoc Correa, 154 — Central</p>
+          <p>{site.displayAddress}</p>
         </AnimatedReveal>
 
         <AnimatedReveal className="location-facts" delay={0.08}>
@@ -73,7 +73,7 @@ export function FocusGallery() {
                 className="button button-red"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Traçar rota até a SOS Ótica no Google Maps"
+                aria-label="Traçar rota até a Ótica S.O.S no Google Maps"
               >
                 <Navigation size={17} aria-hidden="true" />
                 Traçar rota
@@ -88,7 +88,7 @@ export function FocusGallery() {
           <div className="location-map">
             <iframe
               src={site.mapsEmbedUrl}
-              title="Mapa da SOS Ótica em Araguaína"
+              title="Mapa da Ótica S.O.S em Araguaína"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen

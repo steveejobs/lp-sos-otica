@@ -31,7 +31,7 @@ export function Footer() {
 
         <address>
           <strong>Endereço</strong>
-          <span>{site.fullAddress}</span>
+          <span>{site.displayAddress}</span>
           <span>{site.openingHours.weekdays}</span>
           <span>{site.openingHours.saturday}</span>
           <span>WhatsApp: {site.phoneDisplay}</span>

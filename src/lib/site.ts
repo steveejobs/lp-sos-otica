@@ -10,20 +10,23 @@ export const site = {
   postalCode: "77803-060",
   postalCountry: "BR",
   address: "R. Sadoc Correa, 154 - Central, Araguaína - TO",
+  displayAddress: "R. Sadoc Correa, 154 — Central, Araguaína - TO, 77803-060",
   fullAddress:
     "R. Sadoc Correa, 154 - Central, Araguaína - TO, 77803-060, Brasil",
   phoneDisplay: "(63) 99293-8550",
   phoneE164: "+5563992938550",
+  latitude: -7.1920373,
+  longitude: -48.2087301,
   instagram: "@sosoticaoficial",
   instagramUrl: "https://www.instagram.com/sosoticaoficial/",
   whatsappUrl:
     "https://api.whatsapp.com/send/?phone=5563992938550&text=Ol%C3%A1%2C+S.O.S+%C3%93tica%21&type=phone_number&app_absent=0",
   mapUrl:
-    "https://www.google.com/maps/search/?api=1&query=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil",
+    "https://www.google.com/maps/place/%C3%93tica+S.O.S/@-7.1920141,-48.2088701,19.25z/data=!4m6!3m5!1s0x92d90daadbffe76f:0x498c96c9b5a15ebd!8m2!3d-7.1920373!4d-48.2087301!16s%2Fg%2F11t27r67sb?entry=ttu",
   mapsRouteUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil",
+    "https://www.google.com/maps/dir/?api=1&destination=-7.1920373,-48.2087301&travelmode=driving",
   mapsEmbedUrl:
-    "https://maps.google.com/maps?&q=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil&z=17&output=embed",
+    "https://www.google.com/maps?q=-7.1920373,-48.2087301&z=19&output=embed",
   rating: 4.9,
   reviewCount: 92,
   openingHours: {
@@ -67,7 +70,8 @@ export const localBusinessJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    address: site.fullAddress,
+    latitude: site.latitude,
+    longitude: site.longitude,
   },
   areaServed: {
     "@type": "City",

@@ -12,6 +12,16 @@ A seção `src/components/RoutineLensSection.tsx` apresenta seis situações rea
 
 Ao clicar em um card, a resposta lateral muda e o CTA "Falar com a SOS Ótica" usa o WhatsApp oficial. Não há carrossel; no mobile os cards ficam empilhados para toque confortável.
 
+## Processo SOS
+
+A seção `src/components/ProcessSection.tsx` foi inserida depois de `RoutineLensSection` e antes do bloco de laboratório. Ela explica a jornada do atendimento até a entrega em 5 abas: Receita, Lente, Montagem, Ajuste e Pronto.
+
+As abas são `button` reais com `role="tablist"`, `role="tab"`, `role="tabpanel"` e `aria-selected`. Além do clique, a navegação por teclado aceita setas, Home e End. Ao trocar a etapa, a linha de progresso avança, o ícone ativo ganha destaque e o texto entra com fade/slide curto via `framer-motion`.
+
+A composição visual é única e reutilizável: uma armação/lente desenhada em CSS, scan lines leves e marcadores de etapa com ícones `lucide-react`. Não foram usadas imagens pesadas, vídeo, Three.js ou galeria, porque a seção precisa ser compacta e rápida.
+
+No mobile, as tabs viram uma faixa horizontal rolável com scroll suave, o visual reduz altura e o CTA ocupa a largura disponível. O `prefers-reduced-motion` é respeitado pelo CSS global e pelo `useReducedMotion`, removendo animações longas para quem prefere menos movimento.
+
 ## Fotos Reais Da Loja
 
 As imagens vieram de `public/galeria sos/` e foram normalizadas para:
@@ -27,9 +37,11 @@ Foram usadas imagens de atendimento e loja real. A foto infantil da pasta não f
 
 A localização agora usa iframe real do Google Maps com:
 
-`https://maps.google.com/maps?&q=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil&z=17&output=embed`
+`https://www.google.com/maps?q=-7.1920373,-48.2087301&z=19&output=embed`
 
-O iframe tem `loading="lazy"`, `referrerPolicy="no-referrer-when-downgrade"` e título acessível. O botão "Traçar rota" continua usando a URL oficial de rota.
+O iframe tem `loading="lazy"`, `referrerPolicy="no-referrer-when-downgrade"` e título acessível. O botão "Traçar rota" usa coordenadas exatas:
+
+`https://www.google.com/maps/dir/?api=1&destination=-7.1920373,-48.2087301&travelmode=driving`
 
 ## Ordem Da Página
 
@@ -38,14 +50,15 @@ A home foi reorganizada para:
 1. Hero
 2. Provas rápidas
 3. Rotina/lentes
-4. Laboratório de precisão
-5. Fotos reais da loja
-6. Relógios e acessórios
-7. Tendências em óculos
-8. Depoimentos reais
-9. Localização com mapa
-10. FAQ
-11. CTA final
+4. Processo SOS em 5 abas
+5. Laboratório de precisão
+6. Fotos reais da loja
+7. Relógios e acessórios
+8. Tendências em óculos
+9. Depoimentos reais
+10. Localização com mapa
+11. FAQ
+12. CTA final
 
 ## Cuidados Contra Poluição
 
