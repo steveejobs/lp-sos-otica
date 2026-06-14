@@ -23,7 +23,7 @@
 ## Entrega v23
 
 1. Criar `src/components/ProcessSection.tsx` com 5 abas: Receita, Lente, Montagem, Ajuste e Pronto.
-2. Inserir a seção logo depois de `RoutineLensSection`, antes de laboratório, loja, depoimentos e localização.
+2. Inserir a seção logo depois de `RoutineLensSection`, substituindo o bloco antigo de laboratório/agilidade.
 3. Usar apenas CSS, SVG/HTML leve, lucide-react e framer-motion curto para a troca de conteúdo.
 4. Criar linha de progresso conectando as 5 etapas e composição visual reutilizável de óculos/lente.
 5. Garantir tabs reais com `role="tablist"`, `role="tab"`, `role="tabpanel"` e `aria-selected`.

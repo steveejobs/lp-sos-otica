@@ -8,7 +8,7 @@ import {
   useReducedMotion,
   useTransform,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PointerEvent } from "react";
 import { site } from "@/lib/site";
 
@@ -28,6 +28,7 @@ const rightLensPath =
 
 export function LensHero() {
   const reduceMotion = useReducedMotion();
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -113,6 +114,11 @@ export function LensHero() {
     const hero = sectionRef.current;
     if (!hero) return;
 
+    if (!heroImageLoaded) {
+      hero.style.setProperty("--hero-copy-progress", "14");
+      return;
+    }
+
     if (reduceMotion) {
       hero.style.setProperty("--hero-copy-progress", "14");
       return;
@@ -127,7 +133,7 @@ export function LensHero() {
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [reduceMotion]);
+  }, [heroImageLoaded, reduceMotion]);
 
   function handlePointerMove(event: PointerEvent<HTMLElement>) {
     if (reduceMotion || event.pointerType === "touch") return;
@@ -150,7 +156,7 @@ export function LensHero() {
   return (
     <section
       ref={sectionRef}
-      className="cinematic-hero hero-grau"
+      className={`cinematic-hero hero-grau${heroImageLoaded ? " is-hero-ready" : ""}`}
       data-lens-debug={DEBUG_LENS_MASK ? "true" : undefined}
       aria-labelledby="hero-title"
       onPointerMove={handlePointerMove}
@@ -193,8 +199,11 @@ export function LensHero() {
               alt=""
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 680px) 112vw, 1120px"
               className="cinematic-glasses-image"
+              onLoad={() => setHeroImageLoaded(true)}
+              onError={() => setHeroImageLoaded(true)}
             />
             <LensCalibrationOverlay />
           </motion.div>
@@ -279,8 +288,12 @@ function HeroCopyStack() {
   return (
     <div className="cinematic-copy-stack">
       <div className="cinematic-copy-line cinematic-copy-main">
-        <span className="cinematic-copy-segment">{mainLine} • {mainLine} • </span>
-        <span className="cinematic-copy-segment">{mainLine} • {mainLine} • </span>
+        <span className="cinematic-copy-segment">
+          {mainLine} • {mainLine} •{" "}
+        </span>
+        <span className="cinematic-copy-segment">
+          {mainLine} • {mainLine} •{" "}
+        </span>
       </div>
       <div className="cinematic-copy-line cinematic-copy-secondary">
         <span className="cinematic-copy-segment">

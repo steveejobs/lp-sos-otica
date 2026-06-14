@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
 import { Star } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
+import type { CSSProperties } from "react";
 import type { Testimonial } from "@/data/testimonials";
 
 function initials(name: string) {
@@ -31,51 +31,59 @@ export function TestimonialsColumn(props: {
   duration?: number;
 }) {
   const reduceMotion = useReducedMotion();
-  const [isPaused, setIsPaused] = useState(false);
-  const shouldAnimate = !reduceMotion && !isPaused;
+  const duration = `${props.duration || 28}s`;
 
   return (
     <div
-      className={props.className}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={() => setIsPaused(false)}
+      className={`${props.className ?? ""}${reduceMotion ? " is-static" : ""}`}
+      style={{ "--testimonial-duration": duration } as CSSProperties}
     >
-      <motion.div
-        animate={shouldAnimate ? { translateY: "-50%" } : { translateY: 0 }}
-        transition={{
-          duration: props.duration || 18,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        className="testimonials-column-track"
-      >
-        {[...new Array(2)].map((_, index) => (
-          <React.Fragment key={index}>
+      <div className="testimonials-column-track">
+        <div className="testimonials-column-set">
+          {props.testimonials.map((testimonial) => (
+            <TestimonialCard
+              testimonial={testimonial}
+              key={testimonial.name}
+              focusable
+            />
+          ))}
+        </div>
+
+        {!reduceMotion ? (
+          <div className="testimonials-column-set" aria-hidden="true">
             {props.testimonials.map((testimonial) => (
-              <article
-                className="testimonial-column-card"
-                key={`${testimonial.name}-${index}`}
-                tabIndex={0}
-              >
-                <Stars />
-                <p>{testimonial.text}</p>
-                <div className="testimonial-author">
-                  <span className="testimonial-avatar" aria-hidden="true">
-                    {initials(testimonial.name)}
-                  </span>
-                  <span>
-                    <strong>{testimonial.name}</strong>
-                    <small>Origem: {testimonial.source}</small>
-                  </span>
-                </div>
-              </article>
+              <TestimonialCard
+                testimonial={testimonial}
+                key={`${testimonial.name}-duplicate`}
+              />
             ))}
-          </React.Fragment>
-        ))}
-      </motion.div>
+          </div>
+        ) : null}
+      </div>
     </div>
+  );
+}
+
+function TestimonialCard({
+  testimonial,
+  focusable = false,
+}: {
+  testimonial: Testimonial;
+  focusable?: boolean;
+}) {
+  return (
+    <article className="testimonial-column-card" tabIndex={focusable ? 0 : -1}>
+      <Stars />
+      <p>{testimonial.text}</p>
+      <div className="testimonial-author">
+        <span className="testimonial-avatar" aria-hidden="true">
+          {initials(testimonial.name)}
+        </span>
+        <span>
+          <strong>{testimonial.name}</strong>
+          <small>Origem: {testimonial.source}</small>
+        </span>
+      </div>
+    </article>
   );
 }

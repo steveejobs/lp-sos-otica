@@ -28,14 +28,13 @@ A home deve comunicar uma ótica real no Centro de Araguaína com experiência p
 2. Provas rápidas: até 30 minutos, teste de visão, 4,9 no Google.
 3. "Qual lente combina com sua rotina?", escolha guiada interativa.
 4. "Do atendimento ao óculos pronto, sem enrolação", processo em 5 abas.
-5. Laboratório de precisão.
-6. "Por dentro da SOS Ótica", seção editorial com fotos reais.
-7. Relógios e acessórios.
-8. Tendências em óculos.
-9. Clientes que já confiaram na SOS.
-10. Localização com mapa real do Google.
-11. FAQ.
-12. CTA final.
+5. "Por dentro da SOS Ótica", seção editorial com fotos reais.
+6. Relógios e acessórios.
+7. Tendências em óculos.
+8. Clientes que já confiaram na SOS.
+9. Localização com mapa real do Google.
+10. FAQ.
+11. CTA final.
 
 ## Regras
 

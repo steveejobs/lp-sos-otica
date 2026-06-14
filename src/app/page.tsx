@@ -1,4 +1,3 @@
-import { EventsSection } from "@/components/EventsSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalCTA } from "@/components/FinalCTA";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
@@ -23,7 +22,6 @@ export default function Home() {
         <Manifesto />
         <RoutineLensSection />
         <ProcessSection />
-        <EventsSection />
         <StorePhotosSection />
         <WatchesSection />
         <ExameNewsSection />
