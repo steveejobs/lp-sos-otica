@@ -1,4 +1,5 @@
 import { AnimatedReveal } from "@/components/AnimatedReveal";
+import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
 
@@ -23,10 +24,12 @@ export function GoogleReviewsSection() {
           </p>
         </AnimatedReveal>
 
-        <AnimatedReveal className="reviews-summary testimonials-summary" delay={0.08}>
-          <span>Google Reviews</span>
-          <strong>{testimonialsSummary.rating.toFixed(1).replace(".", ",")}</strong>
-          <small>{testimonialsSummary.total} avaliações</small>
+        <AnimatedReveal className="testimonials-rating-wrap" delay={0.08}>
+          <GoogleRatingBadge
+            variant="card"
+            rating={testimonialsSummary.rating.toFixed(1).replace(".", ",")}
+            reviews={`${testimonialsSummary.total} avaliações`}
+          />
         </AnimatedReveal>
       </div>
 

@@ -1,10 +1,15 @@
 import Image from "next/image";
 import { MapPin, MessageCircle } from "lucide-react";
+import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { site } from "@/lib/site";
 
 export function FinalCTA() {
   return (
-    <section className="section final-section" aria-labelledby="final-title">
+    <section
+      id="cta-final"
+      className="section final-section"
+      aria-labelledby="final-title"
+    >
       <div className="site-shell final-panel">
         <div>
           <Image
@@ -19,6 +24,11 @@ export function FinalCTA() {
           <p>
             Fale com a SOS Ótica e receba orientação para resolver com rapidez.
           </p>
+          <GoogleRatingBadge
+            variant="inline"
+            reviews="92 avaliações"
+            className="final-rating"
+          />
         </div>
         <div className="final-actions">
           <a href={site.whatsappUrl} className="button button-red">

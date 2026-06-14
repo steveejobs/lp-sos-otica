@@ -37,3 +37,22 @@
 - O estado ativo muda por clique em `button`, com suporte a setas, Home e End para navegação por teclado.
 - A promessa de até 30 minutos aparece apenas na etapa "Pronto" com a ressalva de receita, lente e disponibilidade.
 - A altura foi limitada por card único centralizado para não competir com o hero.
+
+## Entrega v26
+
+1. Remover a versão de processo com card grande, ilustração de óculos e abas no topo.
+2. Fundir o processo com a ideia de laboratório/agilidade em uma timeline editorial única.
+3. Trocar o título para "Como a SOS resolve seu óculos".
+4. Manter 5 etapas clicáveis: Receita, Lente, Montagem, Ajuste e Pronto.
+5. Usar linha fina, ícones discretos, vermelho apenas no ativo e amarelo como detalhe sutil.
+6. Simplificar mobile para timeline vertical compacta, sem overflow horizontal.
+7. Preservar hero com preload do óculos e textos decorativos `aria-hidden`.
+8. Manter depoimentos com movimento CSS linear e duplicata decorativa inacessível.
+9. Validar rota/mapa por coordenadas, lint, build e screenshots v26.
+
+## Decisões v26
+
+- A timeline não usa imagem grande nem ilustração; é texto, linha e ícones `lucide-react`.
+- A interação continua com `role="tablist"`, `role="tab"`, `role="tabpanel"` e teclado.
+- O bloco antigo `EventsSection` foi removido para não duplicar a promessa de agilidade.
+- No mobile, a seção fica vertical e o resumo ativo aparece abaixo da linha de etapas.

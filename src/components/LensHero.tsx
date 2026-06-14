@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import type { PointerEvent } from "react";
+import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { site } from "@/lib/site";
 
 const mainLine =
@@ -219,6 +220,11 @@ export function LensHero() {
             <MessageCircle size={17} aria-hidden="true" />
             Chamar no WhatsApp
           </a>
+          <GoogleRatingBadge
+            variant="compact"
+            reviews="92 avaliações"
+            href="#avaliacoes"
+          />
         </div>
       </div>
     </section>

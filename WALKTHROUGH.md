@@ -20,19 +20,29 @@ As letras animadas ficam invisíveis até o óculos disparar `onLoad`. Depois di
 
 Os textos repetidos do hero são decorativos e ficam dentro de camadas com `aria-hidden="true"`, mantendo o H1 real em `.sr-only`.
 
+## Nota Google Reviews
+
+A nota Google foi reforçada em três pontos usando `src/components/GoogleRatingBadge.tsx`: chip compacto no hero, card lateral na seção `Clientes que já confiaram na SOS` e linha curta antes do CTA final.
+
+Os dados usados são fixos e consistentes: nota `4,9`, `92 avaliações` e fonte `Google Reviews`. O card de depoimentos mostra label pequeno, estrelas amarelas, nota grande, contagem de avaliações e microtexto "Avaliação média no Google".
+
+As estrelas são visuais. O componente marca as estrelas e o conteúdo decorativo com `aria-hidden="true"` e expõe o texto acessível por `aria-label="Avaliação 4,9 de 5 no Google, com 92 avaliações"`, evitando que leitores de tela anunciem estrela por estrela.
+
+No mobile, o chip do hero quebra para uma segunda linha dentro do painel do CTA, o card dos depoimentos fica abaixo do título da seção quando a grade passa para uma coluna e a frase do CTA final usa a variante inline para não repetir um bloco grande.
+
 ## Processo SOS
 
-A seção `src/components/ProcessSection.tsx` foi inserida depois de `RoutineLensSection`, substituindo o bloco antigo de laboratório/agilidade. Ela explica a jornada do atendimento até a entrega em 5 abas: Receita, Lente, Montagem, Ajuste e Pronto.
+A versão antiga de 5 abas com card grande, ilustração interna de óculos e visual de dashboard foi removida. `src/components/ProcessSection.tsx` agora une processo e laboratório/agilidade em uma timeline editorial compacta com o título "Como a SOS resolve seu óculos".
 
-As abas são `button` reais com `role="tablist"`, `role="tab"`, `role="tabpanel"` e `aria-selected`. Além do clique, a navegação por teclado aceita setas, Home e End. Ao trocar a etapa, a linha de progresso avança, o ícone ativo ganha destaque e o texto entra com fade/slide curto via `framer-motion`.
+As 5 etapas continuam clicáveis: Receita, Lente, Montagem, Ajuste e Pronto. Cada etapa é um `button` real com `role="tab"`, `aria-selected` e suporte a setas, Home e End. O painel de resumo abaixo usa `role="tabpanel"` e atualiza texto curto com microanimação apenas em opacity/transform.
 
-A composição visual é única e reutilizável: uma armação/lente desenhada em CSS, scan lines leves e marcadores de etapa com ícones `lucide-react`. Não foram usadas imagens pesadas, vídeo, Three.js ou galeria, porque a seção precisa ser compacta e rápida.
+A composição visual é apenas linha fina, bolinhas/ícones `lucide-react`, vermelho da marca no passo ativo e amarelo como detalhe sutil. Não há imagem grande, ilustração pesada, vídeo, Three.js, carrossel ou card gigante.
 
-No mobile, as tabs viram uma faixa horizontal rolável com scroll suave, o visual reduz altura e o CTA ocupa a largura disponível. O `prefers-reduced-motion` é respeitado pelo CSS global e pelo `useReducedMotion`, removendo animações longas para quem prefere menos movimento.
+No desktop, a timeline é horizontal. No mobile, ela vira uma timeline vertical compacta sem overflow horizontal; o CTA ocupa a largura disponível. O `prefers-reduced-motion` é respeitado pelo CSS global e pelo `useReducedMotion`.
 
 ## Mobile E Animações
 
-Os espaços mobile foram reduzidos em `src/app/globals.css`: padding padrão das seções caiu para 48px, o hero mobile deixou de usar altura cheia desnecessária, a seção de processo ficou mais compacta e os gaps dos blocos críticos foram reduzidos.
+Os espaços mobile foram reduzidos em `src/app/globals.css`: padding padrão das seções caiu para 48px, o hero mobile deixou de usar altura cheia desnecessária, a seção de processo virou timeline vertical compacta e os gaps dos blocos críticos foram reduzidos.
 
 `src/components/AnimatedReveal.tsx` revela imediatamente em mobile e em `prefers-reduced-motion`, evitando áreas vazias quando o IntersectionObserver demora ou quando o usuário rola rápido.
 

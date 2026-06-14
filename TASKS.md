@@ -29,3 +29,18 @@
 - [x] Rodar `npm run build`.
 - [x] Gerar screenshots v23.
 - [x] Atualizar documentação.
+
+## v26 - Polimento Final
+
+- [x] Remover a seção antiga de 5 abas com card grande e ilustração.
+- [x] Fundir processo e laboratório em uma timeline compacta.
+- [x] Atualizar título para "Como a SOS resolve seu óculos".
+- [x] Manter 5 etapas interativas com `aria-selected` e teclado.
+- [x] Compactar mobile e validar 360x800, 375x812, 390x844 e 430x932.
+- [x] Garantir hero com óculos priorizado e letras aguardando `onLoad`.
+- [x] Otimizar depoimentos com CSS `translate3d` e duplicata `aria-hidden`.
+- [x] Confirmar rota e mapa por coordenadas.
+- [x] Rodar `npm run lint`.
+- [x] Rodar `npm run build`.
+- [x] Gerar screenshots v26.
+- [x] Atualizar documentação.
