@@ -64,15 +64,81 @@ export function TestimonialsColumn(props: {
   );
 }
 
+export function TestimonialsMobileMarquee({
+  testimonials,
+}: {
+  testimonials: Testimonial[];
+}) {
+  const splitIndex = Math.ceil(testimonials.length / 2);
+  const firstRow = testimonials.slice(0, splitIndex);
+  const secondRow = testimonials.slice(splitIndex);
+
+  return (
+    <div className="site-shell testimonials-mobile-marquee">
+      <ul className="sr-only">
+        {testimonials.map((testimonial) => (
+          <li key={`accessible-${testimonial.name}`}>
+            {testimonial.text} {testimonial.name}. Origem: {testimonial.source}.
+          </li>
+        ))}
+      </ul>
+
+      <MobileMarqueeRow testimonials={firstRow} />
+      <MobileMarqueeRow testimonials={secondRow} reverse />
+    </div>
+  );
+}
+
+function MobileMarqueeRow({
+  testimonials,
+  reverse = false,
+}: {
+  testimonials: Testimonial[];
+  reverse?: boolean;
+}) {
+  return (
+    <div
+      className={`testimonials-mobile-row${reverse ? " is-reverse" : ""}`}
+      aria-hidden="true"
+    >
+      <div className="testimonials-mobile-track">
+        <div className="testimonials-mobile-set">
+          {testimonials.map((testimonial) => (
+            <TestimonialCard
+              testimonial={testimonial}
+              key={`mobile-${testimonial.name}`}
+              compact
+            />
+          ))}
+        </div>
+        <div className="testimonials-mobile-set" aria-hidden="true">
+          {testimonials.map((testimonial) => (
+            <TestimonialCard
+              testimonial={testimonial}
+              key={`mobile-${testimonial.name}-duplicate`}
+              compact
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TestimonialCard({
   testimonial,
   focusable = false,
+  compact = false,
 }: {
   testimonial: Testimonial;
   focusable?: boolean;
+  compact?: boolean;
 }) {
   return (
-    <article className="testimonial-column-card" tabIndex={focusable ? 0 : -1}>
+    <article
+      className={`testimonial-column-card${compact ? " is-compact" : ""}`}
+      tabIndex={focusable ? 0 : -1}
+    >
       <Stars />
       <p>{testimonial.text}</p>
       <div className="testimonial-author">

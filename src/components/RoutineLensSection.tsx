@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
-import { site } from "@/lib/site";
+import { buildWhatsAppUrl } from "@/lib/site";
 
 const routineOptions = [
   {
@@ -19,36 +19,54 @@ const routineOptions = [
     title: "Uso muito celular e computador",
     answer:
       "Lentes com antirreflexo e conforto para telas ajudam a reduzir reflexos e melhorar a leitura durante o dia.",
+    ctaLabel: "Pedir orientação para lentes de tela",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: uso muito celular e computador. Quero orientação para lentes de tela.",
   },
   {
     icon: CarFront,
     title: "Dirijo à noite",
     answer:
       "O antirreflexo pode trazer mais conforto contra faróis, reflexos e luzes fortes no trânsito.",
+    ctaLabel: "Falar sobre óculos para dirigir",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: dirijo à noite. Quero saber sobre lentes que ajudem no conforto contra faróis e reflexos.",
   },
   {
     icon: Sun,
     title: "Sinto incômodo com sol forte",
     answer:
       "Óculos solares com proteção UV ajudam a proteger os olhos e deixam a rotina mais confortável.",
+    ctaLabel: "Ver opções para sol forte",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: sinto incômodo com sol forte. Quero saber sobre óculos solares com proteção UV.",
   },
   {
     icon: Timer,
     title: "Preciso de óculos rápido",
     answer:
       "Na SOS Ótica, muitos óculos ficam prontos em até 30 minutos, conforme receita, lente e disponibilidade.",
+    ctaLabel: "Consultar óculos em até 30 minutos",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: preciso resolver rápido. Quero saber se meu óculos pode ficar pronto em até 30 minutos.",
   },
   {
     icon: Glasses,
     title: "Quero uma armação confortável",
     answer:
       "A escolha da armação influencia peso, ajuste no rosto e conforto no uso diário.",
+    ctaLabel: "Escolher armação confortável",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: quero conforto no rosto. Quero ajuda para escolher uma armação confortável.",
   },
   {
     icon: Eye,
     title: "Preciso fazer teste de visão",
     answer:
       "A SOS Ótica realiza teste de visão no local para orientar melhor sua escolha.",
+    ctaLabel: "Agendar teste de visão",
+    message:
+      "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: quero fazer teste de visão. Quero saber como funciona o teste no local.",
   },
 ];
 
@@ -101,9 +119,12 @@ export function RoutineLensSection() {
             <small>Para sua rotina</small>
             <h3>{active.title}</h3>
             <p>{active.answer}</p>
-            <a href={site.whatsappUrl} className="button button-red">
+            <a
+              href={buildWhatsAppUrl(active.message)}
+              className="button button-red"
+            >
               <Sparkles size={17} aria-hidden="true" />
-              Falar com a SOS Ótica
+              {active.ctaLabel}
             </a>
           </div>
         </AnimatedReveal>

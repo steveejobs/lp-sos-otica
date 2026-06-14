@@ -1,6 +1,9 @@
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import {
+  TestimonialsColumn,
+  TestimonialsMobileMarquee,
+} from "@/components/ui/testimonials-columns-1";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
 
 const firstColumn = testimonials.slice(0, 6);
@@ -33,7 +36,7 @@ export function GoogleReviewsSection() {
         </AnimatedReveal>
       </div>
 
-      <div className="site-shell testimonials-columns-wrap">
+      <div className="site-shell testimonials-columns-wrap testimonials-desktop-marquee">
         <TestimonialsColumn
           testimonials={firstColumn}
           className="testimonials-column"
@@ -50,6 +53,8 @@ export function GoogleReviewsSection() {
           duration={31}
         />
       </div>
+
+      <TestimonialsMobileMarquee testimonials={testimonials} />
     </section>
   );
 }

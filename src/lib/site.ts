@@ -1,3 +1,12 @@
+export const WHATSAPP_PHONE = "5563992938550";
+
+export const DEFAULT_WHATSAPP_MESSAGE =
+  "Olá, S.O.S Ótica! Vim pelo site e quero atendimento.";
+
+export function buildWhatsAppUrl(message: string) {
+  return `https://api.whatsapp.com/send/?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
+}
+
 export const site = {
   name: "SOS Ótica",
   legalName: "Ótica S.O.S",
@@ -19,8 +28,7 @@ export const site = {
   longitude: -48.2087301,
   instagram: "@sosoticaoficial",
   instagramUrl: "https://www.instagram.com/sosoticaoficial/",
-  whatsappUrl:
-    "https://api.whatsapp.com/send/?phone=5563992938550&text=Ol%C3%A1%2C+S.O.S+%C3%93tica%21&type=phone_number&app_absent=0",
+  whatsappUrl: buildWhatsAppUrl(DEFAULT_WHATSAPP_MESSAGE),
   mapUrl:
     "https://www.google.com/maps/place/%C3%93tica+S.O.S/@-7.1920141,-48.2088701,19.25z/data=!4m6!3m5!1s0x92d90daadbffe76f:0x498c96c9b5a15ebd!8m2!3d-7.1920373!4d-48.2087301!16s%2Fg%2F11t27r67sb?entry=ttu",
   mapsRouteUrl:

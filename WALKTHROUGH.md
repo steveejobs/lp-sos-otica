@@ -4,13 +4,24 @@
 
 Os dados oficiais ficam em `src/lib/site.ts`: nome, endereço, telefone, WhatsApp, rota, mapa embed, horário, parcelamento, promessa principal e schema LocalBusiness/Optician.
 
+Os links de WhatsApp são gerados por `buildWhatsAppUrl(message)`, usando o telefone `5563992938550` e `encodeURIComponent(message)`. A mensagem padrão dos CTAs genéricos é: "Olá, S.O.S Ótica! Vim pelo site e quero atendimento."
+
 A promessa permanece padronizada como "Óculos pronto em até 30 minutos". A nota "Conforme receita, lente e disponibilidade." aparece de forma discreta.
 
 ## Qual Lente Combina Com Sua Rotina
 
 A seção `src/components/RoutineLensSection.tsx` apresenta seis situações reais: telas, direção noturna, sol forte, urgência, conforto de armação e teste de visão.
 
-Ao clicar em um card, a resposta lateral muda e o CTA "Falar com a SOS Ótica" usa o WhatsApp oficial. Não há carrossel; no mobile os cards ficam empilhados para toque confortável.
+Ao clicar em um card, a resposta lateral muda e o CTA usa o WhatsApp oficial com mensagem personalizada para a escolha ativa. Não há carrossel; no mobile os cards ficam empilhados para toque confortável.
+
+Mensagens personalizadas da escolha guiada:
+
+- Uso muito celular e computador: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: uso muito celular e computador. Quero orientação para lentes de tela."
+- Dirijo à noite: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: dirijo à noite. Quero saber sobre lentes que ajudem no conforto contra faróis e reflexos."
+- Sinto incômodo com sol forte: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: sinto incômodo com sol forte. Quero saber sobre óculos solares com proteção UV."
+- Preciso resolver rápido: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: preciso resolver rápido. Quero saber se meu óculos pode ficar pronto em até 30 minutos."
+- Quero conforto no rosto: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: quero conforto no rosto. Quero ajuda para escolher uma armação confortável."
+- Quero fazer teste de visão: "Olá, S.O.S Ótica! Vim pelo site e escolhi a opção: quero fazer teste de visão. Quero saber como funciona o teste no local."
 
 ## Hero E Carregamento
 
@@ -97,6 +108,8 @@ Validação técnica final:
 
 - `npm run lint`: aprovado.
 - `npm run build`: aprovado.
+- Capturas v32 geradas: `.tmp/visual-audit/whatsapp-hero-v32.png`, `.tmp/visual-audit/whatsapp-guided-choice-v32.png` e `.tmp/visual-audit/whatsapp-mobile-v32.png`.
+- WhatsApp v32 validado no hero, CTA final, localização e nas 6 opções da escolha guiada em desktop e mobile, com telefone `+55 63 99293-8550`, acentos preservados via `encodeURIComponent` e sem a mensagem antiga.
 - Capturas v29 geradas: `.tmp/visual-audit/final-desktop-v29.png`, `.tmp/visual-audit/final-mobile-v29.png`, `.tmp/visual-audit/hero-load-v29.png`, `.tmp/visual-audit/testimonials-motion-v29.png` e `.tmp/visual-audit/processo-polido-v29.png`.
 - Hero validado com um único H1 real, camadas decorativas `aria-hidden="true"`, imagem com `fetchpriority="high"` e letras liberadas apenas após `is-hero-ready`.
 - Depoimentos validados com `testimonialsMarquee` linear no desktop, duplicata `aria-hidden="true"` e marquee desativado no mobile.

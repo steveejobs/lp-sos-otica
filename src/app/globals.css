@@ -2978,6 +2978,29 @@ img {
   line-height: 1.58;
 }
 
+.testimonial-column-card.is-compact {
+  width: clamp(232px, 72vw, 286px);
+  min-height: 154px;
+  gap: 10px;
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(20, 20, 18, 0.03);
+}
+
+.testimonial-column-card.is-compact .testimonial-stars svg {
+  width: 12px;
+  height: 12px;
+}
+
+.testimonial-column-card.is-compact p {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--graphite);
+  font-size: 0.84rem;
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 .testimonial-author {
   display: flex;
   align-items: center;
@@ -3013,6 +3036,30 @@ img {
 .testimonial-author small {
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.testimonial-column-card.is-compact .testimonial-author {
+  gap: 8px;
+  margin-top: 0;
+}
+
+.testimonial-column-card.is-compact .testimonial-avatar {
+  width: 32px;
+  height: 32px;
+  flex-basis: 32px;
+  font-size: 0.68rem;
+}
+
+.testimonial-column-card.is-compact .testimonial-author strong {
+  font-size: 0.82rem;
+}
+
+.testimonial-column-card.is-compact .testimonial-author small {
+  font-size: 0.7rem;
+}
+
+.testimonials-mobile-marquee {
+  display: none;
 }
 
 .location-premium-layout {
@@ -3305,6 +3352,15 @@ img {
   }
   to {
     transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes testimonialsMobileMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -3720,6 +3776,59 @@ img {
 
   .testimonial-column-card {
     padding: 18px;
+  }
+
+  .testimonials-desktop-marquee {
+    display: none;
+  }
+
+  .testimonials-mobile-marquee {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+    overflow: hidden;
+  }
+
+  .testimonials-mobile-row {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  .testimonials-mobile-track {
+    display: flex;
+    width: max-content;
+    transform: translate3d(0, 0, 0);
+    animation: testimonialsMobileMarquee 42s linear infinite;
+    will-change: transform;
+  }
+
+  .testimonials-mobile-row.is-reverse .testimonials-mobile-track {
+    animation-direction: reverse;
+    animation-duration: 48s;
+  }
+
+  .testimonials-mobile-row:active .testimonials-mobile-track {
+    animation-play-state: paused;
+  }
+
+  .testimonials-mobile-set {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 12px;
+    padding-right: 12px;
   }
 
   .exame-news-section {
