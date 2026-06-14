@@ -1269,6 +1269,13 @@ img {
   filter: drop-shadow(0 28px 42px rgba(20, 20, 18, 0.2)) saturate(0.92);
 }
 
+.lab-diagram-image {
+  object-position: center;
+  padding: clamp(10px, 2.2vw, 18px);
+  opacity: 1;
+  filter: drop-shadow(0 26px 42px rgba(20, 20, 18, 0.14)) saturate(0.98);
+}
+
 .lab-lens {
   position: absolute;
   z-index: 3;

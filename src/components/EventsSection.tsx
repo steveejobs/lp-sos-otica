@@ -20,25 +20,12 @@ export function EventsSection() {
         <AnimatedReveal className="lab-visual">
           <div className="lab-frame" aria-hidden="true">
             <Image
-              src="/assets/glasses/eyeglasses-hero.webp"
+              src="/imagem labo.png"
               alt=""
               fill
               sizes="(max-width: 680px) 88vw, 560px"
-              className="lab-product-image"
+              className="lab-product-image lab-diagram-image"
             />
-            <div className="lab-lens">
-              <span className="hud hud-a" />
-              <span className="hud hud-b" />
-              <span className="hud hud-c" />
-              <span className="hud-dot hud-dot-a" />
-              <span className="hud-dot hud-dot-b" />
-            </div>
-            <div className="lab-mount" />
-            <div className="lab-axis" />
-            <div className="lab-scan" />
-            <div className="lab-badge lab-badge-a">Receita conferida</div>
-            <div className="lab-badge lab-badge-b">Ajuste final</div>
-            <div className="lab-timer">30 min</div>
           </div>
         </AnimatedReveal>
 
