@@ -1,4 +1,3 @@
-import { BrandPillars } from "@/components/BrandPillars";
 import { EventsSection } from "@/components/EventsSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -8,10 +7,9 @@ import { Footer } from "@/components/Footer";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { ExameNewsSection } from "@/components/ExameNewsSection";
 import { Header } from "@/components/Header";
-import { LensGuidance } from "@/components/LensGuidance";
 import { LensHero } from "@/components/LensHero";
 import { Manifesto } from "@/components/Manifesto";
-import { SolutionsSection } from "@/components/SolutionsSection";
+import { RoutineLensSection } from "@/components/RoutineLensSection";
 import { StorePhotosSection } from "@/components/StorePhotosSection";
 import { WatchesSection } from "@/components/WatchesSection";
 
@@ -22,14 +20,12 @@ export default function Home() {
       <main id="top">
         <LensHero />
         <Manifesto />
-        <SolutionsSection />
-        <WatchesSection />
-        <BrandPillars />
-        <LensGuidance />
+        <RoutineLensSection />
         <EventsSection />
         <StorePhotosSection />
-        <GoogleReviewsSection />
+        <WatchesSection />
         <ExameNewsSection />
+        <GoogleReviewsSection />
         <FocusGallery />
         <FAQSection />
         <FinalCTA />

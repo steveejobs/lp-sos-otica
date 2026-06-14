@@ -22,6 +22,8 @@ export const site = {
     "https://www.google.com/maps/search/?api=1&query=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil",
   mapsRouteUrl:
     "https://www.google.com/maps/dir/?api=1&destination=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil",
+  mapsEmbedUrl:
+    "https://maps.google.com/maps?&q=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil&z=17&output=embed",
   rating: 4.9,
   reviewCount: 92,
   openingHours: {
@@ -38,10 +40,11 @@ export const site = {
 
 export const navItems = [
   { label: "Rapidez", href: "#rapidez" },
-  { label: "Soluções", href: "#solucoes" },
-  { label: "Relógios", href: "#relogios" },
-  { label: "Lentes", href: "#lentes" },
+  { label: "Rotina", href: "#rotina" },
+  { label: "Laboratório", href: "#laboratorio" },
   { label: "Loja", href: "#por-dentro" },
+  { label: "Relógios", href: "#relogios" },
+  { label: "Avaliações", href: "#avaliacoes" },
   { label: "Contato", href: "#contato" },
 ];
 

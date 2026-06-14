@@ -2,51 +2,53 @@
 
 ## Dados Comerciais
 
-Os dados oficiais ficam em `src/lib/site.ts`: nome, endereço, telefone, WhatsApp, rota, horário, parcelamento, promessa principal e schema LocalBusiness/Optician.
+Os dados oficiais ficam em `src/lib/site.ts`: nome, endereço, telefone, WhatsApp, rota, mapa embed, horário, parcelamento, promessa principal e schema LocalBusiness/Optician.
 
-A promessa foi padronizada para "Óculos pronto em até 30 minutos". A nota "Conforme receita, lente e disponibilidade." aparece de forma discreta, sem ser repetida em todos os blocos.
+A promessa permanece padronizada como "Óculos pronto em até 30 minutos". A nota "Conforme receita, lente e disponibilidade." aparece de forma discreta.
 
-## CTAs
+## Qual Lente Combina Com Sua Rotina
 
-Os CTAs usam o link oficial:
+A seção `src/components/RoutineLensSection.tsx` apresenta seis situações reais: telas, direção noturna, sol forte, urgência, conforto de armação e teste de visão.
 
-`https://api.whatsapp.com/send/?phone=5563992938550&text=Ol%C3%A1%2C+S.O.S+%C3%93tica%21&type=phone_number&app_absent=0`
+Ao clicar em um card, a resposta lateral muda e o CTA "Falar com a SOS Ótica" usa o WhatsApp oficial. Não há carrossel; no mobile os cards ficam empilhados para toque confortável.
 
-O CTA de rota usa:
+## Fotos Reais Da Loja
 
-`https://www.google.com/maps/dir/?api=1&destination=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil`
-
-## Depoimentos
-
-A seção "Clientes que já confiaram na SOS" usa reviews manuais fornecidos pelo cliente em `src/data/testimonials.ts`.
-
-A API do Google ainda não foi conectada para alimentar essa seção. A rota antiga continua existindo como infraestrutura, mas a prova social da home usa os dados revisados manualmente.
-
-Não usamos fotos falsas, randomuser.me ou Unsplash nos depoimentos. Os avatares são iniciais dos clientes, com visual neutro e compatível com a marca.
-
-O componente de colunas fica em `src/components/ui/testimonials-columns-1.tsx`, usa `motion/react`, anima verticalmente em loop, pausa em hover/focus e respeita `prefers-reduced-motion`.
-
-## Fotos Da Loja
-
-A seção "Por dentro da SOS Ótica" foi criada para receber fotos reais da loja em formato editorial, não como galeria comum.
-
-Paths esperados:
+As imagens vieram de `public/galeria sos/` e foram normalizadas para:
 
 - `public/assets/store/store-01.webp`
 - `public/assets/store/store-02.webp`
 - `public/assets/store/store-03.webp`
 - `public/assets/store/store-04.webp`
 
-Enquanto as fotos não existem, a seção mostra placeholders premium com textos como "Foto da loja", "Atendimento" e "Vitrine". Nenhuma imagem externa é usada.
+Foram usadas imagens de atendimento e loja real. A foto infantil da pasta não foi usada. A seção continua editorial, com 1 imagem grande e 2 imagens menores, porque uma galeria comum deixaria a LP mais pesada e menos focada em conversão.
 
-## Localização
+## Mapa Real
 
-A seção de contato mostra "Estamos no Centro de Araguaína", endereço curto, horário, WhatsApp, até 12x no cartão e teste de visão no local. O objetivo é ser confiável e escaneável, sem virar bloco pesado.
+A localização agora usa iframe real do Google Maps com:
 
-## FAQ
+`https://maps.google.com/maps?&q=R.%20Sadoc%20Correa%2C%20154%20-%20Central%2C%20Aragua%C3%ADna%20-%20TO%2C%2077803-060%2C%20Brasil&z=17&output=embed`
 
-O FAQ foi reduzido para perguntas reais e curtas sobre prazo, teste de visão, endereço, parcelamento e horário.
+O iframe tem `loading="lazy"`, `referrerPolicy="no-referrer-when-downgrade"` e título acessível. O botão "Traçar rota" continua usando a URL oficial de rota.
 
-## Notas Técnicas
+## Ordem Da Página
 
-O projeto usa Next + TypeScript e CSS global. Ele não tem Tailwind nem shadcn configurados. A pasta `src/components/ui` foi criada para manter o componente solicitado isolado e facilitar uma futura adoção de shadcn se necessário.
+A home foi reorganizada para:
+
+1. Hero
+2. Provas rápidas
+3. Rotina/lentes
+4. Laboratório de precisão
+5. Fotos reais da loja
+6. Relógios e acessórios
+7. Tendências em óculos
+8. Depoimentos reais
+9. Localização com mapa
+10. FAQ
+11. CTA final
+
+## Cuidados Contra Poluição
+
+Foram removidos blocos redundantes de catálogo da home. As provas comerciais aparecem distribuídas: prazo e teste no início, fotos reais no meio, reviews antes da localização, horário/pagamento/endereço no contato.
+
+Os depoimentos continuam usando dados manuais fornecidos pelo cliente. A API do Google ainda não alimenta a seção pública. Não usamos fotos falsas nos depoimentos; os avatares são iniciais.

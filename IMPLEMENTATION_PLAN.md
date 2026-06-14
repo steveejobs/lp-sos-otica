@@ -1,22 +1,21 @@
 # Implementation Plan
 
-## Entrega v16
+## Entrega v17
 
-1. Centralizar dados comerciais reais em `src/lib/site.ts`.
-2. Padronizar toda a promessa para "Óculos pronto em até 30 minutos".
-3. Atualizar CTAs de WhatsApp e rota com URLs oficiais.
-4. Atualizar FAQ e schema LocalBusiness/Optician.
-5. Criar `src/data/testimonials.ts` com reviews manuais fornecidos pelo cliente.
-6. Criar `src/components/ui/testimonials-columns-1.tsx` usando `motion/react`.
-7. Substituir a seção antiga de reviews por colunas verticais animadas.
-8. Criar `src/components/StorePhotosSection.tsx` com composição editorial e placeholders.
-9. Refinar localização com cards compactos para horário, WhatsApp, 12x e teste de visão.
-10. Validar com lint, build e screenshots v16.
+1. Reorganizar a jornada da home para uma narrativa mais premium e enxuta.
+2. Reduzir as provas rápidas para três sinais comerciais fortes.
+3. Criar `src/components/RoutineLensSection.tsx` com escolha guiada por rotina.
+4. Usar fotos reais da pasta `public/galeria sos/` em `public/assets/store/`.
+5. Refinar "Por dentro da SOS Ótica" com composição editorial e CTAs.
+6. Trocar o mapa abstrato por iframe real do Google Maps.
+7. Manter hero, WhatsApp, rota, schema, relógios, notícias e depoimentos reais.
+8. Ajustar copy para tom mais editorial, sem textos longos.
+9. Validar com lint, build e screenshots v17.
 
 ## Decisões
 
-- O projeto é Next + TypeScript, mas não usa Tailwind nem shadcn. Foi criada a pasta `src/components/ui` para isolar o componente solicitado e manter compatibilidade futura com a estrutura shadcn.
-- Como Tailwind não está configurado, o visual do componente foi aplicado em `src/app/globals.css`.
-- Não foram usadas fotos falsas, randomuser ou Unsplash nos depoimentos.
-- Os avatares dos reviews são iniciais dos clientes.
-- A API do Google permanece preparada no código, mas a seção pública usa dados manuais.
+- A seção de rotina usa React client-side apenas para controlar o card ativo; não há carrossel.
+- Foram escolhidas 4 imagens reais, mas a seção exibe 3 para preservar respiro visual.
+- A foto infantil da pasta de galeria não foi usada nesta rodada.
+- O mapa usa `output=embed` com o endereço oficial, porque o link compartilhado não é uma URL de embed direta.
+- A home removeu blocos redundantes de catálogo para não ficar longa nem repetitiva.

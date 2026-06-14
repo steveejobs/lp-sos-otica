@@ -1,32 +1,22 @@
-import { Clock3, Eye, Glasses, MapPin, Ruler } from "lucide-react";
+import { Clock3, Eye, Star } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
 
 const proofs = [
   {
     icon: Clock3,
-    title: "Rapidez",
-    text: "Montagem ágil para quem precisa resolver o óculos sem perder o dia.",
+    title: "Até 30 minutos",
+    text: "Agilidade para quem precisa resolver o óculos sem perder o dia.",
   },
   {
     icon: Eye,
-    title: "Cuidado com a visão",
-    text: "Orientação clara sobre rotina, adaptação, medidas e conforto visual.",
+    title: "Teste de visão",
+    text: "Orientação no local para escolher com mais clareza.",
   },
   {
-    icon: Glasses,
-    title: "Conforto",
-    text: "Ajuste no rosto, escolha da armação e atenção ao uso real.",
-  },
-  {
-    icon: Ruler,
-    title: "Precisão",
-    text: "Conferência de receita, alinhamento e acabamento antes da entrega.",
-  },
-  {
-    icon: MapPin,
-    title: "Araguaína",
-    text: "Atendimento local no Centro, com rota simples e WhatsApp direto.",
+    icon: Star,
+    title: "4,9 no Google",
+    text: "92 avaliações reforçam a confiança de quem já passou pela SOS.",
   },
 ];
 
@@ -42,9 +32,8 @@ export function Manifesto() {
           <p className="eyebrow">Rapidez com critério</p>
           <h2 id="proof-title">Óculos pronto em até 30 minutos</h2>
           <p>
-            Uma entrega rápida só vale quando vem com cuidado. A SOS Ótica
-            combina laboratório ágil, orientação objetiva e acabamento preciso
-            para entregar clareza com confiança.
+            Óculos não é só grau. É conforto no rosto, nitidez na rotina e
+            segurança para escolher sem pressa.
           </p>
           <small className="promise-note">{site.promiseNote}</small>
         </AnimatedReveal>

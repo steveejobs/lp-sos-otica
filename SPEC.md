@@ -2,13 +2,15 @@
 
 ## Objetivo
 
-A home deve comunicar uma ótica real no Centro de Araguaína, com promessa clara de conversão:
+A home deve comunicar uma ótica real no Centro de Araguaína com experiência premium, clara e leve:
 
 - óculos pronto em até 30 minutos;
 - teste de visão no local;
+- escolha guiada por rotina de uso;
+- loja real, atendimento próximo e presença local;
 - WhatsApp e rota como ações principais;
-- prova social do Google;
-- endereço, horário e pagamento sem excesso de informação.
+- prova social real do Google;
+- mapa real, horário e pagamento sem excesso de informação.
 
 ## Dados Oficiais
 
@@ -19,21 +21,25 @@ A home deve comunicar uma ótica real no Centro de Araguaína, com promessa clar
 - Pagamento: até 12x no cartão
 - Google: 4,9 com 92 avaliações
 
-## Seções Principais
+## Jornada
 
-- Hero com óculos e promessa de até 30 minutos.
-- Provas de rapidez, cuidado, conforto, precisão e presença local.
-- Serviços de óculos de grau, armações, lentes, teste de visão, relógios e acessórios.
-- "Por dentro da SOS Ótica", seção editorial para fotos reais da loja.
-- "Clientes que já confiaram na SOS", depoimentos manuais do Google.
-- "Tendências em óculos", carrossel editorial da Exame.
-- Contato/localização com cards compactos.
-- FAQ curto.
+1. Hero com óculos e revelação nas lentes.
+2. Provas rápidas: até 30 minutos, teste de visão, 4,9 no Google.
+3. "Qual lente combina com sua rotina?", escolha guiada interativa.
+4. Laboratório de precisão.
+5. "Por dentro da SOS Ótica", seção editorial com fotos reais.
+6. Relógios e acessórios.
+7. Tendências em óculos.
+8. Clientes que já confiaram na SOS.
+9. Localização com mapa real do Google.
+10. FAQ.
+11. CTA final.
 
 ## Regras
 
-- Não usar fotos falsas de pessoas.
-- A seção de loja usa placeholders até as fotos reais serem adicionadas em `public/assets/store/`.
-- Reviews usam dados manuais fornecidos pelo cliente; a API do Google ainda não está conectada.
-- A observação "Conforme receita, lente e disponibilidade." deve aparecer de forma discreta, sem repetição excessiva.
+- Não transformar a home em catálogo.
+- Não criar galeria comum de fotos.
+- Não usar fotos falsas, randomuser ou Unsplash para depoimentos.
+- Reviews usam dados manuais fornecidos pelo cliente.
+- A observação "Conforme receita, lente e disponibilidade." deve aparecer de forma discreta.
 - Schema LocalBusiness/Optician deve refletir endereço, telefone, horário, rating e reviewCount.

@@ -2,7 +2,6 @@ import {
   Clock3,
   CreditCard,
   Eye,
-  MapPin,
   MessageCircle,
   Navigation,
 } from "lucide-react";
@@ -86,13 +85,14 @@ export function FocusGallery() {
             </div>
           </div>
 
-          <div className="location-map" aria-hidden="true">
-            <span className="map-grid" />
-            <span className="map-route map-route-a" />
-            <span className="map-route map-route-b" />
-            <span className="map-pin">
-              <MapPin size={22} />
-            </span>
+          <div className="location-map">
+            <iframe
+              src={site.mapsEmbedUrl}
+              title="Mapa da SOS Ótica em Araguaína"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
       </AnimatedReveal>
