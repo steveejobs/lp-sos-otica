@@ -24,27 +24,27 @@ type ProcessStep = {
 const processSteps: ProcessStep[] = [
   {
     label: "Receita",
-    text: "Conferimos sua receita ou realizamos o teste de visão no local.",
+    text: "Conferimos a receita ou fazemos o teste de visão.",
     icon: ClipboardCheck,
   },
   {
     label: "Lente",
-    text: "Indicamos a lente mais adequada para sua rotina.",
+    text: "Indicamos a lente adequada para sua rotina.",
     icon: ScanEye,
   },
   {
     label: "Montagem",
-    text: "A lente é preparada e encaixada com cuidado na armação.",
+    text: "Preparamos a lente e encaixamos na armação.",
     icon: Wrench,
   },
   {
     label: "Ajuste",
-    text: "Ajustamos o óculos no rosto para mais conforto e segurança.",
+    text: "Ajustamos o óculos para ficar confortável.",
     icon: SlidersHorizontal,
   },
   {
     label: "Pronto",
-    text: "Em muitos casos, seu óculos fica pronto em até 30 minutos, conforme receita, lente e disponibilidade.",
+    text: "Muitos óculos ficam prontos em até 30 minutos.",
     icon: CheckCircle2,
   },
 ];

@@ -34,6 +34,7 @@ html {
 }
 
 body {
+  width: 100%;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
@@ -2958,11 +2959,11 @@ img {
 .testimonial-column-card {
   display: grid;
   gap: 14px;
-  border: 1px solid rgba(20, 20, 18, 0.1);
+  border: 1px solid rgba(20, 20, 18, 0.085);
   border-radius: var(--radius-sm);
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 16px 48px rgba(20, 20, 18, 0.055);
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 28px rgba(20, 20, 18, 0.035);
 }
 
 .testimonial-column-card:focus-visible {
@@ -3307,6 +3308,15 @@ img {
   }
 }
 
+@keyframes heroCopyMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (max-width: 1040px) {
   .header-nav,
   .header-actions {
@@ -3458,7 +3468,7 @@ img {
   }
 
   .section {
-    padding: 48px 0;
+    padding: 44px 0;
   }
 
   .section-heading h2,
@@ -3696,6 +3706,10 @@ img {
     will-change: auto;
   }
 
+  .testimonials-column {
+    overflow: visible;
+  }
+
   .testimonials-column-set[aria-hidden="true"] {
     display: none;
   }
@@ -3822,6 +3836,24 @@ img {
   }
 }
 
+@media (max-width: 430px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .testimonials-section {
+    padding-block: 42px;
+  }
+
+  .testimonials-columns-wrap {
+    margin-top: 18px;
+  }
+
+  .process-section {
+    padding-block: 36px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -3847,7 +3879,6 @@ img {
   overflow: hidden;
   padding-top: 76px;
   isolation: isolate;
-  --hero-copy-progress: 12;
   --lens-left-x: 11.18%;
   --lens-left-y: 26.92%;
   --lens-left-w: 34.1%;
@@ -3933,8 +3964,8 @@ img {
 
 .cinematic-copy-blur {
   z-index: 1;
-  filter: blur(4.35px) contrast(0.92) saturate(0.92);
-  transform: skewX(-1.5deg) scale(1.02);
+  filter: blur(3.85px) contrast(0.92) saturate(0.92);
+  transform: skewX(-1.35deg) scale(1.02);
 }
 
 .cinematic-hero.is-hero-ready .cinematic-copy-blur {
@@ -3957,8 +3988,14 @@ img {
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
-  transform: translate3d(calc(var(--hero-copy-progress) * -1%), 0, 0);
+  transform: translate3d(0, 0, 0);
+  animation: heroCopyMarquee 96s linear infinite;
+  animation-play-state: paused;
   will-change: transform;
+}
+
+.cinematic-hero.is-hero-ready .cinematic-copy-line {
+  animation-play-state: running;
 }
 
 .cinematic-copy-main {
@@ -3970,6 +4007,8 @@ img {
   font-size: clamp(0.59rem, 0.8vw, 0.89rem);
   font-weight: 720;
   letter-spacing: 0.12em;
+  animation-duration: 112s;
+  animation-direction: reverse;
 }
 
 .cinematic-copy-segment {
@@ -4158,8 +4197,8 @@ img {
   justify-content: center;
   gap: 6px;
   background: rgba(255, 255, 255, 0.42);
-  box-shadow: 0 18px 44px rgba(231, 25, 31, 0.12);
-  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 30px rgba(231, 25, 31, 0.09);
+  backdrop-filter: blur(12px);
 }
 
 .hero-mini-panel > a:not(.google-rating-badge) {
@@ -4425,16 +4464,16 @@ img {
   }
 
   .cinematic-copy-main {
-    font-size: clamp(1.32rem, 7.05vw, 1.98rem);
+    font-size: clamp(1.26rem, 6.73vw, 1.89rem);
   }
 
   .cinematic-copy-secondary {
-    font-size: clamp(0.54rem, 2.65vw, 0.73rem);
+    font-size: clamp(0.52rem, 2.53vw, 0.7rem);
     letter-spacing: 0.12em;
   }
 
   .cinematic-copy-blur {
-    filter: blur(4.7px) contrast(0.9) saturate(0.88);
+    filter: blur(4.15px) contrast(0.9) saturate(0.88);
     opacity: 0.56;
   }
 
@@ -4527,20 +4566,19 @@ img {
   }
 }
 
-/* v26 compact editorial process timeline */
 .process-section {
-  padding-block: clamp(48px, 5.2vw, 70px);
+  padding-block: clamp(42px, 4.8vw, 64px);
   background:
     radial-gradient(
       circle at 86% 12%,
-      rgba(255, 214, 0, 0.1),
+      rgba(255, 214, 0, 0.07),
       transparent 16rem
     ),
     linear-gradient(180deg, #ffffff 0%, #f7f7f2 100%);
 }
 
 .process-shell {
-  gap: clamp(24px, 3vw, 34px);
+  gap: clamp(20px, 2.6vw, 30px);
 }
 
 .process-heading {
@@ -4555,9 +4593,9 @@ img {
 
 .process-timeline-panel {
   display: grid;
-  gap: clamp(20px, 3vw, 30px);
+  gap: clamp(18px, 2.4vw, 26px);
   border-top: 1px solid rgba(20, 20, 18, 0.1);
-  padding-top: clamp(22px, 3vw, 30px);
+  padding-top: clamp(18px, 2.6vw, 26px);
 }
 
 .process-timeline {
@@ -4571,7 +4609,7 @@ img {
   position: absolute;
   left: calc(10% - 2px);
   right: calc(10% - 2px);
-  top: 21px;
+  top: 18px;
   height: 1px;
   content: "";
   background: linear-gradient(
@@ -4587,7 +4625,7 @@ img {
   display: grid;
   align-content: start;
   justify-items: start;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
   border: 0;
   padding: 0;
@@ -4602,14 +4640,14 @@ img {
   position: relative;
   z-index: 1;
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   place-items: center;
   border: 1px solid rgba(20, 20, 18, 0.12);
   border-radius: 999px;
-  background: #fffefa;
-  color: var(--graphite);
-  box-shadow: 0 8px 20px rgba(20, 20, 18, 0.035);
+  background: rgba(255, 255, 255, 0.72);
+  color: rgba(42, 41, 37, 0.82);
+  box-shadow: none;
   transition:
     transform 220ms var(--ease-premium),
     background-color 220ms var(--ease-premium),
@@ -4622,45 +4660,46 @@ img {
 .process-step:focus-visible .process-step-dot,
 .process-step.is-active .process-step-dot {
   border-color: rgba(231, 25, 31, 0.22);
-  background: var(--red);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(231, 25, 31, 0.16);
+  background: rgba(231, 25, 31, 0.08);
+  color: var(--red-dark);
+  transform: translateY(-1px);
+  box-shadow: none;
 }
 
 .process-step-copy {
   display: grid;
-  gap: 7px;
+  gap: 6px;
 }
 
 .process-step-copy strong {
   color: var(--ink);
-  font-size: 0.98rem;
+  font-size: 0.94rem;
   line-height: 1.1;
 }
 
 .process-step-copy small {
   color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.48;
+  font-size: 0.84rem;
+  line-height: 1.42;
 }
 
 .process-summary {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: clamp(16px, 2.4vw, 28px);
+  gap: clamp(14px, 2vw, 24px);
   align-items: center;
-  border: 1px solid rgba(20, 20, 18, 0.09);
-  border-radius: var(--radius-sm);
-  padding: clamp(18px, 2.4vw, 24px);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 14px 46px rgba(20, 20, 18, 0.045);
+  border: 0;
+  border-top: 1px solid rgba(20, 20, 18, 0.09);
+  border-radius: 0;
+  padding: clamp(16px, 2vw, 22px) 0 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .process-summary-icon {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border-radius: 999px;
   background: rgba(231, 25, 31, 0.08);
@@ -4678,15 +4717,16 @@ img {
 .process-summary h3 {
   margin: 5px 0 0;
   color: var(--ink);
-  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-size: clamp(1.24rem, 1.7vw, 1.68rem);
   line-height: 1.08;
 }
 
 .process-summary p {
   max-width: 560px;
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: var(--graphite);
-  line-height: 1.56;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .process-summary .process-actions {
@@ -4704,7 +4744,7 @@ img {
 
 @media (max-width: 760px) {
   .process-section {
-    padding-block: 48px;
+    padding-block: 40px;
   }
 
   .process-timeline {
@@ -4713,10 +4753,10 @@ img {
   }
 
   .process-timeline::before {
-    left: 20px;
+    left: 17px;
     right: auto;
-    top: 20px;
-    bottom: 20px;
+    top: 18px;
+    bottom: 18px;
     width: 1px;
     height: auto;
     background: linear-gradient(
@@ -4729,8 +4769,8 @@ img {
 
   .process-step {
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
-    padding: 0 0 18px;
+    gap: 11px;
+    padding: 0 0 14px;
   }
 
   .process-step:last-child {
@@ -4738,23 +4778,23 @@ img {
   }
 
   .process-step-dot {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
   }
 
   .process-step-copy small {
-    font-size: 0.86rem;
+    font-size: 0.82rem;
   }
 
   .process-summary {
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 18px;
+    gap: 12px;
+    padding-top: 16px;
   }
 
   .process-summary-icon {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
   }
 
   .process-summary .process-actions {
@@ -4763,5 +4803,14 @@ img {
 
   .process-summary .process-actions .button {
     width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-copy-line,
+  .testimonials-column-track {
+    animation: none;
+    transform: none;
+    will-change: auto;
   }
 }

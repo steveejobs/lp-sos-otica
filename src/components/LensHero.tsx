@@ -19,7 +19,6 @@ const secondaryLine =
   "ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
 
 const POINTER_EASE = 0.1;
-const HERO_COPY_DURATION = 96000;
 const DEBUG_LENS_MASK = false;
 
 const leftLensPath =
@@ -111,31 +110,6 @@ export function LensHero() {
     return () => window.cancelAnimationFrame(frame);
   }, [pointerX, pointerY, reduceMotion]);
 
-  useEffect(() => {
-    const hero = sectionRef.current;
-    if (!hero) return;
-
-    if (!heroImageLoaded) {
-      hero.style.setProperty("--hero-copy-progress", "14");
-      return;
-    }
-
-    if (reduceMotion) {
-      hero.style.setProperty("--hero-copy-progress", "14");
-      return;
-    }
-
-    let frame = 0;
-    const tick = (time: number) => {
-      const progress = ((time % HERO_COPY_DURATION) / HERO_COPY_DURATION) * 50;
-      hero.style.setProperty("--hero-copy-progress", progress.toFixed(4));
-      frame = window.requestAnimationFrame(tick);
-    };
-
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [heroImageLoaded, reduceMotion]);
-
   function handlePointerMove(event: PointerEvent<HTMLElement>) {
     if (reduceMotion || event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
@@ -173,7 +147,7 @@ export function LensHero() {
       </div>
 
       <div className="hero-state hero-state-grau">
-        <HeroCopyLayer />
+        {heroImageLoaded ? <HeroCopyLayer /> : null}
         <motion.div
           className="hero-pointer-frame"
           style={{
@@ -194,7 +168,6 @@ export function LensHero() {
             aria-hidden="true"
           >
             <LensClipDefs />
-            <LensBoundCopy />
             <Image
               src="/assets/glasses/eyeglasses-hero.webp"
               alt=""
@@ -204,8 +177,8 @@ export function LensHero() {
               sizes="(max-width: 680px) 112vw, 1120px"
               className="cinematic-glasses-image"
               onLoad={() => setHeroImageLoaded(true)}
-              onError={() => setHeroImageLoaded(true)}
             />
+            {heroImageLoaded ? <LensBoundCopy /> : null}
             <LensCalibrationOverlay />
           </motion.div>
         </motion.div>
