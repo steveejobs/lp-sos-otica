@@ -120,3 +120,14 @@
 - O texto revelado permanece legivel durante o brilho, e o texto fora das lentes segue desfocado.
 - Validacao executada: `npm run lint` e `npm run build` passaram.
 - Validacao visual gerada em `.tmp/visual-audit/`: `hero-mobile-left-reflection-v45.png`, `hero-mobile-right-reflection-v45.png`, `hero-mobile-reflection-detail-v45.png` e sequencia `hero-mobile-reflection-sweep-v45/` cobrindo 360x800, 375x812, 390x844 e 430x932.
+
+## Hero mobile clean v46
+
+- Removido completamente o reflexo mobile das lentes: `LensReflectionLayer`, os paineis `.lens-reflection-*`, o pseudo-elemento `.lens-surface-reflection` e os keyframes de sweep deixaram de existir no codigo ativo do hero.
+- O blur mobile da frase de fundo foi reduzido e ganhou mais presenca: a camada desfocada ficou com `blur(2.45px)`, contraste/opacidade maiores e peso visual levemente reforcado, mantendo a diferenca entre texto suavizado fora da lente e texto nitido dentro da lente.
+- A frase inferior segue removida no mobile; apenas a frase principal aparece no hero mobile para preservar leitura e foco.
+- O loop mobile da camera foi alongado para 18.5s, com easing mais organico, menos deslocamento lateral, menos escala no zoom e retornos mais longos para reduzir a sensacao de pressa.
+- O marquee mobile foi desacelerado para 112s, mantendo o mesmo movimento sincronizado entre a camada desfocada e a camada nitida das lentes.
+- `prefers-reduced-motion` continua com composicao simplificada, sem animacao de camera e sem qualquer camada extra de reflexo.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Validacao visual v46 gerada em `.tmp/visual-audit/`: `hero-mobile-clean-v46.png`, `hero-mobile-left-zoom-v46.png`, `hero-mobile-right-zoom-v46.png`, `hero-mobile-text-visibility-v46.png` e sequencia `hero-mobile-smooth-loop-v46/` cobrindo 360x800, 375x812, 390x844 e 430x932.

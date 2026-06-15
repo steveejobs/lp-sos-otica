@@ -3855,84 +3855,27 @@ img {
 
 @keyframes heroMobileLensCamera {
   0%,
-  12% {
-    transform: translate3d(0, -16px, 0) scale(1);
+  14% {
+    transform: translate3d(0, -15px, 0) scale(1);
   }
 
-  31%,
-  39% {
-    transform: translate3d(40vw, -18px, 0) scale(1.9);
+  33%,
+  43% {
+    transform: translate3d(38vw, -17px, 0) scale(1.82);
   }
 
-  51%,
-  58% {
-    transform: translate3d(0, -16px, 0) scale(1);
+  58%,
+  66% {
+    transform: translate3d(0, -15px, 0) scale(1);
   }
 
-  75%,
-  83% {
-    transform: translate3d(-40vw, -18px, 0) scale(1.9);
+  82%,
+  91% {
+    transform: translate3d(-38vw, -17px, 0) scale(1.82);
   }
 
-  95%,
   100% {
-    transform: translate3d(0, -16px, 0) scale(1);
-  }
-}
-
-@keyframes heroMobileLeftLensSweep {
-  0%,
-  32.3% {
-    opacity: 0;
-    transform: translate3d(0, -72%, 0) rotate(-4deg) scaleY(0.92);
-  }
-
-  33.5% {
-    opacity: 0.5;
-  }
-
-  36.2% {
-    opacity: 0.72;
-    transform: translate3d(0, -2%, 0) rotate(-4deg) scaleY(1);
-  }
-
-  38.9% {
-    opacity: 0.26;
-    transform: translate3d(0, 62%, 0) rotate(-4deg) scaleY(0.96);
-  }
-
-  40.8%,
-  100% {
-    opacity: 0;
-    transform: translate3d(0, 112%, 0) rotate(-4deg) scaleY(0.94);
-  }
-}
-
-@keyframes heroMobileRightLensSweep {
-  0%,
-  76.5% {
-    opacity: 0;
-    transform: translate3d(0, -74%, 0) rotate(5deg) scaleY(0.94);
-  }
-
-  77.7% {
-    opacity: 0.46;
-  }
-
-  80.4% {
-    opacity: 0.66;
-    transform: translate3d(0, 0%, 0) rotate(5deg) scaleY(1);
-  }
-
-  82.8% {
-    opacity: 0.24;
-    transform: translate3d(0, 58%, 0) rotate(5deg) scaleY(0.96);
-  }
-
-  84.6%,
-  100% {
-    opacity: 0;
-    transform: translate3d(0, 110%, 0) rotate(5deg) scaleY(0.94);
+    transform: translate3d(0, -15px, 0) scale(1);
   }
 }
 
@@ -4902,10 +4845,6 @@ img {
   opacity: 1;
 }
 
-.lens-reflection-layer {
-  display: none;
-}
-
 .lens-bound-copy-desktop {
   position: absolute;
   inset: 0;
@@ -5294,8 +5233,9 @@ img {
   }
 
   .hero-cinema-camera {
-    animation: heroMobileLensCamera 15s cubic-bezier(0.45, 0, 0.2, 1) infinite;
-    transform: translate3d(0, -16px, 0) scale(1);
+    animation: heroMobileLensCamera 18.5s cubic-bezier(0.55, 0, 0.18, 1)
+      infinite;
+    transform: translate3d(0, -15px, 0) scale(1);
     will-change: transform;
   }
 
@@ -5315,142 +5255,10 @@ img {
     z-index: 5;
   }
 
-  .lens-reflection-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 7;
-    display: block;
-    pointer-events: none;
-  }
-
-  .lens-reflection-panel {
-    position: absolute;
-    top: var(--lens-left-y);
-    left: var(--lens-left-x);
-    width: var(--lens-left-w);
-    height: var(--lens-left-h);
-    overflow: hidden;
-    clip-path: url(#leftLensPath);
-    transform: rotate(-0.35deg);
-  }
-
-  .lens-reflection-right {
-    left: var(--lens-right-x);
-    top: var(--lens-right-y);
-    width: var(--lens-right-w);
-    height: var(--lens-right-h);
-    clip-path: url(#rightLensPath);
-    transform: rotate(0.35deg);
-  }
-
-  .lens-surface-reflection {
-    position: absolute;
-    inset: clamp(3px, 1.35vw, 6px) clamp(4px, 1.65vw, 7px);
-    display: block;
-    overflow: hidden;
-    border-radius: 46% 54% 48% 52% / 38% 42% 56% 58%;
-    opacity: 1;
-    pointer-events: none;
-  }
-
-  .lens-surface-reflection::before {
-    position: absolute;
-    top: -58%;
-    left: 50%;
-    width: 22%;
-    height: 88%;
-    content: "";
-    border-radius: 999px;
-    background:
-      linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(178, 184, 174, 0.2) 24%,
-        rgba(255, 255, 255, 0.78) 47%,
-        rgba(255, 253, 244, 0.38) 55%,
-        rgba(181, 187, 176, 0.16) 68%,
-        transparent 100%
-      ),
-      linear-gradient(
-        90deg,
-        transparent 0%,
-        transparent 43%,
-        rgba(255, 255, 255, 0.78) 50%,
-        transparent 58%,
-        transparent 100%
-      ),
-      linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.28) 18%,
-        rgba(255, 253, 244, 0.6) 47%,
-        rgba(190, 196, 184, 0.12) 80%,
-        transparent 100%
-      );
-    filter: blur(1.5px);
-    mix-blend-mode: normal;
-    opacity: 0;
-    box-shadow:
-      inset 5px 0 8px rgba(170, 176, 164, 0.08),
-      0 0 12px rgba(255, 255, 255, 0.16);
-    transform: translate3d(0, -72%, 0) rotate(-4deg) scaleY(0.92);
-    transform-origin: center;
-    will-change: transform, opacity;
-  }
-
-  .lens-reflection-left .lens-surface-reflection::before {
-    animation: heroMobileLeftLensSweep 15s linear infinite;
-  }
-
-  .lens-reflection-right .lens-surface-reflection {
-    inset: clamp(3px, 1.35vw, 6px) clamp(5px, 1.85vw, 8px)
-      clamp(4px, 1.55vw, 7px) clamp(4px, 1.45vw, 7px);
-    border-radius: 52% 46% 52% 48% / 39% 42% 56% 58%;
-  }
-
-  .lens-reflection-right .lens-surface-reflection::before {
-    left: 40%;
-    width: 22%;
-    height: 90%;
-    background:
-      linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(178, 184, 174, 0.18) 24%,
-        rgba(255, 255, 255, 0.7) 48%,
-        rgba(255, 253, 244, 0.34) 57%,
-        rgba(181, 187, 176, 0.14) 70%,
-        transparent 100%
-      ),
-      linear-gradient(
-        90deg,
-        transparent 0%,
-        transparent 44%,
-        rgba(255, 255, 255, 0.66) 50%,
-        transparent 58%,
-        transparent 100%
-      ),
-      linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.25) 18%,
-        rgba(255, 253, 244, 0.54) 48%,
-        rgba(190, 196, 184, 0.1) 80%,
-        transparent 100%
-      );
-    filter: blur(1.7px);
-    transform: translate3d(0, -74%, 0) rotate(5deg) scaleY(0.94);
-    animation: heroMobileRightLensSweep 15s linear infinite;
-  }
-
   .lens-bound-copy-panel::after {
     content: none;
   }
 
-  /*
-    The frame image sits above the lens-only layers on mobile, so the black
-    acetate remains intact while the sweep stays visible through the lens.
-  */
   .cinematic-glasses-image {
     z-index: 6;
   }
@@ -5524,7 +5332,7 @@ img {
   }
 
   .cinematic-copy-main {
-    font-size: clamp(1.42rem, 7.35vw, 2.04rem);
+    font-size: clamp(1.5rem, 7.55vw, 2.12rem);
   }
 
   .cinematic-copy-secondary {
@@ -5532,8 +5340,17 @@ img {
   }
 
   .cinematic-copy-blur {
-    filter: blur(4.4px) contrast(0.88) saturate(0.86);
-    opacity: 0.5;
+    filter: blur(2.5px) contrast(0.96) saturate(0.91);
+    opacity: 0.6;
+  }
+
+  .cinematic-copy-blur .cinematic-copy-line {
+    color: rgba(18, 18, 15, 0.84);
+    font-weight: 805;
+  }
+
+  .cinematic-copy-line {
+    animation-duration: 112s;
   }
 
   .hero-ui {
@@ -6176,17 +5993,17 @@ img {
   }
 
   .cinematic-copy-blur {
-    filter: blur(3px) contrast(0.92) saturate(0.9);
+    filter: blur(2.45px) contrast(0.96) saturate(0.91);
   }
 
   .cinematic-hero.is-hero-ready .cinematic-copy-blur {
-    opacity: 0.64;
+    opacity: 0.62;
   }
 }
 
 @media (max-width: 680px) {
   .cinematic-hero.is-hero-ready .cinematic-copy-blur {
-    opacity: 0.5;
+    opacity: 0.62;
   }
 
   .lens-bound-copy-panel .cinematic-copy-line {
@@ -6201,7 +6018,7 @@ img {
 @media (max-width: 680px) and (prefers-reduced-motion: reduce) {
   .hero-cinema-camera {
     animation: none;
-    transform: translate3d(0, -16px, 0) scale(1.04);
+    transform: translate3d(0, -15px, 0) scale(1.04);
     will-change: auto;
   }
 
@@ -6213,12 +6030,6 @@ img {
 
   .lens-bound-copy-panel .cinematic-copy-stack {
     transform: translateY(-50%) scale(1.05);
-  }
-
-  .lens-surface-reflection::before {
-    animation: none;
-    opacity: 0;
-    will-change: auto;
   }
 }
 

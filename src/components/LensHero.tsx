@@ -206,7 +206,6 @@ export function LensHero() {
                 onLoad={() => setHeroImageLoaded(true)}
               />
               {heroImageLoaded ? <LensBoundCopy /> : null}
-              {heroImageLoaded ? <LensReflectionLayer /> : null}
               <LensCalibrationOverlay />
             </motion.div>
           </motion.div>
@@ -300,19 +299,6 @@ function LensBoundCopy() {
           <div className="lens-clean" />
           <HeroCopyStack />
         </div>
-      </div>
-    </div>
-  );
-}
-
-function LensReflectionLayer() {
-  return (
-    <div className="lens-reflection-layer" aria-hidden="true">
-      <div className="lens-reflection-panel lens-reflection-left">
-        <span className="lens-surface-reflection" />
-      </div>
-      <div className="lens-reflection-panel lens-reflection-right">
-        <span className="lens-surface-reflection" />
       </div>
     </div>
   );
