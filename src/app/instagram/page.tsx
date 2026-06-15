@@ -15,6 +15,8 @@ import {
   Sun,
   Watch,
 } from "lucide-react";
+import { TestimonialsMobileMarquee } from "@/components/ui/testimonials-columns-1";
+import { testimonials, testimonialsSummary } from "@/data/testimonials";
 import { buildWhatsAppUrl } from "@/lib/site";
 
 const instagramWhatsAppUrl = buildWhatsAppUrl(
@@ -38,7 +40,7 @@ const accessoriesWhatsAppUrl = buildWhatsAppUrl(
 
 const routeUrl =
   "https://www.google.com/maps/dir/?api=1&destination=-7.1920373,-48.2087301&travelmode=driving";
-const fullSiteUrl = "https://lp-sos-otica.vercel.app/";
+const fullSiteUrl = "/";
 
 const mainLinks = [
   {
@@ -57,8 +59,8 @@ const mainLinks = [
   },
   {
     label: "Ver coleções",
-    href: collectionsWhatsAppUrl,
-    ariaLabel: "Ver coleções disponíveis pelo WhatsApp",
+    href: "#colecoes",
+    ariaLabel: "Ver coleções em destaque na página",
     icon: Sparkles,
     variant: "light",
   },
@@ -70,7 +72,7 @@ const mainLinks = [
     variant: "light",
   },
   {
-    label: "Ver o site completo",
+    label: "Ver site completo",
     href: fullSiteUrl,
     ariaLabel: "Abrir o site completo da SOS Ótica",
     icon: Globe2,
@@ -78,11 +80,49 @@ const mainLinks = [
   },
 ] as const;
 
-const proofItems = [
-  { value: "4,9", label: "no Google" },
-  { value: "92", label: "avaliações" },
-  { value: "Centro", label: "de Araguaína" },
-  { value: "Seg-Sáb", label: "8h às 18h / 12h" },
+const showcaseMainImages = [
+  {
+    src: "/assets/glasses/eyeglasses-hero.webp",
+    alt: "Armação de óculos de grau da SOS Ótica",
+    contain: true,
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(4).jpg",
+    alt: "Óculos solar em destaque",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%204%20(3).jpg",
+    alt: "Armação premium em coleção",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%205%20(3).jpg",
+    alt: "Detalhe de armação de óculos",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%206%20(3).jpg",
+    alt: "Óculos de coleção da SOS Ótica",
+  },
+];
+
+const showcaseFloatingImages = [
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%201%20(1).jpg",
+    alt: "Armação clara em destaque",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%202%20(1).jpg",
+    alt: "Óculos de grau da coleção",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%205%20(2).jpg",
+    alt: "Detalhe de óculos premium",
+  },
+];
+
+const showcaseLoopImages = [...showcaseMainImages, ...showcaseMainImages];
+const floatingLoopImages = [
+  ...showcaseFloatingImages,
+  ...showcaseFloatingImages,
 ];
 
 const featuredItems = [
@@ -116,6 +156,13 @@ const featuredItems = [
   },
 ];
 
+const localInfo = [
+  "Centro de Araguaína",
+  "R. Sadoc Correa, 154",
+  "Seg-Sex 8h às 18h",
+  "Sáb 8h às 12h",
+];
+
 export const metadata: Metadata = {
   title: "SOS Ótica | Links do Instagram",
   description:
@@ -138,6 +185,74 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+function InstagramShowcase() {
+  return (
+    <div
+      className="instagram-showcase"
+      aria-label="Vitrine de óculos da SOS Ótica"
+    >
+      <div className="instagram-showcase-main">
+        <div className="instagram-showcase-track">
+          {showcaseLoopImages.map((image, index) => (
+            <div
+              className={
+                image.contain
+                  ? "instagram-showcase-card is-contain"
+                  : "instagram-showcase-card"
+              }
+              key={`${image.src}-${index}`}
+              aria-hidden={index >= showcaseMainImages.length}
+            >
+              <Image
+                src={image.src}
+                alt={index < showcaseMainImages.length ? image.alt : ""}
+                fill
+                sizes="(min-width: 720px) 190px, 48vw"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="instagram-showcase-floating" aria-hidden="true">
+        <div className="instagram-showcase-floating-track">
+          {floatingLoopImages.map((image, index) => (
+            <div
+              className="instagram-showcase-mini-card"
+              key={`${image.src}-mini-${index}`}
+            >
+              <Image src={image.src} alt="" fill sizes="104px" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InstagramSocialProof() {
+  return (
+    <section
+      className="instagram-social instagram-shell"
+      aria-label="Prova social da SOS Ótica"
+    >
+      <div className="instagram-rating-card">
+        <span className="instagram-rating-stars" aria-hidden="true">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Star key={index} size={15} fill="currentColor" />
+          ))}
+        </span>
+        <strong>
+          {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no Google
+        </strong>
+        <span>{testimonialsSummary.total} avaliações de clientes</span>
+      </div>
+    </section>
+  );
+}
 
 export default function InstagramBioPage() {
   return (
@@ -165,29 +280,14 @@ export default function InstagramBioPage() {
             atendimento pelo WhatsApp.
           </p>
 
-          <div className="instagram-visual" aria-hidden="true">
-            <div className="instagram-photo instagram-photo-main">
-              <Image
-                src="/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(4).jpg"
-                alt=""
-                fill
-                sizes="(min-width: 720px) 340px, 76vw"
-                priority
-              />
-            </div>
-            <div className="instagram-photo instagram-photo-float">
-              <Image
-                src="/assets/glasses/eyeglasses-hero.webp"
-                alt=""
-                fill
-                sizes="150px"
-              />
-            </div>
-          </div>
+          <InstagramShowcase />
         </div>
       </section>
 
-      <section className="instagram-links instagram-shell" aria-label="Links principais">
+      <section
+        className="instagram-links instagram-shell"
+        aria-label="Links principais"
+      >
         {mainLinks.map((link) => {
           const Icon = link.icon;
 
@@ -208,19 +308,29 @@ export default function InstagramBioPage() {
         })}
       </section>
 
-      <section className="instagram-proof instagram-shell" aria-label="Prova rápida">
-        {proofItems.map((item) => (
-          <div key={`${item.value}-${item.label}`}>
-            <strong>{item.value}</strong>
-            <span>{item.label}</span>
-          </div>
-        ))}
+      <InstagramSocialProof />
+
+      <section
+        className="instagram-testimonials"
+        aria-labelledby="instagram-testimonials-title"
+      >
+        <div className="instagram-shell instagram-section-heading">
+          <h2 id="instagram-testimonials-title">Quem comprou recomenda</h2>
+        </div>
+        <TestimonialsMobileMarquee testimonials={testimonials} />
       </section>
 
-      <section className="instagram-featured instagram-shell" aria-labelledby="featured-title">
+      <section
+        id="colecoes"
+        className="instagram-featured instagram-shell"
+        aria-labelledby="featured-title"
+      >
         <div className="instagram-section-heading">
-          <h2 id="featured-title">Em destaque</h2>
-          <a href={collectionsWhatsAppUrl} aria-label="Pedir ajuda para escolher óculos pelo WhatsApp">
+          <h2 id="featured-title">Mini vitrine</h2>
+          <a
+            href={collectionsWhatsAppUrl}
+            aria-label="Pedir ajuda para escolher óculos pelo WhatsApp"
+          >
             Pedir ajuda
           </a>
         </div>
@@ -255,7 +365,19 @@ export default function InstagramBioPage() {
         </div>
       </section>
 
-      <section className="instagram-contact instagram-shell" aria-labelledby="contact-title">
+      <section
+        className="instagram-local instagram-shell"
+        aria-label="Informações locais"
+      >
+        {localInfo.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </section>
+
+      <section
+        className="instagram-contact instagram-shell"
+        aria-labelledby="contact-title"
+      >
         <div className="instagram-section-heading">
           <h2 id="contact-title">Contato</h2>
         </div>
@@ -271,7 +393,11 @@ export default function InstagramBioPage() {
           </a>
           <div>
             <Clock size={18} aria-hidden="true" />
-            <span>Segunda a sexta: 8h às 18h<br />Sábado: 8h às 12h</span>
+            <span>
+              Segunda a sexta: 8h às 18h
+              <br />
+              Sábado: 8h às 12h
+            </span>
           </div>
         </address>
       </section>

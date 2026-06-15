@@ -32,7 +32,12 @@ import {
 } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
-import { buildWhatsAppUrl } from "@/lib/site";
+
+const PROPOSAL_WHATSAPP_PHONE = "5563991081785";
+
+function buildProposalWhatsAppUrl(message: string) {
+  return `https://api.whatsapp.com/send/?phone=${PROPOSAL_WHATSAPP_PHONE}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
+}
 
 export const metadata: Metadata = {
   title: "Proposta Comercial | SOS Ótica",
@@ -51,22 +56,22 @@ export const metadata: Metadata = {
   },
 };
 
-const siteWhatsAppUrl = buildWhatsAppUrl(
+const siteWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Quero seguir com o site premium de R$ 1.450.",
 );
-const instagramWhatsAppUrl = buildWhatsAppUrl(
+const instagramWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Quero seguir com o pacote Instagram Local de R$ 1.300/mês.",
 );
-const googleWhatsAppUrl = buildWhatsAppUrl(
+const googleWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Quero seguir com o pacote Google Captação Local de R$ 1.450/mês.",
 );
-const completeWhatsAppUrl = buildWhatsAppUrl(
+const completeWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Quero seguir com o pacote Crescimento Completo de R$ 2.200/mês.",
 );
-const recommendedWhatsAppUrl = buildWhatsAppUrl(
+const recommendedWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Quero seguir com Site + Crescimento Completo por 3 meses.",
 );
-const finalWhatsAppUrl = buildWhatsAppUrl(
+const finalWhatsAppUrl = buildProposalWhatsAppUrl(
   "Olá, S.O.S Ótica! Vi a proposta e quero avançar.",
 );
 

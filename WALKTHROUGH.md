@@ -75,3 +75,15 @@
 - Criada a `HeroProofBar`, uma barra editorial compacta com tempo de entrega, teste de visao, endereco central e nota no Google.
 - A prova social do Google foi reduzida para texto discreto, sem novo card, estrela grande ou competicao visual com o CTA e o chip de reviews do hero.
 - O espacamento logo apos o hero ficou mais curto para a barra parecer uma continuacao natural da primeira dobra.
+
+## Hero mobile lentes v42
+
+- O hero mobile ganhou um loop cinematografico de 15s com cinco estados: visao completa do oculos, zoom na lente esquerda, retorno ao centro, zoom na lente direita e novo retorno ao centro.
+- A animacao e mobile-only e fica concentrada no wrapper `hero-cinema-camera`, usando apenas `transform` para escalar e deslocar a composicao inteira. No desktop, o comportamento visual anterior foi mantido.
+- No mobile, a frase inferior/secundaria foi removida com CSS e a faixa principal ficou levemente maior, mantendo uma unica linha de movimento para dar mais legibilidade dentro das lentes.
+- A mascara foi preservada no mesmo sistema de coordenadas do oculos: a imagem, o texto desfocado de fundo e o texto recortado das lentes escalam juntos, enquanto os paineis `lens-bound-*` continuam presos aos percentuais calibrados das lentes.
+- O texto dentro das lentes recebeu contraste e camada limpa propria; fora das lentes, a faixa permanece mais suave e desfocada para evitar vazamento visual dentro da area revelada.
+- `prefers-reduced-motion` desativa o loop de camera mobile, reduz o scale para uma composicao estatica e pausa a faixa em uma posicao legivel.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Screenshots v42 gerados em `.tmp/visual-audit/`: `hero-mobile-full-v42.png`, `hero-mobile-left-lens-v42.png`, `hero-mobile-right-lens-v42.png` e `hero-mobile-center-return-v42.png`.
+- Sequencia v42 gerada em `.tmp/visual-audit/hero-mobile-loop-v42/` cobrindo 360x800, 375x812, 390x844 e 430x932.
