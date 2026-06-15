@@ -52,7 +52,7 @@ export function ProcessSection() {
   const hasStarted = useRef(false);
   const reduceMotion = useReducedMotion();
   const isInView = useInView(sectionRef, {
-    amount: 0.55,
+    amount: 0.6,
     once: true,
   });
   const [progress, setProgress] = useState(0);
@@ -90,7 +90,7 @@ export function ProcessSection() {
     hasStarted.current = true;
     setAnimationStarted(true);
     const controls = animate(0, 1, {
-      duration: 5.2,
+      duration: 5.6,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: setProgress,
       onComplete: () => setProgress(1),

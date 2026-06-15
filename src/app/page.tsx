@@ -7,8 +7,8 @@ import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { ExameNewsSection } from "@/components/ExameNewsSection";
 import { FeaturedCollectionsSection } from "@/components/FeaturedCollectionsSection";
 import { Header } from "@/components/Header";
+import { HeroProofBar } from "@/components/HeroProofBar";
 import { LensHero } from "@/components/LensHero";
-import { Manifesto } from "@/components/Manifesto";
 import { ProcessSection } from "@/components/ProcessSection";
 import { RoutineLensSection } from "@/components/RoutineLensSection";
 import { StorePhotosSection } from "@/components/StorePhotosSection";
@@ -20,7 +20,7 @@ export default function Home() {
       <Header />
       <main id="top">
         <LensHero />
-        <Manifesto />
+        <HeroProofBar />
         <RoutineLensSection />
         <FeaturedCollectionsSection />
         <ProcessSection />

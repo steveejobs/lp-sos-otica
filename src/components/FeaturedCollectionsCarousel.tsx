@@ -4,7 +4,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import type {
   FeaturedCollection,
   CollectionMedia,
@@ -19,19 +18,14 @@ export function FeaturedCollectionsCarousel({
   collections,
   whatsappUrl,
 }: FeaturedCollectionsCarouselProps) {
-  const reduceMotion = useReducedMotion();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const appliedInitialSlide = useRef(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
-    containScroll: "trimSnaps",
-    loop: collections.length > 1,
+    loop: false,
     duration: 34,
   });
-
-  const canAutoplay = collections.length > 1 && !reduceMotion;
 
   const syncSelected = useCallback(() => {
     if (!emblaApi) return;
@@ -64,45 +58,22 @@ export function FeaturedCollectionsCarousel({
 
     if (requestedIndex >= 0) {
       emblaApi.scrollTo(requestedIndex, true);
-      window.setTimeout(() => {
-        document
-          .querySelector("#colecoes")
-          ?.scrollIntoView({ block: "center", inline: "nearest" });
-      }, 300);
     }
   }, [collections, emblaApi]);
 
-  useEffect(() => {
-    if (!emblaApi || !canAutoplay || isPaused || isDragging) return;
-
-    const timer = window.setInterval(() => {
-      emblaApi.scrollNext();
-    }, 7600);
-
-    return () => window.clearInterval(timer);
-  }, [canAutoplay, emblaApi, isDragging, isPaused]);
-
   function scroll(direction: 1 | -1) {
     if (!emblaApi) return;
-
-    setIsPaused(true);
 
     if (direction < 0) {
       emblaApi.scrollPrev();
     } else {
       emblaApi.scrollNext();
     }
-
-    window.setTimeout(() => setIsPaused(false), 2200);
   }
 
   return (
     <div
       className={`featured-collections-carousel${isDragging ? " is-dragging" : ""}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={() => setIsPaused(false)}
     >
       <div className="featured-collections-controls">
         <button
@@ -128,15 +99,12 @@ export function FeaturedCollectionsCarousel({
         ref={emblaRef}
         onPointerDown={() => {
           setIsDragging(true);
-          setIsPaused(true);
         }}
         onPointerUp={() => {
           setIsDragging(false);
-          setIsPaused(false);
         }}
         onPointerCancel={() => {
           setIsDragging(false);
-          setIsPaused(false);
         }}
       >
         <div className="featured-collections-track">
@@ -144,6 +112,7 @@ export function FeaturedCollectionsCarousel({
             <CollectionSlide
               key={collection.number}
               collection={collection}
+              slideIndex={index}
               isActive={index === selectedIndex}
               whatsappUrl={whatsappUrl}
             />
@@ -163,12 +132,10 @@ export function FeaturedCollectionsCarousel({
             aria-label={`Ir para coleção ${collection.number}`}
             aria-current={index === selectedIndex}
             onClick={() => {
-              setIsPaused(true);
               emblaApi?.scrollTo(index);
-              window.setTimeout(() => setIsPaused(false), 2200);
             }}
           >
-            <span>{String(collection.number).padStart(2, "0")}</span>
+            <span>{String(index + 1).padStart(2, "0")}</span>
           </button>
         ))}
       </div>
@@ -178,15 +145,21 @@ export function FeaturedCollectionsCarousel({
 
 function CollectionSlide({
   collection,
+  slideIndex,
   isActive,
   whatsappUrl,
 }: {
   collection: FeaturedCollection;
+  slideIndex: number;
   isActive: boolean;
   whatsappUrl: string;
 }) {
   const desktopSupports = useMemo(
-    () => collection.supports.slice(0, collection.variant === "duo" ? 1 : 3),
+    () =>
+      collection.supports.slice(
+        0,
+        collection.variant === "duo" || collection.variant === "airy" ? 1 : 3,
+      ),
     [collection.supports, collection.variant],
   );
   const mobileSupports = useMemo(
@@ -206,6 +179,8 @@ function CollectionSlide({
         media={collection.dominant}
         className="featured-collection-media is-dominant"
         isActive={isActive}
+        priority={slideIndex === 0}
+        quality={95}
         sizes="(max-width: 680px) 92vw, (max-width: 1040px) 62vw, 520px"
       />
 
@@ -216,6 +191,7 @@ function CollectionSlide({
             media={media}
             className={`featured-collection-media is-support support-${index + 1}`}
             isActive={isActive}
+            quality={85}
             sizes="(max-width: 680px) 42vw, 260px"
           />
         ))}
@@ -242,6 +218,7 @@ function CollectionSlide({
               media={media}
               className="featured-collection-media is-mobile-detail"
               isActive={isActive && index < 2}
+              quality={85}
               sizes="42vw"
             />
           ))}
@@ -255,11 +232,15 @@ function CollectionMediaBlock({
   media,
   className,
   isActive,
+  priority = false,
+  quality = 92,
   sizes,
 }: {
   media: CollectionMedia;
   className: string;
   isActive: boolean;
+  priority?: boolean;
+  quality?: 85 | 92 | 95;
   sizes: string;
 }) {
   const mediaRef = useRef<HTMLDivElement>(null);
@@ -301,15 +282,16 @@ function CollectionMediaBlock({
           alt={media.alt}
           fill
           sizes={sizes}
-          quality={92}
-          loading="lazy"
+          quality={quality}
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           className="featured-collection-image"
         />
       ) : (
         <video
           ref={videoRef}
           className="featured-collection-video"
-          src={media.src}
+          src={isActive || isVisible ? media.src : undefined}
           muted
           loop
           playsInline

@@ -52,7 +52,6 @@ export const site = {
 export const navItems = [
   { label: "Rapidez", href: "#rapidez" },
   { label: "Rotina", href: "#rotina" },
-  { label: "Laboratório", href: "#laboratorio" },
   { label: "Loja", href: "#por-dentro" },
   { label: "Coleções", href: "#colecoes" },
   { label: "Relógios", href: "#relogios" },

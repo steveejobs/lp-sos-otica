@@ -9,11 +9,13 @@ export type CollectionMedia = {
   alt: string;
 };
 
+export type CollectionNumber = 1 | 2 | 3 | 4 | 5 | 6;
+
 export type FeaturedCollection = {
-  number: 1 | 2 | 3 | 4;
+  number: CollectionNumber;
   title: string;
   text: string;
-  variant: "quad" | "duo" | "video-led" | "mixed-video";
+  variant: "quad" | "duo" | "video-led" | "mixed-video" | "airy";
   dominant: CollectionMedia;
   supports: CollectionMedia[];
 };
@@ -30,7 +32,7 @@ const collectionCopy = {
   2: {
     title: "Delicadeza e encaixe",
     text: "Armações leves para quem busca visual limpo e uso confortável.",
-    variant: "duo",
+    variant: "airy",
   },
   3: {
     title: "Solar com presença",
@@ -42,10 +44,22 @@ const collectionCopy = {
     text: "Uma seleção com mais expressão visual, elegância e atitude.",
     variant: "mixed-video",
   },
+  5: {
+    title: "Novidade com presença",
+    text: "Peças recentes com leitura marcante, detalhes limpos e boa presença no rosto.",
+    variant: "mixed-video",
+  },
+  6: {
+    title: "Traço leve e moderno",
+    text: "Armações com acabamento atual para alternar entre rotina e ocasiões especiais.",
+    variant: "video-led",
+  },
 } satisfies Record<
   FeaturedCollection["number"],
   Pick<FeaturedCollection, "title" | "text" | "variant">
 >;
+
+const collectionOrder: CollectionNumber[] = [3, 4, 5, 1, 6, 2];
 
 const collectionWhatsAppUrl = buildWhatsAppUrl(
   "Olá, S.O.S Ótica! Vim pelo site e quero ver opções de óculos.",
@@ -59,19 +73,21 @@ function getCollectionNumber(fileName: string) {
   const match = fileName.match(/cole[cç][aã]o\s*(\d)/i);
   const number = Number(match?.[1]);
 
-  if (number >= 1 && number <= 4) {
-    return number as FeaturedCollection["number"];
+  if (number >= 1 && number <= 6) {
+    return number as CollectionNumber;
   }
 
   return null;
 }
 
 function readCollectionMedia() {
-  const grouped: Record<FeaturedCollection["number"], CollectionMedia[]> = {
+  const grouped: Record<CollectionNumber, CollectionMedia[]> = {
     1: [],
     2: [],
     3: [],
     4: [],
+    5: [],
+    6: [],
   };
   const genericVideos: fs.Dirent[] = [];
 
@@ -134,7 +150,7 @@ function readCollectionMedia() {
 function buildCollections(): FeaturedCollection[] {
   const media = readCollectionMedia();
 
-  return ([1, 2, 3, 4] as const).flatMap((number) => {
+  return collectionOrder.flatMap((number) => {
     const copy = collectionCopy[number];
     const items = media[number];
     const images = items.filter((item) => item.type === "image");
@@ -147,7 +163,7 @@ function buildCollections(): FeaturedCollection[] {
     }
 
     const supports = [
-      ...videos,
+      ...videos.slice(0, 2),
       ...images.filter((image) => image.src !== dominant.src),
     ];
 
