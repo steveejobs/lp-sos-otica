@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import type { PointerEvent } from "react";
+import type { CSSProperties, PointerEvent } from "react";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { site } from "@/lib/site";
 
@@ -18,6 +18,13 @@ const mainLine =
 const secondaryLine =
   "ÓCULOS PRONTO EM ATÉ 30 MINUTOS • CUIDADO VISUAL • CENTRO DE ARAGUAÍNA";
 
+const DESKTOP_MARQUEE_DURATION = "96s";
+const DESKTOP_MARQUEE_INITIAL_X = "-9.5%";
+const DESKTOP_MARQUEE_Y = "calc(50% + 20px)";
+const DESKTOP_MARQUEE_FONT_SIZE = "clamp(1.34rem, 2.54vw, 2.85rem)";
+const DESKTOP_MARQUEE_SECONDARY_FONT_SIZE = "clamp(0.59rem, 0.8vw, 0.89rem)";
+const DESKTOP_MARQUEE_LETTER_SPACING = "0.03em";
+
 const POINTER_EASE = 0.1;
 const DEBUG_LENS_MASK = false;
 
@@ -25,6 +32,19 @@ const leftLensPath =
   "M0.075 0.218 C0.105 0.083 0.247 0.018 0.478 0.018 C0.689 0.018 0.893 0.084 0.957 0.224 C0.993 0.342 0.974 0.574 0.883 0.768 C0.775 0.918 0.591 0.968 0.357 0.924 C0.182 0.886 0.086 0.746 0.058 0.561 C0.042 0.431 0.046 0.317 0.075 0.218 Z";
 const rightLensPath =
   "M0.948 0.218 C0.917 0.083 0.763 0.018 0.522 0.018 C0.311 0.018 0.107 0.084 0.043 0.224 C0.007 0.342 0.026 0.574 0.117 0.768 C0.225 0.918 0.409 0.968 0.643 0.924 C0.832 0.886 0.935 0.746 0.968 0.561 C0.989 0.431 0.983 0.317 0.948 0.218 Z";
+const lensPairLeftPath =
+  "M0.137560 0.371277 C0.147727 0.307447 0.196172 0.277660 0.274522 0.277660 C0.346890 0.277660 0.416268 0.308511 0.438397 0.373404 C0.450359 0.428723 0.443780 0.537234 0.412679 0.627660 C0.376196 0.697872 0.313397 0.721277 0.233254 0.701064 C0.174043 0.682979 0.141148 0.618085 0.131579 0.530851 C0.126196 0.470213 0.127392 0.417021 0.137560 0.371277 Z";
+const lensPairRightPath =
+  "M0.870215 0.371277 C0.860048 0.307447 0.807416 0.277660 0.725478 0.277660 C0.653110 0.277660 0.583732 0.308511 0.561603 0.373404 C0.549641 0.428723 0.556220 0.537234 0.587321 0.627660 C0.623804 0.697872 0.686603 0.721277 0.766746 0.701064 C0.830742 0.682979 0.866029 0.618085 0.877392 0.530851 C0.884569 0.470213 0.882177 0.417021 0.870215 0.371277 Z";
+
+const heroMarqueeStyle = {
+  "--desktop-marquee-duration": DESKTOP_MARQUEE_DURATION,
+  "--desktop-marquee-initial-x": DESKTOP_MARQUEE_INITIAL_X,
+  "--desktop-marquee-y": DESKTOP_MARQUEE_Y,
+  "--desktop-marquee-font-size": DESKTOP_MARQUEE_FONT_SIZE,
+  "--desktop-marquee-secondary-font-size": DESKTOP_MARQUEE_SECONDARY_FONT_SIZE,
+  "--desktop-marquee-letter-spacing": DESKTOP_MARQUEE_LETTER_SPACING,
+} as CSSProperties;
 
 export function LensHero() {
   const reduceMotion = useReducedMotion();
@@ -132,6 +152,7 @@ export function LensHero() {
     <section
       ref={sectionRef}
       className={`cinematic-hero hero-grau${heroImageLoaded ? " is-hero-ready" : ""}`}
+      style={heroMarqueeStyle}
       data-lens-debug={DEBUG_LENS_MASK ? "true" : undefined}
       aria-labelledby="hero-title"
       onPointerMove={handlePointerMove}
@@ -148,7 +169,9 @@ export function LensHero() {
 
       <div className="hero-state hero-state-grau">
         <div className="hero-cinema-camera">
-          {heroImageLoaded ? <HeroCopyLayer /> : null}
+          {heroImageLoaded ? (
+            <HeroCopyLayer className="cinematic-copy-blur-mobile" />
+          ) : null}
           <motion.div
             className="hero-pointer-frame"
             style={{
@@ -168,6 +191,9 @@ export function LensHero() {
               }}
               aria-hidden="true"
             >
+              {heroImageLoaded ? (
+                <HeroCopyLayer className="cinematic-copy-blur-desktop" />
+              ) : null}
               <LensClipDefs />
               <Image
                 src="/assets/glasses/eyeglasses-hero.webp"
@@ -216,6 +242,10 @@ function LensClipDefs() {
         <clipPath id="rightLensPath" clipPathUnits="objectBoundingBox">
           <path d={rightLensPath} />
         </clipPath>
+        <clipPath id="heroLensPairPath" clipPathUnits="objectBoundingBox">
+          <path d={lensPairLeftPath} />
+          <path d={lensPairRightPath} />
+        </clipPath>
       </defs>
     </svg>
   );
@@ -242,9 +272,12 @@ function LensCalibrationOverlay() {
   );
 }
 
-function HeroCopyLayer() {
+function HeroCopyLayer({ className = "" }: { className?: string }) {
   return (
-    <div className="cinematic-copy cinematic-copy-blur" aria-hidden="true">
+    <div
+      className={`cinematic-copy cinematic-copy-blur ${className}`.trim()}
+      aria-hidden="true"
+    >
       <HeroCopyStack />
     </div>
   );
@@ -253,13 +286,19 @@ function HeroCopyLayer() {
 function LensBoundCopy() {
   return (
     <div className="lens-bound-copy" aria-hidden="true">
-      <div className="lens-bound-copy-panel lens-bound-left eyeglasses-left-lens">
+      <div className="lens-bound-copy-desktop">
         <div className="lens-clean" />
         <HeroCopyStack />
       </div>
-      <div className="lens-bound-copy-panel lens-bound-right eyeglasses-right-lens">
-        <div className="lens-clean" />
-        <HeroCopyStack />
+      <div className="lens-bound-copy-mobile">
+        <div className="lens-bound-copy-panel lens-bound-left eyeglasses-left-lens">
+          <div className="lens-clean" />
+          <HeroCopyStack />
+        </div>
+        <div className="lens-bound-copy-panel lens-bound-right eyeglasses-right-lens">
+          <div className="lens-clean" />
+          <HeroCopyStack />
+        </div>
       </div>
     </div>
   );

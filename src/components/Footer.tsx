@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Instagram } from "lucide-react";
 import { navItems, site } from "@/lib/site";
 
 export function Footer() {
@@ -35,7 +36,16 @@ export function Footer() {
           <span>{site.openingHours.weekdays}</span>
           <span>{site.openingHours.saturday}</span>
           <span>WhatsApp: {site.phoneDisplay}</span>
-          <a href={site.instagramUrl}>Instagram: {site.instagram}</a>
+          <a
+            href={site.instagramUrl}
+            className="footer-social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Abrir Instagram da SOS Ótica: ${site.instagram}`}
+          >
+            <Instagram size={15} aria-hidden="true" />
+            Instagram: {site.instagram}
+          </a>
         </address>
 
         <nav aria-label="Links rápidos do rodapé">

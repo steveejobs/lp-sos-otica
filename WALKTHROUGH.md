@@ -31,6 +31,19 @@
 - Validacao executada: `npm run lint` e `npm run build` passaram.
 - Screenshots gerados em `.tmp/visual-audit/`: `instagram-bio-mobile-v01.png`, `instagram-bio-mobile-full-v01.png` e `instagram-bio-desktop-v01.png`.
 
+## Bio page Instagram premium v04
+
+- A rota `/instagram` foi separada visualmente da `/proposta`: a proposta continua como apresentacao comercial de pacotes, enquanto `/instagram` agora funciona como bio page premium para atendimento da loja, rota, colecoes, teste de visao e site completo.
+- O hero da `/instagram` mantem logo, nome "SOS Otica", subtitulo "Centro de Araguaina" e texto curto sobre oculos pronto em ate 30 minutos, teste de visao no local e WhatsApp.
+- Aplicado showcase animado na `/instagram` com imagens reais do projeto, duas faixas em sentidos opostos, fade lateral, card flutuante, fundo off-white, sombras leves, `transform: translate3d`, imagens lazy abaixo do primeiro item e fallback para `prefers-reduced-motion`.
+- Reaproveitado o componente mobile de depoimentos da home (`TestimonialsMobileMarquee`), preservando duas linhas horizontais, sentidos opostos, cards compactos, depoimentos reais de `src/data/testimonials.ts` e duplicacoes visuais com `aria-hidden="true"`.
+- A prova social principal da `/instagram` foi trocada pelo bloco compacto com estrelas amarelas, "4,9 no Google" e "92 avaliacoes de clientes"; o grid seco anterior deixou de ser a prova social principal.
+- CTAs principais configurados na ordem: Chamar no WhatsApp, Tracar rota, Ver colecoes, Agendar teste de visao e Ver site completo. As mensagens de WhatsApp da bio page usam "Vim pelo Instagram" e a rota usa o link Google Maps com destino `-7.1920373,-48.2087301`.
+- Adicionadas informacoes locais discretas apos depoimentos/mini vitrine: Centro de Araguaina, R. Sadoc Correa, 154, Seg-Sex 8h as 18h e Sab 8h as 12h.
+- Mantido CTA fixo mobile "Falar no WhatsApp", com safe area, vermelho da marca e espacamento para nao cobrir os botoes principais na primeira dobra mobile.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Validacao visual gerada em `.tmp/visual-audit/`: `instagram-mobile-v04.png`, `instagram-mobile-full-v04.png`, `instagram-showcase-v04.png`, `instagram-testimonials-v04.png`, `instagram-desktop-v04.png` e `proposta-still-ok-v04.png`.
+
 ## Limpeza de projeto
 
 - Removidos componentes antigos sem uso na LP: `BrandPillars`, `LensGuidance`, `SocialProof`, `SolutionsSection` e `SolarGlassesSection`.
@@ -87,3 +100,13 @@
 - Validacao executada: `npm run lint` e `npm run build` passaram.
 - Screenshots v42 gerados em `.tmp/visual-audit/`: `hero-mobile-full-v42.png`, `hero-mobile-left-lens-v42.png`, `hero-mobile-right-lens-v42.png` e `hero-mobile-center-return-v42.png`.
 - Sequencia v42 gerada em `.tmp/visual-audit/hero-mobile-loop-v42/` cobrindo 360x800, 375x812, 390x844 e 430x932.
+
+## Hero desktop v43 e reflexos mobile v44
+
+- O marquee do hero desktop foi estabilizado com variaveis CSS compartilhadas em `LensHero`, garantindo a mesma duracao, posicao inicial, eixo vertical, escala tipografica e espacamento no texto desfocado de fundo e no texto recortado pelas lentes.
+- A camada desktop das lentes passou a usar um `clipPath` unico para o par de lentes, evitando desalinhamento entre lente esquerda e direita durante o loop horizontal.
+- No mobile, a composicao manteve os paineis individuais das lentes e ganhou reflexos leves animados com pseudo-elementos, sincronizados com os estados de zoom da camera.
+- A versao com reducao de movimento pausa os reflexos e preserva a composicao estatica sem depender de animacoes.
+- O Instagram foi incluido como ponto de contato no header, menu mobile, secao de localizacao e footer, usando `site.instagramUrl` e icone `Instagram` de `lucide-react`.
+- Validacao executada novamente: `npm run lint` e `npm run build` passaram.
+- Validacao visual gerada em `.tmp/visual-audit/`: `hero-desktop-alignment-v43-initial.png`, `hero-desktop-alignment-v43-mid.png`, `hero-desktop-alignment-v43-loop.png`, `hero-desktop-alignment-v43-metrics.json`, `hero-mobile-left-lens-reflection-v44.png`, `hero-mobile-right-lens-reflection-v44.png`, `hero-mobile-center-v44.png`, `instagram-mobile-v04.png`, `instagram-mobile-full-v04.png`, `instagram-desktop-v04.png` e `proposta-still-ok-v04.png`.

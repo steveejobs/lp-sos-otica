@@ -2,6 +2,7 @@ import {
   Clock3,
   CreditCard,
   Eye,
+  Instagram,
   MessageCircle,
   Navigation,
 } from "lucide-react";
@@ -18,6 +19,12 @@ const locationFacts = [
     icon: MessageCircle,
     title: "WhatsApp",
     text: site.phoneDisplay,
+  },
+  {
+    icon: Instagram,
+    title: "Instagram",
+    text: site.instagram,
+    href: site.instagramUrl,
   },
   {
     icon: CreditCard,
@@ -48,13 +55,34 @@ export function FocusGallery() {
         <AnimatedReveal className="location-facts" delay={0.08}>
           {locationFacts.map((item) => {
             const Icon = item.icon;
-            return (
-              <div className="location-fact" key={item.title}>
+            const content = (
+              <>
                 <Icon size={18} aria-hidden="true" />
                 <span>
                   <strong>{item.title}</strong>
                   <small>{item.text}</small>
                 </span>
+              </>
+            );
+
+            if ("href" in item) {
+              return (
+                <a
+                  className="location-fact location-fact-link"
+                  href={item.href}
+                  key={item.title}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Abrir Instagram da SOS Ótica: ${site.instagram}`}
+                >
+                  {content}
+                </a>
+              );
+            }
+
+            return (
+              <div className="location-fact" key={item.title}>
+                {content}
               </div>
             );
           })}
@@ -81,6 +109,16 @@ export function FocusGallery() {
               <a href={site.whatsappUrl} className="button button-ghost">
                 <MessageCircle size={17} aria-hidden="true" />
                 Falar com a SOS Ótica
+              </a>
+              <a
+                href={site.instagramUrl}
+                className="button button-light"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir Instagram da SOS Ótica: ${site.instagram}`}
+              >
+                <Instagram size={17} aria-hidden="true" />
+                Instagram
               </a>
             </div>
           </div>

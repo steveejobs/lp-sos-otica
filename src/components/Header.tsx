@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, MessageCircle, Navigation, X } from "lucide-react";
+import { Instagram, Menu, MessageCircle, Navigation, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navItems, site } from "@/lib/site";
 
@@ -47,6 +47,16 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
+          <a
+            href={site.instagramUrl}
+            className="header-social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Abrir Instagram da SOS Ótica: ${site.instagram}`}
+          >
+            <Instagram size={17} aria-hidden="true" />
+          </a>
+
           <a
             href={site.mapsRouteUrl}
             className="button header-route"
@@ -98,6 +108,17 @@ export function Header() {
             >
               <MessageCircle size={17} aria-hidden="true" />
               Chamar no WhatsApp
+            </a>
+            <a
+              href={site.instagramUrl}
+              className="button header-route mobile-route"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Abrir Instagram da SOS Ótica: ${site.instagram}`}
+              onClick={() => setIsOpen(false)}
+            >
+              <Instagram size={17} aria-hidden="true" />
+              Instagram
             </a>
             <a
               href={site.mapsRouteUrl}
