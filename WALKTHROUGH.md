@@ -110,3 +110,13 @@
 - O Instagram foi incluido como ponto de contato no header, menu mobile, secao de localizacao e footer, usando `site.instagramUrl` e icone `Instagram` de `lucide-react`.
 - Validacao executada novamente: `npm run lint` e `npm run build` passaram.
 - Validacao visual gerada em `.tmp/visual-audit/`: `hero-desktop-alignment-v43-initial.png`, `hero-desktop-alignment-v43-mid.png`, `hero-desktop-alignment-v43-loop.png`, `hero-desktop-alignment-v43-metrics.json`, `hero-mobile-left-lens-reflection-v44.png`, `hero-mobile-right-lens-reflection-v44.png`, `hero-mobile-center-v44.png`, `instagram-mobile-v04.png`, `instagram-mobile-full-v04.png`, `instagram-desktop-v04.png` e `proposta-still-ok-v04.png`.
+
+## Hero mobile reflexo de lentes v45
+
+- O reflexo mobile foi separado da camada de texto revelado: `LensReflectionLayer` renderiza apenas o brilho das lentes, enquanto `LensBoundCopy` continua responsavel pelo texto nitido dentro da lente.
+- A armação foi preservada removendo o sweep antigo dos paineis de texto e mantendo a imagem do oculos como referencia intacta; o novo reflexo usa paineis proprios com `clip-path` da lente e um `inset` interno para nao encostar na borda preta.
+- O sweep agora desce de cima para baixo durante os estados de zoom: primeiro na lente esquerda e depois na direita, com trajetorias levemente diferentes, baixa opacidade, blur curto e centro branco com bordas cinza-quentes discretas.
+- O efeito continua mobile-only dentro de `@media (max-width: 680px)`. No `prefers-reduced-motion`, a animacao do reflexo e removida junto do loop simplificado.
+- O texto revelado permanece legivel durante o brilho, e o texto fora das lentes segue desfocado.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Validacao visual gerada em `.tmp/visual-audit/`: `hero-mobile-left-reflection-v45.png`, `hero-mobile-right-reflection-v45.png`, `hero-mobile-reflection-detail-v45.png` e sequencia `hero-mobile-reflection-sweep-v45/` cobrindo 360x800, 375x812, 390x844 e 430x932.

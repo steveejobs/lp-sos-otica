@@ -16,6 +16,7 @@ import {
   Watch,
 } from "lucide-react";
 import { TestimonialsMobileMarquee } from "@/components/ui/testimonials-columns-1";
+import { InstagramVideoCard } from "@/components/InstagramVideoCard";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
 import { buildWhatsAppUrl } from "@/lib/site";
 
@@ -36,6 +37,9 @@ const collectionsWhatsAppUrl = buildWhatsAppUrl(
 );
 const accessoriesWhatsAppUrl = buildWhatsAppUrl(
   "Olá, S.O.S Ótica! Vim pelo Instagram e quero ver relógios e acessórios.",
+);
+const videoWhatsAppUrl = buildWhatsAppUrl(
+  "Olá, S.O.S Ótica! Vim pelo Instagram, vi o vídeo e quero atendimento.",
 );
 
 const routeUrl =
@@ -129,22 +133,22 @@ const featuredItems = [
   {
     title: "Óculos de grau",
     href: gradeWhatsAppUrl,
-    image: "/assets/glasses/eyeglasses-hero.webp",
-    alt: "Armação de óculos de grau",
+    image: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%202%20(1).jpg",
+    alt: "Óculos de grau em destaque",
     icon: Glasses,
   },
   {
     title: "Óculos solares",
     href: solarWhatsAppUrl,
-    image: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(4).jpg",
+    image: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%204%20(3).jpg",
     alt: "Óculos solares em destaque",
     icon: Sun,
   },
   {
     title: "Coleções",
     href: collectionsWhatsAppUrl,
-    image: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%204%20(3).jpg",
-    alt: "Coleção de armações da SOS Ótica",
+    image: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(1).jpg",
+    alt: "Mulher usando óculos da coleção",
     icon: Sparkles,
   },
   {
@@ -310,6 +314,8 @@ export default function InstagramBioPage() {
 
       <InstagramSocialProof />
 
+      <InstagramVideoCard whatsappUrl={videoWhatsAppUrl} />
+
       <section
         className="instagram-testimonials"
         aria-labelledby="instagram-testimonials-title"
@@ -383,9 +389,14 @@ export default function InstagramBioPage() {
         </div>
 
         <address className="instagram-contact-list">
-          <a href={routeUrl} aria-label="Abrir rota para o endereço da SOS Ótica">
+          <a
+            href={routeUrl}
+            aria-label="Abrir rota para o endereço da SOS Ótica"
+          >
             <MapPin size={18} aria-hidden="true" />
-            <span>R. Sadoc Correa, 154 - Central, Araguaína - TO, 77803-060</span>
+            <span>
+              R. Sadoc Correa, 154 - Central, Araguaína - TO, 77803-060
+            </span>
           </a>
           <a href="tel:+5563992938550" aria-label="Ligar para a SOS Ótica">
             <Phone size={18} aria-hidden="true" />

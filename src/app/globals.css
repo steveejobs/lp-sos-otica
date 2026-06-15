@@ -3882,47 +3882,57 @@ img {
 
 @keyframes heroMobileLeftLensSweep {
   0%,
-  13.6% {
+  32.3% {
     opacity: 0;
-    transform: translate3d(0, 20%, 0) rotate(-13deg);
+    transform: translate3d(0, -72%, 0) rotate(-4deg) scaleY(0.92);
   }
 
-  14.4% {
-    opacity: 0.28;
+  33.5% {
+    opacity: 0.5;
   }
 
-  17.8% {
-    opacity: 0.42;
-    transform: translate3d(420%, -4%, 0) rotate(-13deg);
+  36.2% {
+    opacity: 0.72;
+    transform: translate3d(0, -2%, 0) rotate(-4deg) scaleY(1);
   }
 
-  20.2%,
+  38.9% {
+    opacity: 0.26;
+    transform: translate3d(0, 62%, 0) rotate(-4deg) scaleY(0.96);
+  }
+
+  40.8%,
   100% {
     opacity: 0;
-    transform: translate3d(760%, -26%, 0) rotate(-13deg);
+    transform: translate3d(0, 112%, 0) rotate(-4deg) scaleY(0.94);
   }
 }
 
 @keyframes heroMobileRightLensSweep {
   0%,
-  59.8% {
+  76.5% {
     opacity: 0;
-    transform: translate3d(0, -18%, 0) rotate(10deg);
+    transform: translate3d(0, -74%, 0) rotate(5deg) scaleY(0.94);
   }
 
-  60.8% {
-    opacity: 0.26;
+  77.7% {
+    opacity: 0.46;
   }
 
-  64.2% {
-    opacity: 0.38;
-    transform: translate3d(430%, 2%, 0) rotate(10deg);
+  80.4% {
+    opacity: 0.66;
+    transform: translate3d(0, 0%, 0) rotate(5deg) scaleY(1);
   }
 
-  66.7%,
+  82.8% {
+    opacity: 0.24;
+    transform: translate3d(0, 58%, 0) rotate(5deg) scaleY(0.96);
+  }
+
+  84.6%,
   100% {
     opacity: 0;
-    transform: translate3d(780%, 24%, 0) rotate(10deg);
+    transform: translate3d(0, 110%, 0) rotate(5deg) scaleY(0.94);
   }
 }
 
@@ -4892,6 +4902,10 @@ img {
   opacity: 1;
 }
 
+.lens-reflection-layer {
+  display: none;
+}
+
 .lens-bound-copy-desktop {
   position: absolute;
   inset: 0;
@@ -5298,57 +5312,155 @@ img {
   }
 
   .lens-bound-copy {
-    z-index: 7;
+    z-index: 5;
   }
 
-  .lens-bound-copy-panel::after {
+  .lens-reflection-layer {
     position: absolute;
-    top: -22%;
-    left: -36%;
-    z-index: 2;
-    width: 18%;
-    height: 142%;
+    inset: 0;
+    z-index: 7;
+    display: block;
+    pointer-events: none;
+  }
+
+  .lens-reflection-panel {
+    position: absolute;
+    top: var(--lens-left-y);
+    left: var(--lens-left-x);
+    width: var(--lens-left-w);
+    height: var(--lens-left-h);
+    overflow: hidden;
+    clip-path: url(#leftLensPath);
+    transform: rotate(-0.35deg);
+  }
+
+  .lens-reflection-right {
+    left: var(--lens-right-x);
+    top: var(--lens-right-y);
+    width: var(--lens-right-w);
+    height: var(--lens-right-h);
+    clip-path: url(#rightLensPath);
+    transform: rotate(0.35deg);
+  }
+
+  .lens-surface-reflection {
+    position: absolute;
+    inset: clamp(3px, 1.35vw, 6px) clamp(4px, 1.65vw, 7px);
+    display: block;
+    overflow: hidden;
+    border-radius: 46% 54% 48% 52% / 38% 42% 56% 58%;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .lens-surface-reflection::before {
+    position: absolute;
+    top: -58%;
+    left: 50%;
+    width: 22%;
+    height: 88%;
     content: "";
     border-radius: 999px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(166, 154, 128, 0.12) 28%,
-      rgba(255, 255, 255, 0.62) 43%,
-      rgba(255, 252, 241, 0.92) 50%,
-      rgba(255, 255, 255, 0.28) 59%,
-      rgba(166, 154, 128, 0.08) 72%,
-      transparent 100%
-    );
-    filter: blur(3.2px);
+    background:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(178, 184, 174, 0.2) 24%,
+        rgba(255, 255, 255, 0.78) 47%,
+        rgba(255, 253, 244, 0.38) 55%,
+        rgba(181, 187, 176, 0.16) 68%,
+        transparent 100%
+      ),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 43%,
+        rgba(255, 255, 255, 0.78) 50%,
+        transparent 58%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.28) 18%,
+        rgba(255, 253, 244, 0.6) 47%,
+        rgba(190, 196, 184, 0.12) 80%,
+        transparent 100%
+      );
+    filter: blur(1.5px);
     mix-blend-mode: normal;
     opacity: 0;
-    pointer-events: none;
+    box-shadow:
+      inset 5px 0 8px rgba(170, 176, 164, 0.08),
+      0 0 12px rgba(255, 255, 255, 0.16);
+    transform: translate3d(0, -72%, 0) rotate(-4deg) scaleY(0.92);
     transform-origin: center;
     will-change: transform, opacity;
   }
 
-  .lens-bound-left::after {
+  .lens-reflection-left .lens-surface-reflection::before {
     animation: heroMobileLeftLensSweep 15s linear infinite;
   }
 
-  .lens-bound-right::after {
-    top: -24%;
-    left: -34%;
-    width: 17%;
-    height: 138%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(166, 154, 128, 0.1) 30%,
-      rgba(255, 255, 255, 0.58) 44%,
-      rgba(255, 252, 241, 0.86) 51%,
-      rgba(255, 255, 255, 0.24) 61%,
-      rgba(166, 154, 128, 0.07) 72%,
-      transparent 100%
-    );
-    filter: blur(3.6px);
+  .lens-reflection-right .lens-surface-reflection {
+    inset: clamp(3px, 1.35vw, 6px) clamp(5px, 1.85vw, 8px)
+      clamp(4px, 1.55vw, 7px) clamp(4px, 1.45vw, 7px);
+    border-radius: 52% 46% 52% 48% / 39% 42% 56% 58%;
+  }
+
+  .lens-reflection-right .lens-surface-reflection::before {
+    left: 40%;
+    width: 22%;
+    height: 90%;
+    background:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(178, 184, 174, 0.18) 24%,
+        rgba(255, 255, 255, 0.7) 48%,
+        rgba(255, 253, 244, 0.34) 57%,
+        rgba(181, 187, 176, 0.14) 70%,
+        transparent 100%
+      ),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 44%,
+        rgba(255, 255, 255, 0.66) 50%,
+        transparent 58%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.25) 18%,
+        rgba(255, 253, 244, 0.54) 48%,
+        rgba(190, 196, 184, 0.1) 80%,
+        transparent 100%
+      );
+    filter: blur(1.7px);
+    transform: translate3d(0, -74%, 0) rotate(5deg) scaleY(0.94);
     animation: heroMobileRightLensSweep 15s linear infinite;
+  }
+
+  .lens-bound-copy-panel::after {
+    content: none;
+  }
+
+  /*
+    The frame image sits above the lens-only layers on mobile, so the black
+    acetate remains intact while the sweep stays visible through the lens.
+  */
+  .cinematic-glasses-image {
+    z-index: 6;
+  }
+
+  .lens-bound-left::after {
+    animation: none;
+  }
+
+  .lens-bound-right::after {
+    animation: none;
   }
 
   .lens-bound-copy-desktop {
@@ -6103,7 +6215,7 @@ img {
     transform: translateY(-50%) scale(1.05);
   }
 
-  .lens-bound-copy-panel::after {
+  .lens-surface-reflection::before {
     animation: none;
     opacity: 0;
     will-change: auto;
@@ -6193,7 +6305,7 @@ img {
 .instagram-showcase {
   position: relative;
   width: min(100%, 368px);
-  min-height: 214px;
+  min-height: 296px;
   margin: 22px auto 0;
   overflow: hidden;
   border: 1px solid rgba(20, 20, 18, 0.09);
@@ -6288,26 +6400,26 @@ img {
 .instagram-showcase-floating {
   position: absolute;
   right: 12px;
-  bottom: 12px;
+  bottom: 14px;
   z-index: 5;
-  width: min(48vw, 188px);
+  width: min(52vw, 208px);
   overflow: hidden;
   border: 1px solid rgba(20, 20, 18, 0.09);
   border-radius: 8px;
-  padding: 7px;
+  padding: 8px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 44px rgba(20, 20, 18, 0.13);
   backdrop-filter: blur(16px);
 }
 
 .instagram-showcase-floating-track {
-  gap: 7px;
+  gap: 8px;
   animation: instagramShowcaseMoveReverse 22s linear infinite;
 }
 
 .instagram-showcase-mini-card {
   position: relative;
-  flex: 0 0 82px;
+  flex: 0 0 90px;
   aspect-ratio: 1.12 / 1;
   overflow: hidden;
   border-radius: 7px;
@@ -6514,6 +6626,7 @@ img {
 .instagram-featured,
 .instagram-contact,
 .instagram-testimonials,
+.instagram-video,
 .instagram-local {
   margin-top: 26px;
   animation: instagramFadeUp 760ms var(--ease-premium) 310ms both;
@@ -6539,6 +6652,101 @@ img {
   color: var(--red-dark);
   font-size: 0.86rem;
   font-weight: 760;
+}
+
+.instagram-video .instagram-section-heading {
+  display: block;
+}
+
+.instagram-video .instagram-section-heading p {
+  max-width: 390px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 590;
+  line-height: 1.45;
+}
+
+.instagram-video-card {
+  width: min(100%, 386px);
+  margin-inline: auto;
+  border: 1px solid rgba(20, 20, 18, 0.1);
+  border-radius: 8px;
+  padding: 8px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(249, 248, 242, 0.9)
+    ),
+    #f8f6ef;
+  box-shadow: 0 18px 48px rgba(20, 20, 18, 0.09);
+}
+
+.instagram-video-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 430px;
+  overflow: hidden;
+  border: 1px solid rgba(20, 20, 18, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(237, 235, 227, 0.9)
+    ),
+    #eeeae0;
+}
+
+.instagram-video-frame video,
+.instagram-video-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.instagram-video-frame video {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.instagram-video-placeholder {
+  display: block;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(20, 20, 18, 0.04)),
+    url("/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%204%20(1).jpg") center /
+      cover no-repeat,
+    #eeeae0;
+}
+
+.instagram-video-cta {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  border: 1px solid rgba(231, 25, 31, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--red-dark);
+  font-size: 0.94rem;
+  font-weight: 800;
+  line-height: 1.15;
+  transition:
+    transform 220ms var(--ease-premium),
+    border-color 220ms var(--ease-premium),
+    background-color 220ms var(--ease-premium),
+    box-shadow 220ms var(--ease-premium);
+}
+
+.instagram-video-cta:hover {
+  border-color: rgba(231, 25, 31, 0.28);
+  background: white;
+  box-shadow: 0 14px 34px rgba(231, 25, 31, 0.1);
+  transform: translateY(-1px);
 }
 
 .instagram-featured-grid {
@@ -6581,9 +6789,16 @@ img {
   object-fit: cover;
 }
 
-.instagram-featured-card:first-child .instagram-featured-image img {
-  object-fit: contain;
-  padding: 14px;
+.instagram-featured-card:nth-child(1) .instagram-featured-image img {
+  object-position: center 48%;
+}
+
+.instagram-featured-card:nth-child(2) .instagram-featured-image img {
+  object-position: center 46%;
+}
+
+.instagram-featured-card:nth-child(3) .instagram-featured-image img {
+  object-position: center 42%;
 }
 
 .instagram-featured-copy {
@@ -6812,6 +7027,7 @@ img {
   .instagram-social,
   .instagram-testimonials .testimonials-mobile-marquee,
   .instagram-proof,
+  .instagram-video,
   .instagram-featured,
   .instagram-local,
   .instagram-contact,
@@ -6857,7 +7073,7 @@ img {
   }
 
   .instagram-showcase {
-    min-height: 188px;
+    min-height: 276px;
     margin-top: 17px;
   }
 
@@ -6871,11 +7087,14 @@ img {
   }
 
   .instagram-showcase-floating {
-    width: min(45vw, 170px);
+    right: 10px;
+    bottom: 16px;
+    width: min(49vw, 184px);
+    padding: 8px;
   }
 
   .instagram-showcase-mini-card {
-    flex-basis: 76px;
+    flex-basis: 84px;
   }
 
   .instagram-links {
@@ -6935,7 +7154,7 @@ img {
   }
 
   .instagram-showcase {
-    min-height: 182px;
+    min-height: 268px;
     margin-top: 16px;
   }
 
@@ -6949,11 +7168,13 @@ img {
   }
 
   .instagram-showcase-floating {
-    width: 166px;
+    bottom: 15px;
+    width: 180px;
+    padding: 8px;
   }
 
   .instagram-showcase-mini-card {
-    flex-basis: 76px;
+    flex-basis: 84px;
   }
 
   .instagram-photo-main {
@@ -6987,6 +7208,7 @@ img {
   .instagram-links,
   .instagram-social,
   .instagram-proof,
+  .instagram-video,
   .instagram-testimonials,
   .instagram-featured,
   .instagram-local,
@@ -7003,11 +7225,13 @@ img {
   }
 
   .instagram-main-link,
+  .instagram-video-cta,
   .instagram-featured-card {
     transition: none;
   }
 
   .instagram-main-link:hover,
+  .instagram-video-cta:hover,
   .instagram-featured-card:hover {
     transform: none;
   }
