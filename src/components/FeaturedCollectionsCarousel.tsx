@@ -145,7 +145,6 @@ export function FeaturedCollectionsCarousel({
               key={collection.number}
               collection={collection}
               isActive={index === selectedIndex}
-              isFirst={index === 0}
               whatsappUrl={whatsappUrl}
             />
           ))}
@@ -180,12 +179,10 @@ export function FeaturedCollectionsCarousel({
 function CollectionSlide({
   collection,
   isActive,
-  isFirst,
   whatsappUrl,
 }: {
   collection: FeaturedCollection;
   isActive: boolean;
-  isFirst: boolean;
   whatsappUrl: string;
 }) {
   const desktopSupports = useMemo(
@@ -208,9 +205,8 @@ function CollectionSlide({
       <CollectionMediaBlock
         media={collection.dominant}
         className="featured-collection-media is-dominant"
-        priority={isFirst}
         isActive={isActive}
-        sizes="(max-width: 680px) 92vw, 720px"
+        sizes="(max-width: 680px) 92vw, (max-width: 1040px) 62vw, 520px"
       />
 
       <div className="featured-collection-supports">
@@ -220,7 +216,7 @@ function CollectionSlide({
             media={media}
             className={`featured-collection-media is-support support-${index + 1}`}
             isActive={isActive}
-            sizes="(max-width: 680px) 42vw, 300px"
+            sizes="(max-width: 680px) 42vw, 260px"
           />
         ))}
       </div>
@@ -258,41 +254,55 @@ function CollectionSlide({
 function CollectionMediaBlock({
   media,
   className,
-  priority = false,
   isActive,
   sizes,
 }: {
   media: CollectionMedia;
   className: string;
-  priority?: boolean;
   isActive: boolean;
   sizes: string;
 }) {
+  const mediaRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = mediaRef.current;
+
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
 
     if (!video) return;
 
-    if (!isActive) {
+    if (!isActive || !isVisible) {
       video.pause();
       return;
     }
 
     void video.play().catch(() => undefined);
-  }, [isActive]);
+  }, [isActive, isVisible]);
 
   return (
-    <div className={className}>
+    <div className={`${className} is-${media.type}`} ref={mediaRef}>
       {media.type === "image" ? (
         <Image
           src={media.src}
           alt={media.alt}
           fill
           sizes={sizes}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
+          quality={92}
+          loading="lazy"
           className="featured-collection-image"
         />
       ) : (

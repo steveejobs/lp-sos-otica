@@ -140,17 +140,16 @@ function buildCollections(): FeaturedCollection[] {
     const images = items.filter((item) => item.type === "image");
     const videos = items.filter((item) => item.type === "video");
 
-    const dominant =
-      number === 3 && videos[0] ? videos[0] : (images[0] ?? videos[0]);
+    const dominant = images[0] ?? videos[0];
 
     if (!dominant) {
       return [];
     }
 
-    const supports =
-      number === 3
-        ? images
-        : [...videos, ...images.filter((image) => image.src !== dominant.src)];
+    const supports = [
+      ...videos,
+      ...images.filter((image) => image.src !== dominant.src),
+    ];
 
     return [
       {

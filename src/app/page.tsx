@@ -22,9 +22,9 @@ export default function Home() {
         <LensHero />
         <Manifesto />
         <RoutineLensSection />
+        <FeaturedCollectionsSection />
         <ProcessSection />
         <StorePhotosSection />
-        <FeaturedCollectionsSection />
         <WatchesSection />
         <ExameNewsSection />
         <GoogleReviewsSection />

@@ -52,11 +52,11 @@ export function ProcessSection() {
   const hasStarted = useRef(false);
   const reduceMotion = useReducedMotion();
   const isInView = useInView(sectionRef, {
-    amount: 0.38,
+    amount: 0.55,
     once: true,
-    margin: "0px 0px -14% 0px",
   });
   const [progress, setProgress] = useState(0);
+  const [animationStarted, setAnimationStarted] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const maxStepIndex = processSteps.length - 1;
   const selectedProgress =
@@ -64,16 +64,18 @@ export function ProcessSection() {
   const visualProgress = reduceMotion
     ? 1
     : Math.max(progress, selectedProgress);
-  const activeIndex = reduceMotion
-    ? maxStepIndex
-    : (selectedIndex ??
-      Math.max(
-        0,
-        Math.min(
-          maxStepIndex,
-          Math.floor(visualProgress * maxStepIndex + 0.16),
-        ),
-      ));
+  const activeIndex =
+    reduceMotion || selectedIndex !== null
+      ? (selectedIndex ?? maxStepIndex)
+      : animationStarted
+        ? Math.max(
+            0,
+            Math.min(
+              maxStepIndex,
+              Math.floor(visualProgress * maxStepIndex + 0.16),
+            ),
+          )
+        : -1;
   const isComplete = visualProgress >= 0.995;
 
   useEffect(() => {
@@ -86,10 +88,12 @@ export function ProcessSection() {
     }
 
     hasStarted.current = true;
+    setAnimationStarted(true);
     const controls = animate(0, 1, {
-      duration: 3,
+      duration: 5.2,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: setProgress,
+      onComplete: () => setProgress(1),
     });
 
     return () => controls.stop();
@@ -123,7 +127,10 @@ export function ProcessSection() {
             {processSteps.map((step, index) => {
               const Icon = step.icon;
               const stepProgress = index / maxStepIndex;
-              const isReached = visualProgress >= stepProgress - 0.015;
+              const isReached =
+                reduceMotion ||
+                selectedIndex === index ||
+                (animationStarted && visualProgress >= stepProgress - 0.015);
               const isActive = index === activeIndex;
               const isFinal = index === maxStepIndex && isComplete;
 

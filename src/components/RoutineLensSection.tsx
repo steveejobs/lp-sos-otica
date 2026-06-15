@@ -111,20 +111,22 @@ export function RoutineLensSection() {
           </div>
 
           <div className="routine-lens-answer" aria-live="polite">
-            <span className="routine-answer-icon">
-              <ActiveIcon size={22} aria-hidden="true" />
-            </span>
-            <small>Indicação</small>
-            <h3>{active.title}</h3>
-            <p>{active.answer}</p>
-            <a
-              href={buildWhatsAppUrl(active.message)}
-              className="button button-red"
-              aria-label={`${active.ctaLabel} pelo WhatsApp`}
-            >
-              <Sparkles size={17} aria-hidden="true" />
-              {active.ctaLabel}
-            </a>
+            <div className="routine-lens-answer-content" key={activeIndex}>
+              <span className="routine-answer-icon">
+                <ActiveIcon size={22} aria-hidden="true" />
+              </span>
+              <small>Indicação</small>
+              <h3>{active.title}</h3>
+              <p>{active.answer}</p>
+              <a
+                href={buildWhatsAppUrl(active.message)}
+                className="button button-red"
+                aria-label={`${active.ctaLabel} pelo WhatsApp`}
+              >
+                <Sparkles size={17} aria-hidden="true" />
+                {active.ctaLabel}
+              </a>
+            </div>
           </div>
         </AnimatedReveal>
       </div>
