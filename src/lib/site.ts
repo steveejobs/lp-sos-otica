@@ -54,6 +54,7 @@ export const navItems = [
   { label: "Rotina", href: "#rotina" },
   { label: "Laboratório", href: "#laboratorio" },
   { label: "Loja", href: "#por-dentro" },
+  { label: "Coleções", href: "#colecoes" },
   { label: "Relógios", href: "#relogios" },
   { label: "Avaliações", href: "#avaliacoes" },
   { label: "Contato", href: "#contato" },

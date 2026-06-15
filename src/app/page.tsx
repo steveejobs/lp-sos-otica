@@ -5,6 +5,7 @@ import { FocusGallery } from "@/components/FocusGallery";
 import { Footer } from "@/components/Footer";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { ExameNewsSection } from "@/components/ExameNewsSection";
+import { FeaturedCollectionsSection } from "@/components/FeaturedCollectionsSection";
 import { Header } from "@/components/Header";
 import { LensHero } from "@/components/LensHero";
 import { Manifesto } from "@/components/Manifesto";
@@ -23,6 +24,7 @@ export default function Home() {
         <RoutineLensSection />
         <ProcessSection />
         <StorePhotosSection />
+        <FeaturedCollectionsSection />
         <WatchesSection />
         <ExameNewsSection />
         <GoogleReviewsSection />
