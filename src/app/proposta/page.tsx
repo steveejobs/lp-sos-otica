@@ -31,6 +31,7 @@ import {
   WalletCards,
 } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
+import { testimonials, testimonialsSummary } from "@/data/testimonials";
 import { buildWhatsAppUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -238,6 +239,163 @@ const conditions = [
   "Mudanças fora do escopo aprovado podem ser orçadas separadamente.",
 ];
 
+const showcaseMainImages = [
+  {
+    src: "/assets/glasses/eyeglasses-hero.webp",
+    alt: "Armação de óculos de grau da SOS Ótica",
+    contain: true,
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(4).jpg",
+    alt: "Óculos solar em destaque",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%204%20(3).jpg",
+    alt: "Armação premium em coleção",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%205%20(3).jpg",
+    alt: "Detalhe de armação de óculos",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%206%20(3).jpg",
+    alt: "Óculos de coleção da SOS Ótica",
+  },
+];
+
+const showcaseFloatingImages = [
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%201%20(1).jpg",
+    alt: "Armação clara em destaque",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%202%20(1).jpg",
+    alt: "Óculos de grau da coleção",
+  },
+  {
+    src: "/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%205%20(2).jpg",
+    alt: "Detalhe de óculos premium",
+  },
+];
+
+const compactTestimonials = testimonials.slice(0, 5);
+const showcaseLoopImages = [...showcaseMainImages, ...showcaseMainImages];
+const floatingLoopImages = [
+  ...showcaseFloatingImages,
+  ...showcaseFloatingImages,
+];
+const compactTestimonialsLoop = [
+  ...compactTestimonials,
+  ...compactTestimonials,
+];
+
+function ProposalShowcase() {
+  return (
+    <div
+      id="proposta-showcase"
+      className="proposal-showcase"
+      aria-label="Vitrine de óculos da SOS Ótica"
+    >
+      <div className="proposal-showcase-main">
+        <div className="proposal-showcase-track">
+          {showcaseLoopImages.map((image, index) => (
+            <div
+              className={
+                image.contain
+                  ? "proposal-showcase-card is-contain"
+                  : "proposal-showcase-card"
+              }
+              key={`${image.src}-${index}`}
+              aria-hidden={index >= showcaseMainImages.length}
+            >
+              <Image
+                src={image.src}
+                alt={index < showcaseMainImages.length ? image.alt : ""}
+                fill
+                sizes="(min-width: 960px) 220px, 54vw"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="proposal-showcase-floating" aria-hidden="true">
+        <div className="proposal-showcase-floating-track">
+          {floatingLoopImages.map((image, index) => (
+            <div
+              className="proposal-showcase-mini-card"
+              key={`${image.src}-mini-${index}`}
+            >
+              <Image src={image.src} alt="" fill sizes="132px" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProposalSocialProof() {
+  return (
+    <div
+      id="proposta-social-proof"
+      className="proposal-social-proof"
+      aria-label="Prova social da SOS Ótica"
+    >
+      <div className="proposal-rating-card">
+        <span className="proposal-rating-stars" aria-hidden="true">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Star key={index} size={15} fill="currentColor" />
+          ))}
+        </span>
+        <strong>
+          {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no Google
+        </strong>
+        <span>{testimonialsSummary.total} avaliações de clientes</span>
+      </div>
+
+      <div
+        className="proposal-testimonial-strip"
+        aria-label="Depoimentos de clientes"
+      >
+        <ul className="sr-only">
+          {compactTestimonials.map((testimonial) => (
+            <li key={testimonial.name}>
+              {testimonial.name}: {testimonial.text}
+            </li>
+          ))}
+        </ul>
+        <div className="proposal-testimonial-track" aria-hidden="true">
+          {compactTestimonialsLoop.map((testimonial, index) => (
+            <article
+              className="proposal-mini-testimonial"
+              key={`${testimonial.name}-${index}`}
+            >
+              <span className="proposal-mini-stars">
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <Star key={starIndex} size={10} fill="currentColor" />
+                ))}
+              </span>
+              <p>{testimonial.text}</p>
+              <strong>{testimonial.name}</strong>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="proposal-local-proof" aria-label="Informações locais">
+        <span>
+          <MapPin size={15} aria-hidden="true" />
+          Centro de Araguaína
+        </span>
+        <span>Seg-Sex 8h às 18h · Sáb 8h às 12h</span>
+      </div>
+    </div>
+  );
+}
+
 function ProposalCta({
   href,
   children,
@@ -351,28 +509,8 @@ export default function ProposalPage() {
           </AnimatedReveal>
 
           <AnimatedReveal className="proposal-hero-visual" delay={0.08}>
-            <div className="proposal-hero-photo">
-              <Image
-                src="/assets/store/store-01.webp"
-                alt="Interior da loja SOS Ótica em Araguaína"
-                fill
-                priority
-                sizes="(min-width: 960px) 48vw, 92vw"
-              />
-            </div>
-            <div className="proposal-hero-card" aria-hidden="true">
-              <Image
-                src="/assets/glasses/eyeglasses-hero.webp"
-                alt=""
-                width={430}
-                height={242}
-                priority
-              />
-              <div>
-                <strong>Presença digital com destino claro</strong>
-                <span>WhatsApp, rota, avaliações e visita na loja.</span>
-              </div>
-            </div>
+            <ProposalShowcase />
+            <ProposalSocialProof />
           </AnimatedReveal>
         </div>
       </section>
@@ -526,7 +664,11 @@ export default function ProposalPage() {
         </div>
       </section>
 
-      <section className="proposal-section" aria-labelledby="comparison-title">
+      <section
+        className="proposal-section"
+        id="comparativo"
+        aria-labelledby="comparison-title"
+      >
         <div className="proposal-shell">
           <AnimatedReveal className="proposal-section-heading">
             <span className="proposal-eyebrow">Comparativo rápido</span>

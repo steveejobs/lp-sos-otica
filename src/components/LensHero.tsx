@@ -147,41 +147,43 @@ export function LensHero() {
       </div>
 
       <div className="hero-state hero-state-grau">
-        {heroImageLoaded ? <HeroCopyLayer /> : null}
-        <motion.div
-          className="hero-pointer-frame"
-          style={{
-            x: glassesX,
-            y: glassesY,
-            rotateX: glassesRotateX,
-            rotateY: glassesRotateY,
-          }}
-        >
+        <div className="hero-cinema-camera">
+          {heroImageLoaded ? <HeroCopyLayer /> : null}
           <motion.div
-            className="cinematic-glasses cinematic-glasses-grau"
-            animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut",
+            className="hero-pointer-frame"
+            style={{
+              x: glassesX,
+              y: glassesY,
+              rotateX: glassesRotateX,
+              rotateY: glassesRotateY,
             }}
-            aria-hidden="true"
           >
-            <LensClipDefs />
-            <Image
-              src="/assets/glasses/eyeglasses-hero.webp"
-              alt=""
-              fill
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 680px) 112vw, 1120px"
-              className="cinematic-glasses-image"
-              onLoad={() => setHeroImageLoaded(true)}
-            />
-            {heroImageLoaded ? <LensBoundCopy /> : null}
-            <LensCalibrationOverlay />
+            <motion.div
+              className="cinematic-glasses cinematic-glasses-grau"
+              animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
+              transition={{
+                duration: 22,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              aria-hidden="true"
+            >
+              <LensClipDefs />
+              <Image
+                src="/assets/glasses/eyeglasses-hero.webp"
+                alt=""
+                fill
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 680px) 116vw, 1120px"
+                className="cinematic-glasses-image"
+                onLoad={() => setHeroImageLoaded(true)}
+              />
+              {heroImageLoaded ? <LensBoundCopy /> : null}
+              <LensCalibrationOverlay />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="hero-ui">

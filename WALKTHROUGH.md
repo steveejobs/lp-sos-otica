@@ -1,5 +1,26 @@
 # Walkthrough
 
+## Proposta comercial v01
+
+- Criada a rota `/proposta` como pagina comercial independente, sem entrada no menu publico principal.
+- A pagina usa metadata propria com `title` "Proposta Comercial | SOS Otica", description da proposta e `robots: noindex/nofollow` para evitar indexacao no Google.
+- Valores configurados: site premium por R$ 1.450 pagamento unico; Instagram Local por R$ 1.300/mes; Google Captacao Local por R$ 1.450/mes + midia; Crescimento Completo por R$ 2.200/mes + midia.
+- CTAs de WhatsApp configurados com mensagens especificas para site premium, Instagram Local, Google Captacao Local, Crescimento Completo, recomendacao de 3 meses e aprovacao final da proposta.
+- Pacote recomendado: "Site + Crescimento Completo por 3 meses", destacado como melhor escolha com calculo de R$ 8.050 e reforco estrategico de presenca, conteudo, reputacao, Google, WhatsApp e rota.
+- Condicoes comerciais destacadas: site como pagamento unico, mensalidades antecipadas, trabalhos iniciando apos confirmacao do pagamento do ciclo, verba de anuncios fora do escopo e paga direto pelo cliente, mudancas extras orcadas separadamente.
+- Comportamento mobile: hero empilhado, CTAs em largura total, cards mensais em coluna, comparativo convertido em cards por plano e imagens carregadas de forma leve sem videos.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Screenshots gerados em `.tmp/visual-audit/`: `proposta-mobile-v01.png`, `proposta-desktop-v01.png`, `proposta-planos-v01.png` e `proposta-comparativo-v01.png`.
+
+## Proposta showcase e social proof v02/v03
+
+- Refinada a hero visual da rota `/proposta`: a composicao estatica foi substituida por uma vitrine animada com duas faixas de imagens reais do projeto, movimento horizontal continuo, fade lateral, card flutuante secundario em sentido oposto e pausa em hover/press.
+- A vitrine usa apenas imagens locais de oculos e colecoes, sem videos, com animacao CSS por `transform: translate3d`, duplicacao de listas para loop continuo e fallback em `prefers-reduced-motion`.
+- Criado o bloco compacto de prova social na `/proposta`: card com 5 estrelas amarelas, nota `4,9 no Google`, `92 avaliacoes de clientes`, mini depoimentos reais reaproveitados de `src/data/testimonials.ts` e faixa local discreta com Centro de Araguaina e horarios.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
+- Screenshots gerados em `.tmp/visual-audit/`: `proposta-showcase-mobile-v02.png`, `proposta-showcase-desktop-v02.png`, `proposta-showcase-detail-v02.png`, `proposta-socialproof-mobile-v03.png`, `proposta-socialproof-desktop-v03.png` e `proposta-testimonials-compact-v03.png`.
+- Sequencia de movimento gerada em `.tmp/visual-audit/proposta-showcase-motion-v02/`: `frame-01.png`, `frame-02.png` e `frame-03.png`.
+
 ## Bio page Instagram v01
 
 - Criada a rota principal `/instagram` como uma bio page mobile-first para uso no Instagram, com alias `/bio` redirecionando para a rota principal.
@@ -7,7 +28,7 @@
 - Links configurados: WhatsApp geral com mensagem "Vim pelo Instagram e quero atendimento", rota Google Maps para `-7.1920373, -48.2087301`, colecoes pelo WhatsApp, agendamento de teste de visao, site completo `https://lp-sos-otica.vercel.app/` e mensagens especificas para grau, solar, colecoes e relogios/acessorios.
 - Assets utilizados: `/imagens/logotipo icon preto.png`, `/assets/glasses/eyeglasses-hero.webp`, imagens estaticas leves da pasta `/galeria colecao` e `/imagens/TECHNOS-02.jpg`.
 - Otimizacoes mobile: pagina estatica, sem videos, imagens abaixo da dobra com lazy loading, prioridade apenas para logo e composicao do topo, CSS escopado em classes `instagram-*`, animacoes sutis com suporte a `prefers-reduced-motion`, botoes com area de toque ampla, foco visivel e CTA fixo no rodape.
-- Validacao executada: `npm run lint` passou com 1 warning preexistente em `src/app/proposta/page.tsx`; `npm run build` passou.
+- Validacao executada: `npm run lint` e `npm run build` passaram.
 - Screenshots gerados em `.tmp/visual-audit/`: `instagram-bio-mobile-v01.png`, `instagram-bio-mobile-full-v01.png` e `instagram-bio-desktop-v01.png`.
 
 ## Limpeza de projeto
