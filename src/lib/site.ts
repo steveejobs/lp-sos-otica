@@ -45,8 +45,6 @@ export const site = {
   mainPromise: "Óculos pronto em até 30 minutos",
   promiseNote: "Conforme receita, lente e disponibilidade.",
   logoIcon: "/imagens/logotipo icon preto.png",
-  logoIconColor: "/imagens/logotipo icon.png",
-  logoFull: "/imagens/logotipo completa preta.png",
 };
 
 export const navItems = [

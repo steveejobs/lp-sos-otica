@@ -7,6 +7,7 @@ export type CollectionMedia = {
   type: "image" | "video";
   src: string;
   alt: string;
+  poster?: string;
 };
 
 export type CollectionNumber = 1 | 2 | 3 | 4 | 5 | 6;
@@ -154,7 +155,12 @@ function buildCollections(): FeaturedCollection[] {
     const copy = collectionCopy[number];
     const items = media[number];
     const images = items.filter((item) => item.type === "image");
-    const videos = items.filter((item) => item.type === "video");
+    const videos = items
+      .filter((item) => item.type === "video")
+      .map((video) => ({
+        ...video,
+        poster: images[0]?.src,
+      }));
 
     const dominant = images[0] ?? videos[0];
 
@@ -162,10 +168,11 @@ function buildCollections(): FeaturedCollection[] {
       return [];
     }
 
-    const supports = [
-      ...videos.slice(0, 2),
-      ...images.filter((image) => image.src !== dominant.src),
-    ];
+    const imageSupports = images.filter((image) => image.src !== dominant.src);
+    const supports =
+      number === 5 || number === 6
+        ? [...videos.slice(0, 1), ...imageSupports]
+        : [...imageSupports, ...videos.slice(0, 1)];
 
     return [
       {

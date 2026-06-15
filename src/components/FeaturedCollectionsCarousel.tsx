@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 import type {
   FeaturedCollection,
   CollectionMedia,
@@ -20,7 +21,12 @@ export function FeaturedCollectionsCarousel({
 }: FeaturedCollectionsCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const appliedInitialSlide = useRef(false);
+  const reduceMotion = useReducedMotion();
+  const isCarouselInView = useInView(carouselRef, {
+    amount: 0.38,
+  });
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -61,6 +67,34 @@ export function FeaturedCollectionsCarousel({
     }
   }, [collections, emblaApi]);
 
+  useEffect(() => {
+    if (
+      !emblaApi ||
+      reduceMotion ||
+      !isCarouselInView ||
+      isDragging ||
+      collections.length <= 1
+    ) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else {
+        emblaApi.scrollTo(0);
+      }
+    }, 6200);
+
+    return () => window.clearInterval(timer);
+  }, [
+    collections.length,
+    emblaApi,
+    isCarouselInView,
+    isDragging,
+    reduceMotion,
+  ]);
+
   function scroll(direction: 1 | -1) {
     if (!emblaApi) return;
 
@@ -73,6 +107,7 @@ export function FeaturedCollectionsCarousel({
 
   return (
     <div
+      ref={carouselRef}
       className={`featured-collections-carousel${isDragging ? " is-dragging" : ""}`}
     >
       <div className="featured-collections-controls">
@@ -158,7 +193,7 @@ function CollectionSlide({
     () =>
       collection.supports.slice(
         0,
-        collection.variant === "duo" || collection.variant === "airy" ? 1 : 3,
+        collection.variant === "duo" || collection.variant === "airy" ? 1 : 2,
       ),
     [collection.supports, collection.variant],
   );
@@ -181,7 +216,7 @@ function CollectionSlide({
         isActive={isActive}
         priority={slideIndex === 0}
         quality={95}
-        sizes="(max-width: 680px) 92vw, (max-width: 1040px) 62vw, 520px"
+        sizes="(min-width: 1280px) 560px, (min-width: 768px) 50vw, 92vw"
       />
 
       <div className="featured-collection-supports">
@@ -192,7 +227,7 @@ function CollectionSlide({
             className={`featured-collection-media is-support support-${index + 1}`}
             isActive={isActive}
             quality={85}
-            sizes="(max-width: 680px) 42vw, 260px"
+            sizes="(min-width: 1280px) 220px, (min-width: 768px) 22vw, 42vw"
           />
         ))}
       </div>
@@ -292,6 +327,7 @@ function CollectionMediaBlock({
           ref={videoRef}
           className="featured-collection-video"
           src={isActive || isVisible ? media.src : undefined}
+          poster={media.poster}
           muted
           loop
           playsInline

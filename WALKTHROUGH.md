@@ -1,5 +1,37 @@
 # Walkthrough
 
+## Bio page Instagram v01
+
+- Criada a rota principal `/instagram` como uma bio page mobile-first para uso no Instagram, com alias `/bio` redirecionando para a rota principal.
+- Estrutura da pagina: hero com lockup vertical da marca, texto curto de proposta, composicao visual leve com imagem de colecao e oculos, pilha de CTAs principais, prova rapida compacta, mini vitrine, contato curto e CTA fixo mobile.
+- Links configurados: WhatsApp geral com mensagem "Vim pelo Instagram e quero atendimento", rota Google Maps para `-7.1920373, -48.2087301`, colecoes pelo WhatsApp, agendamento de teste de visao, site completo `https://lp-sos-otica.vercel.app/` e mensagens especificas para grau, solar, colecoes e relogios/acessorios.
+- Assets utilizados: `/imagens/logotipo icon preto.png`, `/assets/glasses/eyeglasses-hero.webp`, imagens estaticas leves da pasta `/galeria colecao` e `/imagens/TECHNOS-02.jpg`.
+- Otimizacoes mobile: pagina estatica, sem videos, imagens abaixo da dobra com lazy loading, prioridade apenas para logo e composicao do topo, CSS escopado em classes `instagram-*`, animacoes sutis com suporte a `prefers-reduced-motion`, botoes com area de toque ampla, foco visivel e CTA fixo no rodape.
+- Validacao executada: `npm run lint` passou com 1 warning preexistente em `src/app/proposta/page.tsx`; `npm run build` passou.
+- Screenshots gerados em `.tmp/visual-audit/`: `instagram-bio-mobile-v01.png`, `instagram-bio-mobile-full-v01.png` e `instagram-bio-desktop-v01.png`.
+
+## Limpeza de projeto
+
+- Removidos componentes antigos sem uso na LP: `BrandPillars`, `LensGuidance`, `SocialProof`, `SolutionsSection` e `SolarGlassesSection`.
+- Removida a dependencia direta `motion`; o unico uso foi trocado para `framer-motion`, que ja esta no projeto.
+- Removidos assets publicos sem referencia: cena solar antiga, imagem de laboratorio, galeria antiga `galeria sos`, logo variantes nao usadas, duplicata de relogio, icone 48px solto e video generico pesado `video.mp4`.
+- Mantidos os assets usados pela LP atual: logo preto, favicon/icons declarados, fotos da loja, relogios ativos, hero de oculos e midias das 6 colecoes.
+- Removidos artefatos locais ignorados: `.next`, `debug.log` e pacote local `node_modules/motion`.
+
+## Galeria compacta v41
+
+- A secao `Colecoes em destaque` foi reduzida para uma vitrine premium compacta: padding desktop limitado, shell com `max-width: 1200px` e slide com altura maxima de 560px.
+- A composicao desktop agora mostra no maximo 1 midia principal, 2 apoios e bloco de texto/CTA. O terceiro apoio visual foi removido do desktop para evitar mosaico pesado.
+- O grid da galeria foi estabilizado com largura explicita no shell, carousel, viewport e track, evitando que o Embla expanda o slide alem do viewport.
+- As imagens principais continuam com `quality={95}` e `sizes` realista: `(min-width: 1280px) 560px, (min-width: 768px) 50vw, 92vw`. Apoios usam `quality={85}` e largura menor.
+- As Colecoes 5 e 6 continuam integradas na ordem visual 3, 4, 5, 1, 6, 2. A navegacao exibe 01 a 06 nessa ordem.
+- Videos seguem com `muted`, `loop`, `playsInline`, `preload="metadata"` e poster da imagem principal da colecao quando disponivel. Videos so tocam quando o slide esta ativo e visivel.
+- O autoplay da galeria foi reativado sem pausa no hover. Ele roda apenas quando a galeria esta em viewport, respeita `prefers-reduced-motion` e volta para o primeiro slide ao chegar no final.
+- A Proof Bar compacta substitui os cards grandes de provas rapidas com quatro itens finos: prazo, teste de visao, endereco e Google.
+- Processo SOS mantido com threshold 0.6, disparo uma vez, duracao de 5.6s e timeline vertical limpa no mobile.
+- Escolha guiada mobile mantida com cards estaveis, resposta com `min-height` e CTA com altura fixa.
+- Screenshots v41 gerados em `.tmp/visual-audit/`: `gallery-compact-desktop-v41.png`, `gallery-6-collections-v41.png`, `gallery-mobile-v41.png`, `proofbar-v41.png`, `process-trigger-v41.png`, `guided-choice-mobile-v41.png`, `fullpage-desktop-v41.png` e `fullpage-mobile-v41.png`.
+
 ## Polimento final SOS Otica v38/v39
 
 - A ordem apos o hero ficou: provas rapidas, escolha guiada, colecoes em destaque, Processo SOS, loja real, relogios, noticias, depoimentos, contato, FAQ e CTA final.

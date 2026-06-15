@@ -1,7 +1,7 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 import type { CSSProperties } from "react";
 import type { Testimonial } from "@/data/testimonials";
 
