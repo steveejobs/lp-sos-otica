@@ -1,22 +1,21 @@
 import { Clock3, Eye, Star } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
-import { site } from "@/lib/site";
 
 const proofs = [
   {
     icon: Clock3,
-    title: "Até 30 minutos",
-    text: "Agilidade para quem precisa resolver o óculos sem perder o dia.",
+    title: "Óculos pronto em até 30 minutos",
+    text: "Conforme receita, lente e disponibilidade.",
   },
   {
     icon: Eye,
-    title: "Teste de visão",
-    text: "Orientação no local para escolher com mais clareza.",
+    title: "Teste de visão no local",
+    text: "Atendimento direto na loja.",
   },
   {
     icon: Star,
-    title: "4,9 no Google",
-    text: "92 avaliações reforçam a confiança de quem já passou pela SOS.",
+    title: "4,9 no Google · 92 avaliações",
+    text: "Prova social objetiva de clientes reais.",
   },
 ];
 
@@ -28,15 +27,9 @@ export function Manifesto() {
       aria-labelledby="proof-title"
     >
       <div className="site-shell">
-        <AnimatedReveal className="section-heading proof-heading">
-          <p className="eyebrow">Rapidez com critério</p>
-          <h2 id="proof-title">Óculos pronto em até 30 minutos</h2>
-          <p>
-            Óculos não é só grau. É conforto no rosto, nitidez na rotina e
-            segurança para escolher sem pressa.
-          </p>
-          <small className="promise-note">{site.promiseNote}</small>
-        </AnimatedReveal>
+        <h2 id="proof-title" className="sr-only">
+          Provas rápidas da SOS Ótica
+        </h2>
 
         <div className="proof-grid">
           {proofs.map((item, index) => {

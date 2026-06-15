@@ -22,11 +22,11 @@
 
 ## Entrega v23
 
-1. Criar `src/components/ProcessSection.tsx` com 5 abas: Receita, Lente, Montagem, Ajuste e Pronto.
+1. Criar primeira versão de `src/components/ProcessSection.tsx` com 5 etapas: Receita, Lente, Montagem, Ajuste e Pronto.
 2. Inserir a seção logo depois de `RoutineLensSection`, substituindo o bloco antigo de laboratório/agilidade.
 3. Usar apenas CSS, SVG/HTML leve, lucide-react e framer-motion curto para a troca de conteúdo.
 4. Criar linha de progresso conectando as 5 etapas e composição visual reutilizável de óculos/lente.
-5. Garantir tabs reais com `role="tablist"`, `role="tab"`, `role="tabpanel"` e `aria-selected`.
+5. Garantir navegação acessível na primeira versão interativa.
 6. Ajustar mobile com tabs horizontais roláveis, CTA grande e visual simplificado.
 7. Respeitar `prefers-reduced-motion` com redução de transições/animações.
 8. Validar com lint, build e screenshots v23.
@@ -43,7 +43,7 @@
 1. Remover a versão de processo com card grande, ilustração de óculos e abas no topo.
 2. Fundir o processo com a ideia de laboratório/agilidade em uma timeline editorial única.
 3. Trocar o título para "Como a SOS resolve seu óculos".
-4. Manter 5 etapas clicáveis: Receita, Lente, Montagem, Ajuste e Pronto.
+4. Manter 5 etapas estáticas: Receita, Lente, Montagem, Ajuste e Pronto.
 5. Usar linha fina, ícones discretos, vermelho apenas no ativo e amarelo como detalhe sutil.
 6. Simplificar mobile para timeline vertical compacta, sem overflow horizontal.
 7. Preservar hero com preload do óculos e textos decorativos `aria-hidden`.
@@ -53,6 +53,6 @@
 ## Decisões v26
 
 - A timeline não usa imagem grande nem ilustração; é texto, linha e ícones `lucide-react`.
-- A interação continua com `role="tablist"`, `role="tab"`, `role="tabpanel"` e teclado.
+- A timeline final é estática, com `role="list"` e 5 etapas curtas para reduzir altura e complexidade.
 - O bloco antigo `EventsSection` foi removido para não duplicar a promessa de agilidade.
 - No mobile, a seção fica vertical e o resumo ativo aparece abaixo da linha de etapas.

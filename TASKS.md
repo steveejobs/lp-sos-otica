@@ -16,15 +16,15 @@
 
 ## v23 - Processo SOS
 
-- [x] Criar seção premium de processo com exatamente 5 abas.
+- [x] Criar primeira versão premium de processo com 5 etapas.
 - [x] Inserir a seção após a escolha guiada por rotina.
 - [x] Implementar linha de progresso e visual leve sem imagens pesadas.
-- [x] Usar tabs reais com `aria-selected` e navegação por teclado.
+- [x] Validar navegação por teclado na primeira versão interativa.
 - [x] Adicionar CTA "Chamar no WhatsApp" com link oficial.
 - [x] Ajustar layout desktop compacto.
 - [x] Ajustar layout mobile com tabs horizontais roláveis.
 - [x] Respeitar `prefers-reduced-motion`.
-- [x] Validar clique nas 5 abas, mobile, reduced motion e link do WhatsApp.
+- [x] Validar a primeira versão em mobile, reduced motion e link do WhatsApp.
 - [x] Rodar `npm run lint`.
 - [x] Rodar `npm run build`.
 - [x] Gerar screenshots v23.
@@ -35,7 +35,7 @@
 - [x] Remover a seção antiga de 5 abas com card grande e ilustração.
 - [x] Fundir processo e laboratório em uma timeline compacta.
 - [x] Atualizar título para "Como a SOS resolve seu óculos".
-- [x] Manter 5 etapas interativas com `aria-selected` e teclado.
+- [x] Manter 5 etapas claras em timeline editorial estática.
 - [x] Compactar mobile e validar 360x800, 375x812, 390x844 e 430x932.
 - [x] Garantir hero com óculos priorizado e letras aguardando `onLoad`.
 - [x] Otimizar depoimentos com CSS `translate3d` e duplicata `aria-hidden`.

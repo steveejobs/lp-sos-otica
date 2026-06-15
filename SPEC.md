@@ -43,5 +43,5 @@ A home deve comunicar uma ótica real no Centro de Araguaína com experiência p
 - Não usar fotos falsas, randomuser ou Unsplash para depoimentos.
 - Reviews usam dados manuais fornecidos pelo cliente.
 - A observação "Conforme receita, lente e disponibilidade." deve aparecer de forma discreta.
-- A seção de processo deve ser compacta e editorial, usando timeline interativa discreta; não usar card gigante, carrossel, vídeo, Three.js ou imagens pesadas.
+- A seção de processo deve ser compacta e editorial, usando timeline estática e discreta; não usar card gigante, carrossel, vídeo, Three.js ou imagens pesadas.
 - Schema LocalBusiness/Optician deve refletir endereço, telefone, horário, rating e reviewCount.

@@ -45,11 +45,11 @@ No mobile, o chip do hero quebra para uma segunda linha dentro do painel do CTA,
 
 A versão antiga de 5 abas com card grande, ilustração interna de óculos e visual de dashboard foi removida. `src/components/ProcessSection.tsx` agora une processo e laboratório/agilidade em uma timeline editorial compacta com o título "Como a SOS resolve seu óculos".
 
-As 5 etapas continuam clicáveis: Receita, Lente, Montagem, Ajuste e Pronto. Cada etapa é um `button` real com `role="tab"`, `aria-selected` e suporte a setas, Home e End. O painel de resumo abaixo usa `role="tabpanel"` e atualiza texto curto com microanimação apenas em opacity/transform.
+As 5 etapas aparecem como uma lista editorial estática: Receita, Lente, Montagem, Ajuste e Pronto. A seção usa `role="list"`/`role="listitem"` e textos curtos para reduzir altura, evitar estado duplicado e manter a leitura direta.
 
 A composição visual foi refinada para parecer mais editorial: linha fina, ícones `lucide-react` menores, textos curtos, menos bordas, sem sombra pesada e sem painel com aparência de dashboard. O vermelho da marca fica como estado ativo discreto e o amarelo aparece apenas como detalhe sutil. Não há imagem grande, ilustração pesada, vídeo, Three.js, carrossel ou card gigante.
 
-No desktop, a timeline é horizontal. No mobile, ela vira uma timeline vertical compacta sem overflow horizontal, com menos altura entre etapas; o CTA ocupa a largura disponível. O `prefers-reduced-motion` é respeitado pelo CSS global e pelo `useReducedMotion`.
+No desktop, a timeline é horizontal. No mobile, ela vira uma timeline vertical compacta sem overflow horizontal e com menos altura entre etapas. O `prefers-reduced-motion` é respeitado pelo CSS global.
 
 ## Mobile E Animações
 
@@ -87,7 +87,7 @@ A home foi reorganizada para:
 1. Hero
 2. Provas rápidas
 3. Rotina/lentes
-4. Processo SOS em 5 abas
+4. Processo SOS em 5 etapas
 5. Fotos reais da loja
 6. Relógios e acessórios
 7. Tendências em óculos
@@ -116,5 +116,5 @@ Validação técnica final:
 - Rotas validadas por DOM usando coordenadas exatas.
 - Iframe do mapa validado com coordenadas, zoom 19, `loading="lazy"` e `referrerPolicy`.
 - WhatsApp validado com link oficial.
-- 5 abas do processo clicadas em desktop, mobile e reduced motion.
+- Timeline de 5 etapas do processo verificada em desktop, mobile e reduced motion.
 - Viewports mobile testados sem overflow horizontal: 390x844, 375x812, 430x932 e 360x800.
