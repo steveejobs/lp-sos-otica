@@ -803,11 +803,11 @@ export default function ProposalPage() {
 
             <div className="proposal-recommendation-media" aria-hidden="true">
               <Image
-                src="/galeria%20cole%C3%A7%C3%A3o/cole%C3%A7%C3%A3o%203%20(4).jpg"
+                src="/assets/store/store-01.webp"
                 alt=""
                 fill
                 sizes="(min-width: 960px) 38vw, 88vw"
-                loading="lazy"
+                loading="eager"
               />
             </div>
           </AnimatedReveal>

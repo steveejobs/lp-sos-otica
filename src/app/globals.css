@@ -8198,33 +8198,42 @@ img {
   }
 
   .proposal-showcase {
-    min-height: clamp(232px, 66vw, 292px);
+    display: grid;
+    min-height: auto;
+    padding: 10px;
     touch-action: pan-y;
   }
 
   .proposal-showcase::before,
   .proposal-showcase::after {
-    width: 42px;
+    display: none;
   }
 
   .proposal-showcase-main {
-    inset: 28px 0 auto;
-    padding-block: 16px;
+    position: static;
+    overflow: visible;
+    padding-block: 0;
   }
 
   .proposal-showcase-track {
     display: grid;
     width: 100%;
     max-width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .proposal-showcase-card {
     width: 100%;
+    aspect-ratio: 1.14 / 1;
     padding: 0;
     transform: none !important;
     opacity: 1;
+  }
+
+  .proposal-showcase-card:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 2.12 / 1;
   }
 
   .proposal-showcase-card:nth-child(n + 4) {
@@ -8240,10 +8249,7 @@ img {
   }
 
   .proposal-showcase-floating {
-    right: 12px;
-    bottom: 12px;
-    width: min(48vw, 188px);
-    padding: 7px;
+    display: none;
   }
 
   .proposal-showcase-floating-track {
@@ -8385,6 +8391,10 @@ img {
     margin-top: 14px;
   }
 
+  .proposal-mobile-compare-card span:has(.proposal-check:not(.is-active)) {
+    display: none;
+  }
+
   .proposal-mobile-compare-card span {
     display: grid;
     grid-template-columns: 30px minmax(0, 1fr);
@@ -8396,7 +8406,7 @@ img {
   }
 
   .proposal-recommendation-media {
-    min-height: 320px;
+    min-height: 260px;
   }
 
   .proposal-conditions li {
@@ -8427,20 +8437,8 @@ img {
     min-height: auto;
   }
 
-  .proposal-showcase {
-    min-height: 226px;
-  }
-
-  .proposal-showcase-card {
-    flex-basis: 132px;
-  }
-
-  .proposal-showcase-floating {
-    width: 168px;
-  }
-
-  .proposal-showcase-mini-card {
-    flex-basis: 78px;
+  .proposal-showcase-card:first-child {
+    aspect-ratio: 1.86 / 1;
   }
 }
 
