@@ -8298,8 +8298,21 @@ img {
     padding: 22px;
   }
 
+  .proposal-site-card {
+    opacity: 1 !important;
+    transform: none !important;
+    contain: layout paint;
+  }
+
   .proposal-site-includes {
     grid-template-columns: 1fr;
+  }
+
+  .proposal-site-includes span {
+    min-width: 0;
+    min-height: 44px;
+    overflow-wrap: break-word;
+    transform: none !important;
   }
 
   .proposal-plan-badge {

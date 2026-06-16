@@ -25,7 +25,7 @@ export function AnimatedReveal({
   const showImmediately = reduceMotion || isCompactViewport;
 
   useEffect(() => {
-    const query = window.matchMedia("(max-width: 680px)");
+    const query = window.matchMedia("(max-width: 760px)");
     const update = () => setIsCompactViewport(query.matches);
 
     update();
