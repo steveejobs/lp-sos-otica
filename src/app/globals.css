@@ -8239,6 +8239,7 @@ img {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    mask-image: none;
   }
 
   .proposal-testimonial-strip::-webkit-scrollbar {
@@ -8246,12 +8247,36 @@ img {
   }
 
   .proposal-testimonial-track {
-    animation-duration: 38s;
+    animation: none;
+    transform: none;
+    will-change: auto;
   }
 
   .proposal-mini-testimonial {
     flex-basis: min(230px, 76vw);
     scroll-snap-align: center;
+  }
+
+  .proposal-showcase-track,
+  .proposal-showcase-floating-track {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .proposal-button,
+  .proposal-pillar-card,
+  .proposal-plan-card,
+  .proposal-combo-card,
+  .proposal-mobile-compare-card {
+    transition: none;
+  }
+
+  .proposal-button:hover,
+  .proposal-pillar-card:hover,
+  .proposal-plan-card:hover,
+  .proposal-combo-card:hover {
+    transform: none;
   }
 
   .proposal-local-proof {
