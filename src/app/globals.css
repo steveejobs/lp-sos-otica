@@ -8269,7 +8269,16 @@ img {
   }
 
   .proposal-rating-card {
-    padding: 13px 14px;
+    column-gap: 10px;
+    padding: 12px 13px;
+  }
+
+  .proposal-rating-card strong {
+    font-size: 0.98rem;
+  }
+
+  .proposal-rating-card > span:last-child {
+    font-size: 0.8rem;
   }
 
   .proposal-testimonial-strip {
@@ -8277,6 +8286,8 @@ img {
     scroll-snap-type: none;
     touch-action: pan-y;
     mask-image: none;
+    border-color: rgba(20, 20, 18, 0.08);
+    background: rgba(255, 255, 255, 0.78);
   }
 
   .proposal-testimonial-strip::-webkit-scrollbar {
@@ -8287,8 +8298,8 @@ img {
     display: grid;
     width: 100%;
     max-width: 100%;
-    gap: 10px;
-    padding: 10px;
+    gap: 0;
+    padding: 0;
     animation: none;
     transform: none;
     will-change: auto;
@@ -8296,11 +8307,27 @@ img {
 
   .proposal-mini-testimonial {
     width: 100%;
-    min-height: 108px;
+    min-height: auto;
+    border: 0;
+    padding: 13px;
+    background: transparent;
+    box-shadow: none;
     scroll-snap-align: none;
   }
 
-  .proposal-mini-testimonial:nth-child(n + 3) {
+  .proposal-mini-testimonial p {
+    min-height: 0;
+    margin: 8px 0 8px;
+    -webkit-line-clamp: 3;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .proposal-mini-testimonial strong {
+    font-size: 0.8rem;
+  }
+
+  .proposal-mini-testimonial:nth-child(n + 2) {
     display: none;
   }
 
@@ -8342,24 +8369,67 @@ img {
   .proposal-site-card,
   .proposal-recommendation-panel,
   .proposal-final-panel {
-    padding: 22px;
+    padding: 20px;
   }
 
   .proposal-site-card {
     opacity: 1 !important;
     transform: none !important;
     contain: layout paint;
+    gap: 18px;
+  }
+
+  .proposal-site-copy p {
+    margin: 14px 0 18px;
+    font-size: 0.94rem;
+    line-height: 1.52;
+  }
+
+  .proposal-price-row {
+    gap: 8px;
+    margin-top: 13px;
+  }
+
+  .proposal-price-row strong {
+    font-size: clamp(2.02rem, 10vw, 2.54rem);
+  }
+
+  .proposal-price-row span {
+    font-size: 0.86rem;
   }
 
   .proposal-site-includes {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 10px;
+    align-content: start;
   }
 
   .proposal-site-includes span {
     min-width: 0;
-    min-height: 44px;
+    min-height: 0;
+    align-items: flex-start;
+    gap: 6px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 0.8rem;
+    font-weight: 730;
+    line-height: 1.25;
     overflow-wrap: break-word;
     transform: none !important;
+  }
+
+  .proposal-site-includes svg {
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+  }
+
+  .proposal-note {
+    margin-top: 0;
+    padding-top: 14px;
+    font-size: 0.82rem;
+    line-height: 1.42;
   }
 
   .proposal-plan-badge {
