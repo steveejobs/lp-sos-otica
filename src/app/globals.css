@@ -8150,6 +8150,17 @@ img {
     width: min(100% - 28px, 560px);
   }
 
+  .proposal-page {
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
+
+  .proposal-page .sr-only,
+  .proposal-page .sr-only li {
+    max-width: 1px;
+    overflow: hidden;
+  }
+
   .proposal-section {
     padding: 46px 0;
   }
@@ -8182,8 +8193,13 @@ img {
     min-height: auto;
   }
 
+  .proposal-hero::before {
+    display: none;
+  }
+
   .proposal-showcase {
     min-height: clamp(232px, 66vw, 292px);
+    touch-action: pan-y;
   }
 
   .proposal-showcase::before,
@@ -8197,13 +8213,22 @@ img {
   }
 
   .proposal-showcase-track {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
-    animation-duration: 34s;
   }
 
   .proposal-showcase-card {
-    flex-basis: clamp(134px, 43vw, 174px);
+    width: 100%;
     padding: 0;
+    transform: none !important;
+    opacity: 1;
+  }
+
+  .proposal-showcase-card:nth-child(n + 4) {
+    display: none;
   }
 
   .proposal-showcase-card img {
@@ -8222,12 +8247,19 @@ img {
   }
 
   .proposal-showcase-floating-track {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 7px;
-    animation-duration: 22s;
   }
 
   .proposal-showcase-mini-card {
-    flex-basis: 84px;
+    width: 100%;
+  }
+
+  .proposal-showcase-mini-card:nth-child(n + 3) {
+    display: none;
   }
 
   .proposal-rating-card {
@@ -8235,10 +8267,9 @@ img {
   }
 
   .proposal-testimonial-strip {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: hidden;
+    scroll-snap-type: none;
+    touch-action: pan-y;
     mask-image: none;
   }
 
@@ -8247,14 +8278,24 @@ img {
   }
 
   .proposal-testimonial-track {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+    padding: 10px;
     animation: none;
     transform: none;
     will-change: auto;
   }
 
   .proposal-mini-testimonial {
-    flex-basis: min(230px, 76vw);
-    scroll-snap-align: center;
+    width: 100%;
+    min-height: 108px;
+    scroll-snap-align: none;
+  }
+
+  .proposal-mini-testimonial:nth-child(n + 3) {
+    display: none;
   }
 
   .proposal-showcase-track,
