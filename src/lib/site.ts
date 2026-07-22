@@ -52,7 +52,7 @@ export const navItems = [
   { label: "Rotina", href: "#rotina" },
   { label: "Loja", href: "#por-dentro" },
   { label: "Coleções", href: "#colecoes" },
-  { label: "Relógios", href: "#relogios" },
+  { label: "Acessórios", href: "#acessorios" },
   { label: "Avaliações", href: "#avaliacoes" },
   { label: "Contato", href: "#contato" },
 ];
@@ -104,6 +104,6 @@ export const localBusinessJsonLd = {
   },
   paymentAccepted: "Cash, Credit Card, Debit Card",
   description:
-    "Ótica em Araguaína-TO com óculos pronto em até 30 minutos, teste de visão no local, lentes, armações, relógios e acessórios.",
+    "Ótica em Araguaína-TO com óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e acessórios.",
   priceRange: "$$",
 };

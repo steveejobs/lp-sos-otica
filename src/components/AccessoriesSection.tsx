@@ -5,26 +5,20 @@ import { MessageCircle } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
 
-const featuredWatch = {
-  title: "Coleção Technos em destaque",
-  text: "A vitrine Technos apresentada como uma peça única, com modelos para comparar acabamento, caixa e pulseira sem perder detalhe.",
-  image: "/imagens/TECHNOS-02.jpg",
+const featuredAccessory = {
+  title: "Acessórios selecionados",
+  text: "Cases de luxo, flanelas premium e organizadores para manter seus óculos sempre protegidos e impecáveis.",
+  image: "/imagens/acessorios-1.jpg",
   isMosaic: true,
 };
 
-const watches = [
+const accessories = [
   {
-    title: "Automático GMT",
-    text: "Estojo, pulseira extra e leitura marcante para observar de perto.",
-    image: "/imagens/TECHNOS-01.jpg",
+    title: "Correntes e cordões",
+    text: "Elegância e praticidade para o seu dia a dia. Uma corrente dourada para complementar seu estilo.",
+    image: "/imagens/acessorios-2.jpg",
     isMosaic: false,
-  },
-  {
-    title: "Vitrine selecionada",
-    text: "Peças com presença, acabamento e boa composição para presente.",
-    image: "/imagens/TECHNOS-06.jpg",
-    isMosaic: false,
-  },
+  }
 ];
 
 function publicAssetExists(src: string) {
@@ -32,22 +26,21 @@ function publicAssetExists(src: string) {
   return fs.existsSync(filePath);
 }
 
-export function WatchesSection() {
+export function AccessoriesSection() {
   return (
     <section
-      id="relogios"
+      id="acessorios"
       className="section watches-section"
-      aria-labelledby="watches-title"
+      aria-labelledby="accessories-title"
     >
       <div className="site-shell watches-layout">
         <AnimatedReveal className="section-heading compact watches-copy-panel">
-          <p className="eyebrow">Relógios e acessórios</p>
-          <h2 id="watches-title">
-            Relógios com presença e acabamento para escolher sem pressa
+          <p className="eyebrow">Acessórios</p>
+          <h2 id="accessories-title">
+            Detalhes que complementam e protegem seu óculos
           </h2>
           <p>
-            Uma curadoria Technos enxuta, com modelos de vitrine, opções para
-            presente e peças que pedem comparação ao vivo.
+            Uma curadoria de cases de proteção, flanelas premium e correntes elegantes para dar um toque extra de estilo e cuidado.
           </p>
           <a href={site.whatsappUrl} className="button button-red">
             <MessageCircle size={18} aria-hidden="true" />
@@ -56,18 +49,18 @@ export function WatchesSection() {
         </AnimatedReveal>
 
         <AnimatedReveal className="watches-gallery" delay={0.08}>
-          <WatchCard
-            watch={featuredWatch}
+          <AccessoryCard
+            item={featuredAccessory}
             className="watch-card-featured"
             sizes="(max-width: 1040px) 92vw, 620px"
             priority
           />
 
           <div className="watches-grid">
-            {watches.map((watch) => (
-              <WatchCard
-                key={watch.title}
-                watch={watch}
+            {accessories.map((item) => (
+              <AccessoryCard
+                key={item.title}
+                item={item}
                 sizes="(max-width: 680px) 92vw, 320px"
               />
             ))}
@@ -78,38 +71,38 @@ export function WatchesSection() {
   );
 }
 
-function WatchCard({
-  watch,
+function AccessoryCard({
+  item,
   className = "",
   sizes,
   priority = false,
 }: {
-  watch: typeof featuredWatch;
+  item: typeof featuredAccessory;
   className?: string;
   sizes: string;
   priority?: boolean;
 }) {
   return (
     <article
-      className={`watch-card ${watch.isMosaic ? "watch-card-mosaic" : ""} ${className}`}
+      className={`watch-card ${item.isMosaic ? "watch-card-mosaic" : ""} ${className}`}
     >
-      <WatchImage
-        src={watch.image}
-        alt={watch.title}
+      <AccessoryImage
+        src={item.image}
+        alt={item.title}
         sizes={sizes}
         priority={priority}
-        contain={watch.isMosaic}
+        contain={item.isMosaic}
       />
       <div className="watch-copy">
-        <p className="watch-kicker">Technos</p>
-        <h3>{watch.title}</h3>
-        <p>{watch.text}</p>
+        <p className="watch-kicker">Acessórios</p>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
       </div>
     </article>
   );
 }
 
-function WatchImage({
+function AccessoryImage({
   src,
   alt,
   sizes,

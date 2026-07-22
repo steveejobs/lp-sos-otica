@@ -36,7 +36,7 @@ const collectionsWhatsAppUrl = buildWhatsAppUrl(
   "Olá, S.O.S Ótica! Vim pelo Instagram e quero ver as coleções disponíveis.",
 );
 const accessoriesWhatsAppUrl = buildWhatsAppUrl(
-  "Olá, S.O.S Ótica! Vim pelo Instagram e quero ver relógios e acessórios.",
+  "Olá, S.O.S Ótica! Vim pelo Instagram e quero ver opções de acessórios.",
 );
 const videoWhatsAppUrl = buildWhatsAppUrl(
   "Olá, S.O.S Ótica! Vim pelo Instagram, vi o vídeo e quero atendimento.",
@@ -152,10 +152,10 @@ const featuredItems = [
     icon: Sparkles,
   },
   {
-    title: "Relógios e acessórios",
+    title: "Acessórios",
     href: accessoriesWhatsAppUrl,
-    image: "/imagens/TECHNOS-02.jpg",
-    alt: "Relógio Technos disponível na SOS Ótica",
+    image: "/imagens/acessorios-1.jpg",
+    alt: "Acessórios selecionados da SOS Ótica",
     icon: Watch,
   },
 ];

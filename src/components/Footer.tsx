@@ -26,7 +26,7 @@ export function Footer() {
           </a>
           <p>
             Óculos pronto em até 30 minutos, teste de visão no local, lentes,
-            armações, relógios e acessórios.
+            armações e acessórios.
           </p>
         </div>
 

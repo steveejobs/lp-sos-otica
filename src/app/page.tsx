@@ -12,7 +12,7 @@ import { LensHero } from "@/components/LensHero";
 import { ProcessSection } from "@/components/ProcessSection";
 import { RoutineLensSection } from "@/components/RoutineLensSection";
 import { StorePhotosSection } from "@/components/StorePhotosSection";
-import { WatchesSection } from "@/components/WatchesSection";
+import { AccessoriesSection } from "@/components/AccessoriesSection";
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
         <FeaturedCollectionsSection />
         <ProcessSection />
         <StorePhotosSection />
-        <WatchesSection />
+        <AccessoriesSection />
         <ExameNewsSection />
         <GoogleReviewsSection />
         <FocusGallery />
