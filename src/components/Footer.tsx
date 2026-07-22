@@ -60,7 +60,7 @@ export function Footer() {
       
       <div className="creator-credit">
         <a href={`https://wa.me/5563991081785?text=${encodeURIComponent("Olá Gabriel! Gostaria de saber mais sobre as criações de páginas. Vim pela página SOS Ótica (Principal).")}`} target="_blank" rel="noopener noreferrer">
-          Criado por <strong>Gabriel Rabelo Bandeira</strong>
+          Criado por <strong>Gabriel R.</strong>
         </a>
       </div>
     </footer>
