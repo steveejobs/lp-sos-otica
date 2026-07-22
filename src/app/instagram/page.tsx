@@ -418,6 +418,12 @@ export default function InstagramBioPage() {
         <span>SOS Ótica - Centro de Araguaína</span>
       </footer>
 
+      <div className="creator-credit">
+        <a href={`https://wa.me/5563991081785?text=${encodeURIComponent("Olá Gabriel! Gostaria de saber mais sobre as criações de páginas. Vim pela página SOS Ótica (Instagram).")}`} target="_blank" rel="noopener noreferrer">
+          Criado por <strong>Gabriel Rabelo Bandeira</strong>
+        </a>
+      </div>
+
       <a
         href={instagramWhatsAppUrl}
         className="instagram-fixed-cta"

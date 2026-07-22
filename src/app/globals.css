@@ -6241,8 +6241,13 @@ img {
   object-fit: cover;
 }
 
-.instagram-showcase:hover .instagram-showcase-track,
-.instagram-showcase:hover .instagram-showcase-floating-track,
+@media (hover: hover) and (pointer: fine) {
+  .instagram-showcase:hover .instagram-showcase-track,
+  .instagram-showcase:hover .instagram-showcase-floating-track {
+    animation-play-state: paused;
+  }
+}
+
 .instagram-showcase:active .instagram-showcase-track,
 .instagram-showcase:active .instagram-showcase-floating-track,
 .instagram-testimonials
@@ -8534,4 +8539,29 @@ img {
     transform: none;
     will-change: auto;
   }
+}
+
+.creator-credit {
+  text-align: center;
+  padding: 16px 24px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.creator-credit a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.creator-credit a:hover {
+  opacity: 1;
+}
+
+.instagram-page .creator-credit {
+  border-top: none;
+  padding-top: 0;
+  margin-top: -16px;
+  margin-bottom: 70px;
 }
