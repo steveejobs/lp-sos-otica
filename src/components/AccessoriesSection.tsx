@@ -5,24 +5,32 @@ import { MessageCircle } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { site } from "@/lib/site";
 
-const featuredAccessory = {
+type AccessoryItem = {
+  title: string;
+  text: string;
+  image?: string;
+  images?: string[];
+  isMosaic: boolean;
+};
+
+const featuredAccessory: AccessoryItem = {
   title: "Acessórios selecionados",
   text: "Cases de luxo, flanelas premium e organizadores para manter seus óculos sempre protegidos e impecáveis.",
-  image: "/imagens/acessorios-1.jpg",
+  images: ["/acessorios/1 (3).png", "/acessorios/1 (4).png"],
   isMosaic: true,
 };
 
-const accessories = [
+const accessories: AccessoryItem[] = [
   {
     title: "Correntes e cordões",
     text: "Elegância e praticidade para o seu dia a dia. Uma corrente dourada para complementar seu estilo.",
-    image: "/imagens/acessorios-2.jpg",
+    image: "/acessorios/1 (1).png",
     isMosaic: false,
   },
   {
     title: "Prendedores de óculos",
     text: "Mais firmeza e segurança para a haste não escorregar da orelha. Ideal para quem busca um ajuste perfeito o dia todo.",
-    image: "/imagens/acessorios-3.jpg",
+    image: "/acessorios/1 (2).png",
     isMosaic: false,
   }
 ];
@@ -83,7 +91,7 @@ function AccessoryCard({
   sizes,
   priority = false,
 }: {
-  item: typeof featuredAccessory;
+  item: AccessoryItem;
   className?: string;
   sizes: string;
   priority?: boolean;
@@ -92,13 +100,29 @@ function AccessoryCard({
     <article
       className={`watch-card ${item.isMosaic ? "watch-card-mosaic" : ""} ${className}`}
     >
-      <AccessoryImage
-        src={item.image}
-        alt={item.title}
-        sizes={sizes}
-        priority={priority}
-        contain={item.isMosaic}
-      />
+      {item.images ? (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', padding: '12px 12px 0' }}>
+          {item.images.map((img, i) => (
+            <AccessoryImage
+              key={i}
+              src={img}
+              alt={`${item.title} ${i + 1}`}
+              sizes={sizes}
+              priority={priority}
+              contain={item.isMosaic}
+              wrapperStyle={{ margin: 0, height: '100%', aspectRatio: 'auto' }}
+            />
+          ))}
+        </div>
+      ) : (
+        <AccessoryImage
+          src={item.image!}
+          alt={item.title}
+          sizes={sizes}
+          priority={priority}
+          contain={item.isMosaic}
+        />
+      )}
       <div className="watch-copy">
         <p className="watch-kicker">Acessórios</p>
         <h3>{item.title}</h3>
@@ -114,17 +138,19 @@ function AccessoryImage({
   sizes,
   priority = false,
   contain = false,
+  wrapperStyle,
 }: {
   src: string;
   alt: string;
   sizes: string;
   priority?: boolean;
   contain?: boolean;
+  wrapperStyle?: React.CSSProperties;
 }) {
   const hasImage = publicAssetExists(src);
 
   return (
-    <div className="watch-media">
+    <div className="watch-media" style={wrapperStyle}>
       {hasImage ? (
         <Image
           src={src}
