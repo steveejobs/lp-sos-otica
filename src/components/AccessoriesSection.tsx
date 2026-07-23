@@ -18,6 +18,12 @@ const accessories = [
     text: "Elegância e praticidade para o seu dia a dia. Uma corrente dourada para complementar seu estilo.",
     image: "/imagens/acessorios-2.jpg",
     isMosaic: false,
+  },
+  {
+    title: "Prendedores de óculos",
+    text: "Mais firmeza e segurança para a haste não escorregar da orelha. Ideal para quem busca um ajuste perfeito o dia todo.",
+    image: "/imagens/acessorios-3.jpg",
+    isMosaic: false,
   }
 ];
 
