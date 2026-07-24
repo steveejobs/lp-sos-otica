@@ -6779,7 +6779,22 @@ img {
   background: linear-gradient(135deg, var(--red), var(--red-dark));
   color: white;
   font-weight: 800;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   box-shadow: 0 18px 44px rgba(231, 25, 31, 0.3);
+  transform: translate3d(0, calc(100% + 20px), 0);
+  transition:
+    opacity 240ms var(--ease-premium),
+    visibility 240ms var(--ease-premium),
+    transform 320ms var(--ease-premium);
+}
+
+.instagram-fixed-cta.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
 }
 
 @keyframes instagramFadeUp {
@@ -7042,7 +7057,8 @@ img {
 
   .instagram-main-link,
   .instagram-video-cta,
-  .instagram-featured-card {
+  .instagram-featured-card,
+  .instagram-fixed-cta {
     transition: none;
   }
 

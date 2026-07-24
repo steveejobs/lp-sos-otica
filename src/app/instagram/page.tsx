@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { TestimonialsMobileMarquee } from "@/components/ui/testimonials-columns-1";
 import { InstagramVideoCard } from "@/components/InstagramVideoCard";
+import { InstagramFixedWhatsApp } from "@/components/InstagramFixedWhatsApp";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
 import { buildWhatsAppUrl } from "@/lib/site";
 
@@ -289,6 +290,7 @@ export default function InstagramBioPage() {
       </section>
 
       <section
+        id="instagram-main-links"
         className="instagram-links instagram-shell"
         aria-label="Links principais"
       >
@@ -424,14 +426,7 @@ export default function InstagramBioPage() {
         </a>
       </div>
 
-      <a
-        href={instagramWhatsAppUrl}
-        className="instagram-fixed-cta"
-        aria-label="Falar com a SOS Ótica no WhatsApp"
-      >
-        <MessageCircle size={19} aria-hidden="true" />
-        <span>Falar no WhatsApp</span>
-      </a>
+      <InstagramFixedWhatsApp href={instagramWhatsAppUrl} />
     </main>
   );
 }
