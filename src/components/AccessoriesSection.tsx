@@ -101,18 +101,29 @@ function AccessoryCard({
       className={`watch-card ${item.isMosaic ? "watch-card-mosaic" : ""} ${className}`}
     >
       {item.images ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', padding: '12px 12px 0' }}>
-          {item.images.map((img, i) => (
-            <AccessoryImage
-              key={i}
-              src={img}
-              alt={`${item.title} ${i + 1}`}
-              sizes={sizes}
-              priority={priority}
-              contain={item.isMosaic}
-              wrapperStyle={{ margin: 0, height: '100%', aspectRatio: 'auto' }}
-            />
-          ))}
+        <div className="watch-media" style={{ display: 'flex', gap: '12px', padding: '12px' }}>
+          {item.images.map((img, i) => {
+            const hasImage = publicAssetExists(img);
+            return (
+              <div key={i} style={{ flex: 1, position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
+                {hasImage ? (
+                  <Image
+                    src={img}
+                    alt={`${item.title} ${i + 1}`}
+                    fill
+                    sizes={sizes}
+                    priority={priority}
+                    className={`watch-image ${item.isMosaic ? "watch-image-contain" : ""}`}
+                  />
+                ) : (
+                  <div className="watch-placeholder" aria-hidden="true">
+                    <span />
+                    <small>Imagem em breve</small>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       ) : (
         <AccessoryImage
