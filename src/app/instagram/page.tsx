@@ -172,6 +172,14 @@ export const metadata: Metadata = {
   title: "SOS Ótica | Links do Instagram",
   description:
     "Links rápidos da SOS Ótica no Centro de Araguaína: WhatsApp, rota, coleções, teste de visão e site completo.",
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   alternates: {
     canonical: "/instagram",
   },

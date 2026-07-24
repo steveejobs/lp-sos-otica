@@ -178,13 +178,9 @@ export function LensHero() {
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
-      <h1 id="hero-title" className="sr-only">
-        SOS Ótica em Araguaína: óculos pronto em até 30 minutos
-      </h1>
-
-      <div className="hero-brand-signal" aria-hidden="true">
-        <span>SOS Ótica</span>
-        <span>Centro de Araguaína</span>
+      <div className="hero-brand-signal">
+        <h1 id="hero-title">SOS Ótica em Araguaína</h1>
+        <span>Óculos pronto em até 30 minutos</span>
       </div>
 
       <div className="hero-state hero-state-grau">

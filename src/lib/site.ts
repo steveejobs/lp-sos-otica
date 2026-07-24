@@ -100,6 +100,52 @@ export const localBusinessJsonLd = {
     areaServed: "BR",
     availableLanguage: "Portuguese",
   },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Produtos e serviços da SOS Ótica em Araguaína",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: "Óculos de grau",
+          category: "Óculos e armações",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: "Óculos solares com proteção UV",
+          category: "Óculos solares",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: "Lentes oftálmicas e antirreflexo",
+          category: "Lentes para óculos",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Teste de visão no local",
+          areaServed: site.city,
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Montagem e ajuste de óculos",
+          areaServed: site.city,
+        },
+      },
+    ],
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

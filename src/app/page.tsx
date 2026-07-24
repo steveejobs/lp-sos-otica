@@ -16,9 +16,9 @@ import { StorePhotosSection } from "@/components/StorePhotosSection";
 import { AccessoriesSection } from "@/components/AccessoriesSection";
 import { seoJsonLd } from "@/lib/site";
 
-const title = "SOS Ótica em Araguaína | Óculos pronto em até 30 minutos";
+const title = "Ótica em Araguaína | Óculos em até 30 min | SOS Ótica";
 const description =
-  "SOS Ótica em Araguaína-TO: óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e atendimento no Centro.";
+  "Ótica no Centro de Araguaína-TO com óculos de grau, solares, lentes antirreflexo, teste de visão e muitos óculos prontos em até 30 minutos.";
 
 export const metadata: Metadata = {
   title,

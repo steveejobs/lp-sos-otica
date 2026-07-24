@@ -4,9 +4,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "SOS Ótica em Araguaína | Óculos pronto em até 30 minutos",
+  title: "Ótica em Araguaína | Óculos em até 30 min | SOS Ótica",
   description:
-    "SOS Ótica em Araguaína-TO: óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e atendimento no Centro.",
+    "Ótica no Centro de Araguaína-TO com óculos de grau, solares, lentes antirreflexo, teste de visão e muitos óculos prontos em até 30 minutos.",
   applicationName: "SOS Ótica",
   category: "Ótica",
   referrer: "origin-when-cross-origin",
