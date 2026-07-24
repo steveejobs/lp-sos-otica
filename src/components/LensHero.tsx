@@ -8,7 +8,7 @@ import {
   useReducedMotion,
   useTransform,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { CSSProperties, PointerEvent } from "react";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { site } from "@/lib/site";
@@ -48,10 +48,10 @@ const heroMarqueeStyle = {
 
 export function LensHero() {
   const reduceMotion = useReducedMotion();
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
+  const pointerFrame = useRef<number | null>(null);
   const smoothPointer = useRef({
     currentX: 0,
     currentY: 0,
@@ -97,6 +97,10 @@ export function LensHero() {
 
   useEffect(() => {
     if (reduceMotion) {
+      if (pointerFrame.current !== null) {
+        window.cancelAnimationFrame(pointerFrame.current);
+        pointerFrame.current = null;
+      }
       smoothPointer.current = {
         currentX: 0,
         currentY: 0,
@@ -105,30 +109,44 @@ export function LensHero() {
       };
       pointerX.set(0);
       pointerY.set(0);
-      return;
     }
 
-    let frame = 0;
-    const tick = () => {
-      const pointer = smoothPointer.current;
-      pointer.currentX += (pointer.targetX - pointer.currentX) * POINTER_EASE;
-      pointer.currentY += (pointer.targetY - pointer.currentY) * POINTER_EASE;
-
-      if (Math.abs(pointer.targetX - pointer.currentX) < 0.001) {
-        pointer.currentX = pointer.targetX;
+    return () => {
+      if (pointerFrame.current !== null) {
+        window.cancelAnimationFrame(pointerFrame.current);
+        pointerFrame.current = null;
       }
-      if (Math.abs(pointer.targetY - pointer.currentY) < 0.001) {
-        pointer.currentY = pointer.targetY;
-      }
-
-      pointerX.set(pointer.currentX);
-      pointerY.set(pointer.currentY);
-      frame = window.requestAnimationFrame(tick);
     };
-
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
   }, [pointerX, pointerY, reduceMotion]);
+
+  function tickPointer() {
+    const pointer = smoothPointer.current;
+    pointer.currentX += (pointer.targetX - pointer.currentX) * POINTER_EASE;
+    pointer.currentY += (pointer.targetY - pointer.currentY) * POINTER_EASE;
+
+    if (Math.abs(pointer.targetX - pointer.currentX) < 0.001) {
+      pointer.currentX = pointer.targetX;
+    }
+    if (Math.abs(pointer.targetY - pointer.currentY) < 0.001) {
+      pointer.currentY = pointer.targetY;
+    }
+
+    pointerX.set(pointer.currentX);
+    pointerY.set(pointer.currentY);
+
+    const isSettled =
+      pointer.currentX === pointer.targetX &&
+      pointer.currentY === pointer.targetY;
+    pointerFrame.current = isSettled
+      ? null
+      : window.requestAnimationFrame(tickPointer);
+  }
+
+  function startPointerAnimation() {
+    if (!reduceMotion && pointerFrame.current === null) {
+      pointerFrame.current = window.requestAnimationFrame(tickPointer);
+    }
+  }
 
   function handlePointerMove(event: PointerEvent<HTMLElement>) {
     if (reduceMotion || event.pointerType === "touch") return;
@@ -141,17 +159,19 @@ export function LensHero() {
       -0.5,
       Math.min(0.5, (event.clientY - rect.top) / rect.height - 0.5),
     );
+    startPointerAnimation();
   }
 
   function resetPointer() {
     smoothPointer.current.targetX = 0;
     smoothPointer.current.targetY = 0;
+    startPointerAnimation();
   }
 
   return (
     <section
       ref={sectionRef}
-      className={`cinematic-hero hero-grau${heroImageLoaded ? " is-hero-ready" : ""}`}
+      className="cinematic-hero hero-grau is-hero-ready"
       style={heroMarqueeStyle}
       data-lens-debug={DEBUG_LENS_MASK ? "true" : undefined}
       aria-labelledby="hero-title"
@@ -169,9 +189,7 @@ export function LensHero() {
 
       <div className="hero-state hero-state-grau">
         <div className="hero-cinema-camera">
-          {heroImageLoaded ? (
-            <HeroCopyLayer className="cinematic-copy-blur-mobile" />
-          ) : null}
+          <HeroCopyLayer className="cinematic-copy-blur-mobile" />
           <motion.div
             className="hero-pointer-frame"
             style={{
@@ -181,19 +199,11 @@ export function LensHero() {
               rotateY: glassesRotateY,
             }}
           >
-            <motion.div
+            <div
               className="cinematic-glasses cinematic-glasses-grau"
-              animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
-              transition={{
-                duration: 22,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
               aria-hidden="true"
             >
-              {heroImageLoaded ? (
-                <HeroCopyLayer className="cinematic-copy-blur-desktop" />
-              ) : null}
+              <HeroCopyLayer className="cinematic-copy-blur-desktop" />
               <LensClipDefs />
               <Image
                 src="/assets/glasses/eyeglasses-hero.webp"
@@ -203,11 +213,10 @@ export function LensHero() {
                 fetchPriority="high"
                 sizes="(max-width: 680px) 116vw, 1120px"
                 className="cinematic-glasses-image"
-                onLoad={() => setHeroImageLoaded(true)}
               />
-              {heroImageLoaded ? <LensBoundCopy /> : null}
+              <LensBoundCopy />
               <LensCalibrationOverlay />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -1,12 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { localBusinessJsonLd, site } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sosotica.com.br"),
+  metadataBase: new URL(SITE_URL),
   title: "SOS Ótica em Araguaína | Óculos pronto em até 30 minutos",
   description:
     "SOS Ótica em Araguaína-TO: óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e atendimento no Centro.",
+  applicationName: "SOS Ótica",
+  category: "Ótica",
+  referrer: "origin-when-cross-origin",
   keywords: [
     "SOS Ótica",
     "ótica em Araguaína",
@@ -14,11 +17,22 @@ export const metadata: Metadata = {
     "teste de visão Araguaína",
     "lentes e armações",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
       { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
       { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: "/favicon.ico",
@@ -27,21 +41,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
-  openGraph: {
-    title: "SOS Ótica | Óculos pronto em até 30 minutos",
-    description:
-      "Teste de visão no local, lentes, armações e atendimento no Centro de Araguaína-TO.",
-    locale: "pt_BR",
-    type: "website",
-    images: [
-      {
-        url: site.logoIcon,
-        width: 1200,
-        height: 1200,
-        alt: "Logo SOS Ótica",
-      },
-    ],
-  },
 };
 
 export const viewport: Viewport = {
@@ -57,15 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
-        {children}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessJsonLd),
-          }}
-        />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

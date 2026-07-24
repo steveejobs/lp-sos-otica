@@ -3853,6 +3853,16 @@ img {
   }
 }
 
+@keyframes heroGlassesFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
 @keyframes heroMobileLensCamera {
   0%,
   14% {
@@ -4806,7 +4816,9 @@ img {
   width: var(--hero-glasses-width);
   aspect-ratio: 1672 / 940;
   filter: drop-shadow(0 46px 86px rgba(20, 20, 18, 0.22));
+  animation: heroGlassesFloat 22s ease-in-out infinite;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hero-pointer-frame {
@@ -5742,6 +5754,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cinematic-glasses,
   .cinematic-copy-line,
   .testimonials-column-track {
     animation: none;

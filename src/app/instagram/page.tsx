@@ -179,15 +179,25 @@ export const metadata: Metadata = {
     title: "SOS Ótica | Centro de Araguaína",
     description:
       "Óculos pronto em até 30 minutos, teste de visão no local e atendimento pelo WhatsApp.",
+    url: "/instagram",
+    siteName: "SOS Ótica",
+    locale: "pt_BR",
     type: "website",
     images: [
       {
         url: "/imagens/logotipo icon preto.png",
-        width: 1200,
-        height: 1200,
+        width: 1254,
+        height: 1254,
         alt: "Logo SOS Ótica",
       },
     ],
+  },
+  twitter: {
+    card: "summary",
+    title: "SOS Ótica | Centro de Araguaína",
+    description:
+      "Óculos pronto em até 30 minutos, teste de visão no local e atendimento pelo WhatsApp.",
+    images: ["/imagens/logotipo icon preto.png"],
   },
 };
 

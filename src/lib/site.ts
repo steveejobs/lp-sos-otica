@@ -1,4 +1,5 @@
 export const WHATSAPP_PHONE = "5563992938550";
+export const SITE_URL = "https://www.sosotica.com.br";
 
 export const DEFAULT_WHATSAPP_MESSAGE =
   "Olá, S.O.S Ótica! Vim pelo site e quero atendimento.";
@@ -58,14 +59,23 @@ export const navItems = [
 ];
 
 export const localBusinessJsonLd = {
-  "@context": "https://schema.org",
   "@type": ["LocalBusiness", "Optician"],
+  "@id": `${SITE_URL}/#optician`,
   name: site.name,
+  alternateName: site.legalName,
   legalName: site.legalName,
-  image: site.logoIcon,
+  description:
+    "Ótica em Araguaína-TO com óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e acessórios.",
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon-512.png`,
+  image: [
+    `${SITE_URL}/assets/store/store-01.webp`,
+    `${SITE_URL}/assets/store/store-02.webp`,
+    `${SITE_URL}/assets/store/store-03.webp`,
+  ],
   telephone: site.phoneE164,
-  url: "https://sosotica.com.br",
   sameAs: [site.instagramUrl],
+  hasMap: site.mapUrl,
   address: {
     "@type": "PostalAddress",
     streetAddress: site.streetAddress,
@@ -83,6 +93,13 @@ export const localBusinessJsonLd = {
     "@type": "City",
     name: site.city,
   },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phoneE164,
+    contactType: "customer service",
+    areaServed: "BR",
+    availableLanguage: "Portuguese",
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -97,13 +114,24 @@ export const localBusinessJsonLd = {
       closes: "12:00",
     },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: site.rating,
-    reviewCount: site.reviewCount,
-  },
   paymentAccepted: "Cash, Credit Card, Debit Card",
-  description:
-    "Ótica em Araguaína-TO com óculos pronto em até 30 minutos, teste de visão no local, lentes, armações e acessórios.",
+  currenciesAccepted: "BRL",
   priceRange: "$$",
+};
+
+export const websiteJsonLd = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: site.name,
+  alternateName: site.legalName,
+  inLanguage: "pt-BR",
+  publisher: {
+    "@id": `${SITE_URL}/#optician`,
+  },
+};
+
+export const seoJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [localBusinessJsonLd, websiteJsonLd],
 };
